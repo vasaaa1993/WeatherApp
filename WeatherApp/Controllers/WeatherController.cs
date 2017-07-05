@@ -11,24 +11,39 @@ namespace WeatherApp.Controllers
     public class WeatherController : Controller
     {
 		private static WeatherService _weatherService;
+
 		public WeatherController()
 		{
 			if (_weatherService == null)
 				_weatherService = new WeatherService();
 		}
-        // GET: /Weather/Index
-        public ActionResult Index(Weather model)
+		// GET: /Weather/Index
+
+		public ActionResult Index()
         {
-			var curWeather = (model.main   == null) ? _weatherService.GetWeatherByTownName("London") : model;
-            return View(curWeather);
+			return View();
         }
 
-		// GET: /Weather/Indexi
+		// GET: /Weather/Index
 		[HttpPost]
-		public ActionResult Index(string city)
+		public ActionResult Index(string city, string time)
 		{
-			//_curWeather = _weatherService.GetWeatherByTownName(city);
-			return View(_weatherService.GetWeatherByTownName(city));
+			if (city == "" || city == null)
+			{
+				return View("Index");
+			}
+			int nPeriod = int.Parse(time);
+			var weather = _weatherService.GetWeatherByTownName(city, int.Parse(time));
+
+			switch (nPeriod)
+			{
+				case 3:
+					return View("ThreeDays", weather);
+				case 7:
+					return View("SevenDays", weather);
+				default:
+					return View("CurrentDay", weather);
+			}
 		}
 	}
 }

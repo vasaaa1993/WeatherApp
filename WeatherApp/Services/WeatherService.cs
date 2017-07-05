@@ -19,10 +19,9 @@ namespace WeatherApp.Services
 		{
 		}
 
-		public Weather GetWeatherByTownName(string name)
+		public Weather GetWeatherByTownName(string name, int dayPeriod)
 		{
-			//string sUrl = $"http://api.openweathermap.org/data/2.5/weather?q={name}&units=metric&APPID={_csApiKey}";
-			HttpWebRequest apiRequest = WebRequest.Create($"http://api.openweathermap.org/data/2.5/weather?q={name}&units=metric&APPID={_csApiKey}") as HttpWebRequest;
+			HttpWebRequest apiRequest = WebRequest.Create($"http://api.openweathermap.org/data/2.5/forecast/daily?q=London&type=accurate&units=metric&cnt={dayPeriod}&APPID={_csApiKey}") as HttpWebRequest;
 			string apiResponse = "";
 			using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
 			{

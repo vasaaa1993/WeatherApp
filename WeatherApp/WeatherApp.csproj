@@ -146,6 +146,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\City.cs" />
+    <Compile Include="Helpers\Coord.cs" />
+    <Compile Include="Helpers\Temperature.cs" />
+    <Compile Include="Helpers\WeatherInfo.cs" />
+    <Compile Include="Helpers\WeatherListItem.cs" />
     <Compile Include="Models\Weather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\WeatherService.cs" />
@@ -188,6 +193,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Weather\Index.cshtml" />
+    <Content Include="Views\Shared\_WeatherLayout.cshtml" />
+    <Content Include="Views\Weather\CurrentDay.cshtml" />
+    <Content Include="Views\Weather\ThreeDays.cshtml" />
+    <Content Include="Views\Weather\SevenDays.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
