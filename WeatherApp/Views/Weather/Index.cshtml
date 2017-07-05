@@ -2,34 +2,136 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<div>
-	@Html.ActionLink("Kiev", "Index", new { city = "Kiev" })<br />
-	@Html.ActionLink("Lviv", "Index", new { city = "Lviv" })<br />
-	@Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })<br />
-	@Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })<br />
-	@Html.ActionLink("Odessa", "Index", new { city = "Odessa" })<br />
-</div>
-
-@using (Html.BeginForm("Index", "Weather"))
-{
-	<div>
-		@Html.TextBox("city", null)
+<script>
+	function timeConverter(unixTimestamp) {
+        var a = new Date(unixTimestamp * 1000);
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+        return time;
+    }
+</script>
+<div class="row search-panel">
+	<div class="col-xs-12 ">
+		@using (Html.BeginForm("Index", "Weather"))
+		{
+			<div class="form-group">
+				<div class="col-xs-10 search-input">
+					@Html.TextBox("city", null, new { @class = "form-control col-xs-10", placeholder = "City name" })
+				</div>
+				<div class="col-xs-2" style="padding-left=0">
+					<input type="submit" value="Find" class="btn btn-primary" />
+				</div>
+			</div>
+		}
 	</div>
-		<input type="submit" value="Submit" />
-}
-<div>
-	@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.city?.name })<br />
-	@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.city?.name })<br />
-	@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.city?.name })<br />
+	<div class="col-xs-9">
+		<ul class="list-inline">
+			<li>@Html.ActionLink("Kiev", "Index", new { city = "Kiev" })</li>
+			<li>@Html.ActionLink("Lviv", "Index", new { city = "Lviv" })</li>
+			<li>@Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })</li>
+			<li>@Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })</li>
+			<li>@Html.ActionLink("Odessa", "Index", new { city = "Odessa" })</li>
+		</ul>
+	</div>
 </div>
+<hr id="search-hr"/>
+
 @if (Model == null)
 {
 	<h2>Enter city</h2>
 }
 else
 {
-	<h2>@Model.list[0].temp.day</h2>
+	<div class="container">
+		<h3>@Model.city.name</h3>
+		@if (Model.list.Count == 1)
+		{
+			<h5>Forecast for Current Day</h5>;
+		}
+		else if (Model.list.Count == 3)
+		{
+			<h5>Forecast for 3 Days</h5>;
+		}
+		else
+		{
+			<h5>Forecast for 7 Days</h5>;
+		}
+
+		<ul class="list-inline">
+			<li>@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.city?.name })</li>
+			<li>@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.city?.name })</li>
+			<li>@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.city?.name })</li>
+		</ul>
+		<div class="row seven-cols weather-container">
+			@foreach (var w in @Model.list)
+			{
+				<div class="col-sm-1 weather-item">
+					<div class="container">
+						<div class="weather-item-header">
+							<strong><script>document.write(timeConverter(@w.dt))</script></strong>
+						</div>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-4">
+								<img src="@($"http://openweathermap.org/img/w/{@w.weather[0].icon}.png")" alt="@w.weather[0].description" cclass="img-responsive center-block" />
+							</div>
+						</div>
+						<div class="weather-item-header">
+							@w.weather[0].description
+						</div>
+						<div class="row">
+							<div class="col-sm-7 weather-value">
+								Temp
+							</div>
+							<div class="col-sm-5 weather-value  text-right">
+								@w.temp.day
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-sm-7 weather-value">
+								Pressure, mm
+							</div>
+							<div class="col-sm-5 weather-value text-right">
+								@w.pressure
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-7 weather-value">
+								Humidity, %
+							</div>
+							<div class="col-sm-5 weather-value  text-right">
+								@w.humidity
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-7 weather-value">
+								Clouds, %
+							</div>
+							<div class="col-sm-5 weather-value  text-right">
+								@w.clouds
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-7 weather-value">
+								Wind speed, m/s
+							</div>
+							<div class="col-sm-5 weather-value  text-right">
+								@w.speed
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>		
+</div>
 }
 
 

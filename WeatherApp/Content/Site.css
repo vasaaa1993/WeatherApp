@@ -4,10 +4,10 @@
 }
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
+/*.body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
+}*/
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -17,8 +17,84 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.body-content {
+	padding-left: 0;
+	padding-right: 0;
+	background-color: #eceff1;
+}
+
+.search-panel
+{
+	margin-left:0;
+	margin-right:0;
+}
+
+.search-input
+{
+	padding-left:0;
+}
+
+#search-hr {
+	margin-bottom: 5px;
+	margin-top: 0;
+}
+
+.weather-container {
+	background-color: #cfd8dc;
+}
+.weather-item {
+	padding:0;
+	font-size:12px;
+}
+.weather-item .container{
+	margin:1px;
+	padding:5px;
+	background-color: #e1f5fe;
+}
+.weather-item-header{
+	text-align:center;
+}
+.weather-item .container .row {
+	margin: 0;
+}
+
+.weather-item .container .row .col-sm-4 {
+	padding: 0;
+}
+.weather-value{
+	padding:0;
+}
+
+@media (min-width: 768px) {
+	.seven-cols .col-md-1, .seven-cols .col-sm-1, .seven-cols .col-lg-1 {
+		width: 100%;
+		*width: 100%;
+	}
+}
+
+@media (min-width: 992px) {
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1 {
+		width: 14.285714285714285714285714285714%;
+		*width: 14.285714285714285714285714285714%;
+	}
+}
+
+/**
+ *  The following is not really needed in this case
+ *  Only to demonstrate the usage of @media for large screens
+ */
+@media (min-width: 1200px) {
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1 {
+		width: 14.285714285714285714285714285714%;
+		*width: 14.285714285714285714285714285714%;
+	}
 }
