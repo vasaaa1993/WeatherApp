@@ -1,0 +1,26 @@
+﻿@model WeatherApp.Models.Weather
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Model.name</h2>
+@using (Html.BeginForm())
+{
+
+	<div>
+	
+		@Html.DropDownList("city", new List<SelectListItem>
+		{
+			new SelectListItem{ Text = "Kiev", Value = "Kiev"},
+			new SelectListItem{ Text = "Lviv", Value = "Lviv"},
+			new SelectListItem{ Text = "Kharkiv", Value = "Kharkiv"},
+			new SelectListItem{ Text = "Dnipropetrovsk", Value = "Dnipropetrovsk"},
+			new SelectListItem{ Text = "Odessa", Value = "Odessa"},
+		})
+		<input type="submit" value="Show" class="btn-default" />
+		<p>
+			T: @Model.main.temp
+		</p>
+	</div>
+}
+
