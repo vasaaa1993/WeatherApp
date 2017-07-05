@@ -17,33 +17,12 @@ namespace WeatherApp.Controllers
 			if (_weatherService == null)
 				_weatherService = new WeatherService();
 		}
-		// GET: /Weather/Index
-
-		public ActionResult Index()
-        {
-			return View();
-        }
 
 		// GET: /Weather/Index
-		[HttpPost]
-		public ActionResult Index(string city, string time)
+		public ActionResult Index(Weather model, string city, string time)
 		{
-			if (city == "" || city == null)
-			{
-				return View("Index");
-			}
-			int nPeriod = int.Parse(time);
-			var weather = _weatherService.GetWeatherByTownName(city, int.Parse(time));
-
-			switch (nPeriod)
-			{
-				case 3:
-					return View("ThreeDays", weather);
-				case 7:
-					return View("SevenDays", weather);
-				default:
-					return View("CurrentDay", weather);
-			}
+			var weather = _weatherService.GetWeatherByTownName(city, time ?? "1");
+			return View(weather);
 		}
 	}
 }

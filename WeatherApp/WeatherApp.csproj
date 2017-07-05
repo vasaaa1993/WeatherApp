@@ -193,10 +193,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Weather\Index.cshtml" />
-    <Content Include="Views\Shared\_WeatherLayout.cshtml" />
-    <Content Include="Views\Weather\CurrentDay.cshtml" />
-    <Content Include="Views\Weather\ThreeDays.cshtml" />
-    <Content Include="Views\Weather\SevenDays.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

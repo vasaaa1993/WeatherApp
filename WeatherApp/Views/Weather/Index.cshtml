@@ -1,9 +1,35 @@
-﻿
+﻿@model WeatherApp.Models.Weather
 @{
     ViewBag.Title = "Index";
-	Layout = "~/Views/Shared/_WeatherLayout.cshtml";
 }
 
-<h2>Index</h2>
+<div>
+	@Html.ActionLink("Kiev", "Index", new { city = "Kiev" })<br />
+	@Html.ActionLink("Lviv", "Index", new { city = "Lviv" })<br />
+	@Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })<br />
+	@Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })<br />
+	@Html.ActionLink("Odessa", "Index", new { city = "Odessa" })<br />
+</div>
+
+@using (Html.BeginForm("Index", "Weather"))
+{
+	<div>
+		@Html.TextBox("city", null)
+	</div>
+		<input type="submit" value="Submit" />
+}
+<div>
+	@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.city?.name })<br />
+	@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.city?.name })<br />
+	@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.city?.name })<br />
+</div>
+@if (Model == null)
+{
+	<h2>Enter city</h2>
+}
+else
+{
+	<h2>@Model.list[0].temp.day</h2>
+}
 
 

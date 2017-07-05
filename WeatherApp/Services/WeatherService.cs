@@ -19,9 +19,14 @@ namespace WeatherApp.Services
 		{
 		}
 
-		public Weather GetWeatherByTownName(string name, int dayPeriod)
+		public Weather GetWeatherByTownName(string name, string dayPeriod)
 		{
-			HttpWebRequest apiRequest = WebRequest.Create($"http://api.openweathermap.org/data/2.5/forecast/daily?q=London&type=accurate&units=metric&cnt={dayPeriod}&APPID={_csApiKey}") as HttpWebRequest;
+			if (name == null)
+				return null;
+			int nDayPeriod;
+			if (!int.TryParse(dayPeriod, out nDayPeriod))
+				nDayPeriod = 1;
+			HttpWebRequest apiRequest = WebRequest.Create($"http://api.openweathermap.org/data/2.5/forecast/daily?q={name}&type=accurate&units=metric&cnt={nDayPeriod}&APPID={_csApiKey}") as HttpWebRequest;
 			string apiResponse = "";
 			using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
 			{
@@ -29,7 +34,6 @@ namespace WeatherApp.Services
 				apiResponse = reader.ReadToEnd();
 				return JsonConvert.DeserializeObject<Weather>(apiResponse);
 			}
-			return new Weather();
 		}
 	}
 }
