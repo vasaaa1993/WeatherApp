@@ -1,6 +1,27 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.navbar {
+	background-color: #428bca;
+	border: none;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: white;
+}
+
+	.navbar-inverse .navbar-nav > li > a:hover {
+		color: #01579B;
+	}
+
+.navbar-inverse .navbar-brand {
+	color: white;
+}
+
+	.navbar-inverse .navbar-brand:hover {
+		color: #01579B;
+	}
+
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -13,30 +34,29 @@
    will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
-    white-space: normal;
+	white-space: normal;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
 select,
 textarea {
-    max-width: 280px;
+	max-width: 280px;
 }
 
 .body-content {
 	padding-left: 0;
 	padding-right: 0;
-	background-color: #eceff1;
+	background-color: #E3F2FD;
+	border-radius: 0 0 10px 10px;
 }
 
-.search-panel
-{
-	margin-left:0;
-	margin-right:0;
+.search-panel {
+	margin-left: 0;
+	margin-right: 0;
 }
 
-.search-input
-{
-	padding-left:0;
+.search-input {
+	padding-left: 0;
 }
 
 #search-hr {
@@ -45,20 +65,27 @@ textarea {
 }
 
 .weather-container {
-	background-color: #cfd8dc;
 }
+
 .weather-item {
-	padding:0;
-	font-size:12px;
+	padding: 0;
 }
-.weather-item .container{
-	margin:1px;
-	padding:5px;
-	background-color: #e1f5fe;
+
+.weather-item .container {
+	background-color: #BBDEFB;
 }
-.weather-item-header{
-	text-align:center;
+
+.city-name {
+	background-color: #BBDEFB;
+	border-radius: 10px;
+	margin-left: -15px;
+	margin-right: -15px;
 }
+
+.weather-item-header {
+	text-align: center;
+}
+
 .weather-item .container .row {
 	margin: 0;
 }
@@ -66,12 +93,60 @@ textarea {
 .weather-item .container .row .col-sm-4 {
 	padding: 0;
 }
-.weather-value{
-	padding:0;
+
+.weather-value {
+	color: #455A64;
+	font-family: 'Roboto';
+}
+
+.text-color-grey {
+	color: #455A64;
+}
+
+.weather-img {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	max-width: 80%;
+}
+
+.center-list {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.min-max-temp h5 {
+	margin: 5px;
+}
+
+/* 7 colons*/
+
+.seven-cols .weather-item {
+	font-size: 12px;
+}
+
+.seven-cols .weather-item-header {
+	font-size: 16px;
+}
+
+.seven-cols .weather-item .container {
+	margin: 1px;
+	padding: 5px;
+	border-radius: 10px;
+}
+
+.seven-cols .weather-value {
+	padding: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 @media (min-width: 768px) {
-	.seven-cols .col-md-1, .seven-cols .col-sm-1, .seven-cols .col-lg-1 {
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1 {
 		width: 100%;
 		*width: 100%;
 	}
@@ -86,10 +161,96 @@ textarea {
 	}
 }
 
-/**
- *  The following is not really needed in this case
- *  Only to demonstrate the usage of @media for large screens
- */
+
+@media (min-width: 1200px) {
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1 {
+		width: 14.285714285714285714285714285714%;
+		*width: 14.285714285714285714285714285714%;
+	}
+}
+/* 3 colons*/
+
+.three-cols .weather-value {
+	padding: 0;
+}
+
+.three-cols .weather-item {
+	font-size: 18px;
+}
+
+.three-cols .weather-item-header {
+	font-size: 25px;
+}
+
+.three-cols h5{
+	font-size:25px;
+}
+
+.three-cols h5 {
+	font-size: 25px;
+}
+
+.three-cols h3 {
+	font-size: 30px;
+}
+
+.three-cols .weather-item .container {
+	margin: 3px;
+	padding: 15px;
+	border-radius: 20px;
+}
+
+
+@media (min-width: 768px) {
+	.three-cols .col-md-1,
+	.three-cols .col-sm-1,
+	.three-cols .col-lg-1 {
+		width: 100%;
+		*width: 100%;
+	}
+}
+
+@media (min-width: 992px) {
+	.three-cols .col-md-1,
+	.three-cols .col-sm-1,
+	.three-cols .col-lg-1 {
+		width: 33.33333%;
+		*width: 33.3333%;
+	}
+}
+
+@media (min-width: 1200px) {
+	.three-cols .col-md-1,
+	.three-cols .col-sm-1,
+	.three-cols .col-lg-1 {
+		width: 33.33333%;
+		*width: 33.3333%;
+	}
+}
+
+/* 3 colons*/
+
+@media (min-width: 768px) {
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1 {
+		width: 100%;
+		*width: 100%;
+	}
+}
+
+@media (min-width: 992px) {
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1 {
+		width: 14.285714285714285714285714285714%;
+		*width: 14.285714285714285714285714285714%;
+	}
+}
+
+
 @media (min-width: 1200px) {
 	.seven-cols .col-md-1,
 	.seven-cols .col-sm-1,
