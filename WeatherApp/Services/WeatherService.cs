@@ -28,11 +28,18 @@ namespace WeatherApp.Services
 				nDayPeriod = 1;
 			HttpWebRequest apiRequest = WebRequest.Create($"http://api.openweathermap.org/data/2.5/forecast/daily?q={name}&type=accurate&units=metric&cnt={nDayPeriod}&APPID={_csApiKey}") as HttpWebRequest;
 			string apiResponse = "";
-			using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
+			try
 			{
-				StreamReader reader = new StreamReader(response.GetResponseStream());
-				apiResponse = reader.ReadToEnd();
-				return JsonConvert.DeserializeObject<Weather>(apiResponse);
+				using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
+				{
+					StreamReader reader = new StreamReader(response.GetResponseStream());
+					apiResponse = reader.ReadToEnd();
+					return JsonConvert.DeserializeObject<Weather>(apiResponse);
+				}
+			}
+			catch(InvalidOperationException)
+			{ 
+				return null;
 			}
 		}
 	}

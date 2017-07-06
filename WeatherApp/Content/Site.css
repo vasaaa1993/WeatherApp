@@ -230,32 +230,64 @@ textarea {
 	}
 }
 
-/* 3 colons*/
+/* 1 colons*/
+
+.one-cols .weather-value {
+	padding: 0;
+}
+
+.one-cols .weather-item {
+	font-size: 18px;
+}
+
+.one-cols .weather-item-header {
+	font-size: 25px;
+}
+
+.one-cols h5 {
+	font-size: 25px;
+}
+
+.one-cols h5 {
+	font-size: 25px;
+}
+
+.one-cols h3 {
+	font-size: 30px;
+}
+
+.one-cols .weather-item .container {
+	margin: 3px;
+	padding: 40px;
+	border-radius: 20px;
+}
 
 @media (min-width: 768px) {
-	.seven-cols .col-md-1,
-	.seven-cols .col-sm-1,
-	.seven-cols .col-lg-1 {
-		width: 100%;
-		*width: 100%;
+	.one-cols .col-md-1,
+	.one-cols .col-sm-1,
+	.one-cols .col-lg-1 {
+		width: 50%;
+		*width: 50%;
 	}
 }
 
 @media (min-width: 992px) {
-	.seven-cols .col-md-1,
-	.seven-cols .col-sm-1,
-	.seven-cols .col-lg-1 {
-		width: 14.285714285714285714285714285714%;
-		*width: 14.285714285714285714285714285714%;
+	.one-cols .col-md-1,
+	.one-cols .col-sm-1,
+	.one-cols .col-lg-1 {
+		width: 50%;
+		*width: 50%;
 	}
 }
 
 
 @media (min-width: 1200px) {
-	.seven-cols .col-md-1,
-	.seven-cols .col-sm-1,
-	.seven-cols .col-lg-1 {
-		width: 14.285714285714285714285714285714%;
-		*width: 14.285714285714285714285714285714%;
+	.one-cols .col-md-1,
+	.one-cols .col-sm-1,
+	.one-cols .col-lg-1 {
+		width: 50%;
+		*width: 50%;
+		float: none;
+		margin: 0 auto;
 	}
 }
