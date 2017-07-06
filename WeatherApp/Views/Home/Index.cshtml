@@ -1,31 +1,161 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model WeatherApp.Models.Weather
+@{
+	ViewBag.Title = "Index";
+	int CountOfDays = Model?.list?.Count ?? 0;
+	string sWeatherItemColonClass = "one-cols";
+	switch (CountOfDays)
+	{
+		case 3:
+			sWeatherItemColonClass = "three-cols";
+			break;
+		case 7:
+			sWeatherItemColonClass = "seven-cols";
+			break;
+	}
+}
+<script>
+	function timeConverter(unixTimestamp) {
+        var a = new Date(unixTimestamp * 1000);
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var time = date + ' ' + month + ' ' + year;
+        return time;
+    }
+</script>
+<div class="row search-panel">
+	<div class="col-xs-12 ">
+		@using (Html.BeginForm("Index", "Home"))
+		{
+			<div class="form-group">
+				<div class="col-xs-10 search-input">
+					@Html.TextBox("city", null, new { @class = "form-control col-xs-10", placeholder = "City name", required = "required" })
+				</div>
+				<div class="col-xs-2" style="padding-left=0">
+					<input type="submit" value="Find" class="btn btn-primary" />
+				</div>
+			</div>
+		}
+	</div>
+	<div class="col-xs-9">
+		<ul class="list-inline">
+			<li>@Html.ActionLink("Kiev", "Index", new { city = "Kiev" })</li>
+			<li>@Html.ActionLink("Lviv", "Index", new { city = "Lviv" })</li>
+			<li>@Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })</li>
+			<li>@Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })</li>
+			<li>@Html.ActionLink("Odessa", "Index", new { city = "Odessa" })</li>
+		</ul>
+	</div>
+</div>
+<hr id="search-hr" />
+
+@if (@CountOfDays == 0)
+{
+	<h2 class="text-center text-color-grey">Please, enter the city name...</h2>
+}
+else
+{
+	<div class="container">
+		<div class="city-name text-color-grey">
+			<h1 class=" text-center">@Model.city.name</h1>
+			<div class="text-center"><h4>@Model.city.country</h4></div>
+		</div>
+		<h3 class="text-primary text-center">
+			Weather Forecast For
+			@((@CountOfDays == 1) ? "Current Day" :
+			(@CountOfDays == 3) ? "3 Days" : "7 Days")
+		</h3>
+		<ul class="list-inline center-list">
+			<li>@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.city?.name })</li>
+			<li>@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.city?.name })</li>
+			<li>@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.city?.name })</li>
+		</ul>
+		<div class="row @sWeatherItemColonClass weather-container">
+			@foreach (var w in @Model.list)
+			{
+				<div class="col-sm-1 weather-item">
+					<div class="container">
+						<div class="weather-item-header text-color-grey">
+							<h3>@w.temp.day°</h3>
+						</div>
+						<div class="weather-item-header text-color-grey">
+							<h4>
+								<script>document.write(timeConverter(@w.dt))</script>
+							</h4>
+						</div>
+						<div class="row">
+							<img src="@($"/WeatherIcons/{w.weather[0].id}{w.weather[0].icon.ElementAt(2)}.png")" alt="@w.weather[0].description" class="weather-img ">
+						</div>
+						<div class="weather-item-header text-color-grey">
+							@w.weather[0].description
+						</div>
+						<div class="row text-center min-max-temp text-info">
+							<div class="row">
+								<div class="col-sm-6">
+									<h5>Min</h5>
+								</div>
+								<div class="col-sm-6">
+									<h5>Max</h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<h5>@w.temp.min°</h5>
+								</div>
+								<div class="col-sm-6">
+									<h5>@w.temp.max°</h5>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 weather-value">
+								Temp:
+							</div>
+							<div class="col-sm-6 weather-value  text-right">
+								@w.temp.day°
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6 weather-value">
+								Pressure:
+							</div>
+							<div class="col-sm-6 weather-value text-right">
+								@(w.pressure) hPa
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6 weather-value">
+								Humidity:
+							</div>
+							<div class="col-sm-6 weather-value  text-right">
+								@w.humidity %
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6 weather-value">
+								Clouds:
+							</div>
+							<div class="col-sm-6 weather-value  text-right">
+								@w.clouds %
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 weather-value">
+								Wind speed
+							</div>
+							<div class="col-sm-6 weather-value  text-right">
+								@w.speed mps
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

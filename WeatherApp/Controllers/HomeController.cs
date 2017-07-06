@@ -16,9 +16,10 @@ namespace WeatherApp.Controllers
 				_weatherService = new WeatherService();
 		}
 
-		public ActionResult Index()
+		public ActionResult Index(string city, string time)
 		{
-			return View();
+			var weather = _weatherService.GetWeatherByTownName(city, time ?? "1");
+			return View(weather);
 		}
 
 		public ActionResult About()
