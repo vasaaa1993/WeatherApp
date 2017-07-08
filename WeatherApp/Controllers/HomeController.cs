@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WeatherApp.Services;
@@ -16,9 +17,18 @@ namespace WeatherApp.Controllers
 				_weatherService = new WeatherService();
 		}
 
-		public ActionResult Index(string city, string time)
+		public async Task<ActionResult> Index(string city, string time)
 		{
-			var weather = _weatherService.GetWeatherByTownName(city, time ?? "1");
+			ViewBag.DefaultCities = new List<string>()
+			{
+				"Kiev",
+				"Lviv",
+				"Kharkiv",
+				"Dnipropetrovsk",
+				"Odessa"
+			};
+
+			var weather = await _weatherService.GetWeatherByTownName(city, time ?? "1");
 			return View(weather);
 		}
 

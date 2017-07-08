@@ -40,11 +40,10 @@
 	</div>
 	<div class="col-xs-9">
 		<ul class="list-inline">
-			<li>@Html.ActionLink("Kiev", "Index", new { city = "Kiev" })</li>
-			<li>@Html.ActionLink("Lviv", "Index", new { city = "Lviv" })</li>
-			<li>@Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })</li>
-			<li>@Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })</li>
-			<li>@Html.ActionLink("Odessa", "Index", new { city = "Odessa" })</li>
+			@foreach(var cityName in ViewBag.DefaultCities as List<string>)
+			{
+				<li>@Html.ActionLink(cityName, "Index", new { city = cityName })</li>
+			}
 		</ul>
 	</div>
 </div>
