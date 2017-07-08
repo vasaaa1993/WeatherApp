@@ -10,11 +10,10 @@ namespace WeatherApp.Controllers
 {
 	public class HomeController : Controller
 	{
-		private static WeatherService _weatherService;
-		public HomeController()
+		private static IWeatherService _weatherService;
+		public HomeController(IWeatherService service)
 		{
-			if (_weatherService == null)
-				_weatherService = new WeatherService();
+			_weatherService = service;
 		}
 
 		public async Task<ActionResult> Index(string city, string time)

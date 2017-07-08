@@ -12,10 +12,10 @@ using WeatherApp.Models;
 
 namespace WeatherApp.Services
 {
-	public class WeatherService
+	public class OpenWeatherService : IWeatherService
 	{
 		//Weather curWeather;
-		public WeatherService()
+		public OpenWeatherService()
 		{
 		}
 
