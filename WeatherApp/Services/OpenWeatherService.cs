@@ -8,15 +8,18 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using WeatherApp.ApiResponseConvenrters;
 using WeatherApp.Models;
 
 namespace WeatherApp.Services
 {
 	public class OpenWeatherService : IWeatherService
 	{
+		private IApiResponseConverter _converter;
 		//Weather curWeather;
-		public OpenWeatherService()
+		public OpenWeatherService(IApiResponseConverter converter)
 		{
+			_converter = converter;
 		}
 
 		public async Task<Weather> GetWeatherByTownName(string name, string dayPeriod)
@@ -34,7 +37,7 @@ namespace WeatherApp.Services
 				using (HttpContent content = response.Content)
 				{
 					string apiResponse = await content.ReadAsStringAsync();
-					return JsonConvert.DeserializeObject<Weather>(apiResponse);
+					return _converter.Convert(apiResponse);
 				}
 			}
 			catch(Exception)
