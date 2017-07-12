@@ -1,33 +1,38 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Linq;
+using Newtonsoft.Json;
 using WeatherApp.Models;
 
 namespace WeatherApp.ApiResponseConvenrters
 {
 	public class JsonResponseConverter : IApiResponseConverter
 	{
+		public Weather Convert(string sResponse)
+		{
+			var weather = JsonConvert.DeserializeObject<Models.OpenWeather.Weather>(sResponse);
+			return OpenWeather2Weather(weather);
+		}
+
 		public static DateTime TimeStampToDateTime(int javaTimeStamp)
 		{
 			// Java timestamp is milliseconds past epoch
-			System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+			var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 			dtDateTime = dtDateTime.AddMilliseconds(javaTimeStamp).ToLocalTime();
 			return dtDateTime;
 		}
 
-		private static Weather OpenWeather2Weather(WeatherApp.Models.OpenWeather.Weather w)
+		private static Weather OpenWeather2Weather(Models.OpenWeather.Weather w)
 		{
-			Weather weather = new Weather
+			var weather = new Weather
 			{
 				CityName = w.city.name,
 				CountryCodeOfTheCity = w.city.country
 			};
 			foreach (var item in w.list)
-			{
 				weather.WeatherList.Add(
-					new WeatherListItem()
+					new WeatherListItem
 					{
-						Icon = $"{ item.weather[0].id }{ item.weather[0].icon.ElementAt(2) }.png",
+						Icon = $"{item.weather[0].id}{item.weather[0].icon.ElementAt(2)}.png",
 						Clouds = item.clouds,
 						Description = item.weather[0].description,
 						Humidity = item.humidity,
@@ -38,13 +43,7 @@ namespace WeatherApp.ApiResponseConvenrters
 						MinTemp = item.temp.min,
 						Time = TimeStampToDateTime(item.dt)
 					});
-			}
 			return weather;
-		}
-		public Weather Convert(string sResponse)
-		{
-			var weather = JsonConvert.DeserializeObject<WeatherApp.Models.OpenWeather.Weather>(sResponse);
-			return OpenWeather2Weather(weather);
 		}
 	}
 }

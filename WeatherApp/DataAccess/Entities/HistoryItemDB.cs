@@ -9,8 +9,10 @@ namespace WeatherApp.DataAccess.Entities
 	{
 		[Key]
 		public int Id { get; set; }
+
 		[Column(TypeName = "DateTime2")]
 		public DateTime Time { get; set; }
+
 		public virtual WeatherDb WeatherDb { get; set; }
 	}
 }

@@ -7,8 +7,10 @@ namespace WeatherApp.DataAccess.Entities
 	[Table("Weather")]
 	public class WeatherDb
 	{
-		[Key, ForeignKey("HistoryItemDb")]
+		[Key]
+		[ForeignKey("HistoryItemDb")]
 		public int Id { get; set; }
+
 		[Column(TypeName = "DateTime")]
 		public DateTime Time { get; set; }
 
@@ -18,10 +20,13 @@ namespace WeatherApp.DataAccess.Entities
 
 		[StringLength(50)]
 		public string City { get; set; }
+
 		[StringLength(10)]
 		public string Country { get; set; }
+
 		[StringLength(30)]
 		public string Description { get; set; }
+
 		public double Humidity { get; set; }
 		public double Pressure { get; set; }
 		public int Clouds { get; set; }

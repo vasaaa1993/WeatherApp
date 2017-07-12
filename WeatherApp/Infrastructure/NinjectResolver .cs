@@ -1,7 +1,7 @@
-﻿using Ninject;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Ninject;
 using WeatherApp.ApiResponseConvenrters;
 using WeatherApp.DataAccess;
 using WeatherApp.Services;
@@ -10,8 +10,8 @@ namespace WeatherApp.Infrastructure
 {
 	public class NinjectResolver : IDependencyResolver
 	{
+		private readonly IKernel kernel;
 
-		private IKernel kernel;
 		public NinjectResolver(IKernel kernelParam)
 		{
 			kernel = kernelParam;

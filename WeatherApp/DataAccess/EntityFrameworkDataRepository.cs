@@ -10,96 +10,16 @@ namespace WeatherApp.DataAccess
 	{
 		private readonly EntityFrameworkContext _ctx;
 
-		#region Helpers
-
-		private static City CityDb2City(CityDb city)
-		{
-			return new City()
-			{
-				Id = city.Id,
-				Name = city.Name
-			};
-		}
-		private static Weather WeatherDb2Wearter(WeatherDb weather)
-		{
-			return new Weather()
-			{
-				CityName = weather.City,
-				CountryCodeOfTheCity = weather.Country,
-				WeatherList = new List<WeatherListItem>()
-				{
-					new WeatherListItem()
-					{
-						Clouds = weather.Clouds,
-						DayTemp = weather.DayTemp,
-						Description = weather.Description,
-						Humidity = weather.Humidity,
-						Icon = weather.Icon,
-						MaxTemp = weather.MaxTemp,
-						MinTemp = weather.MinTemp,
-						Pressure = weather.Pressure,
-						Time = weather.Time,
-						WindSpeed = weather.WindSpeed
-					}
-				}
-
-			};
-		}
-		private static WeatherDb Weather2WearterDb(Weather weather)
-		{
-			if (weather == null || weather.WeatherList.Count == 0)
-				return null;
-
-			return new WeatherDb()
-			{
-				City = weather.CityName,
-				Country = weather.CountryCodeOfTheCity,
-				Clouds = weather.WeatherList[0].Clouds,
-				DayTemp = weather.WeatherList[0].DayTemp,
-				Description = weather.WeatherList[0].Description,
-				Humidity = weather.WeatherList[0].Humidity,
-				Icon = weather.WeatherList[0].Icon,
-				MaxTemp = weather.WeatherList[0].MaxTemp,
-				MinTemp = weather.WeatherList[0].MinTemp,
-				Pressure = weather.WeatherList[0].Pressure,
-				Time = weather.WeatherList[0].Time,
-				WindSpeed = weather.WeatherList[0].WindSpeed
-			};
-		}
-		private static HistoryResponse HistoryDb2HistoryResponse(HistoryItemDb history)
-		{
-			return new HistoryResponse()
-			{
-				Id = history.Id,
-				Time = history.Time,
-				Weather = WeatherDb2Wearter(history.WeatherDb)
-			};
-		}
-
-		private static HistoryItemDb HistoryDbItemFromWeather(Weather weather)
-		{
-			WeatherDb w = Weather2WearterDb(weather);
-			if (weather == null)
-				return null;
-			return new HistoryItemDb()
-			{
-				Time = DateTime.Now,
-				WeatherDb = w
-			};
-		}
-		#endregion
-
 		public EntityFrameworkDataRepository()
 		{
 			_ctx = new EntityFrameworkContext();
 		}
+
 		public IEnumerable<City> GetAllCities()
 		{
 			IList<City> cities = new List<City>();
 			foreach (var cityDb in _ctx.Cities)
-			{
 				cities.Add(CityDb2City(cityDb));
-			}
 			return cities;
 		}
 
@@ -111,7 +31,7 @@ namespace WeatherApp.DataAccess
 
 		public void AddCity(string name)
 		{
-			_ctx.Cities.Add(new CityDb()
+			_ctx.Cities.Add(new CityDb
 			{
 				Name = name
 			});
@@ -138,12 +58,94 @@ namespace WeatherApp.DataAccess
 
 		public void AddResponseToHistory(Weather weather)
 		{
-			var history= HistoryDbItemFromWeather(weather);
-			if (history!= null)
+			var history = HistoryDbItemFromWeather(weather);
+			if (history != null)
 			{
 				_ctx.History.Add(history);
 				_ctx.SaveChanges();
 			}
 		}
+
+		#region Helpers
+
+		private static City CityDb2City(CityDb city)
+		{
+			return new City
+			{
+				Id = city.Id,
+				Name = city.Name
+			};
+		}
+
+		private static Weather WeatherDb2Wearter(WeatherDb weather)
+		{
+			return new Weather
+			{
+				CityName = weather.City,
+				CountryCodeOfTheCity = weather.Country,
+				WeatherList = new List<WeatherListItem>
+				{
+					new WeatherListItem
+					{
+						Clouds = weather.Clouds,
+						DayTemp = weather.DayTemp,
+						Description = weather.Description,
+						Humidity = weather.Humidity,
+						Icon = weather.Icon,
+						MaxTemp = weather.MaxTemp,
+						MinTemp = weather.MinTemp,
+						Pressure = weather.Pressure,
+						Time = weather.Time,
+						WindSpeed = weather.WindSpeed
+					}
+				}
+			};
+		}
+
+		private static WeatherDb Weather2WearterDb(Weather weather)
+		{
+			if (weather == null || weather.WeatherList.Count == 0)
+				return null;
+
+			return new WeatherDb
+			{
+				City = weather.CityName,
+				Country = weather.CountryCodeOfTheCity,
+				Clouds = weather.WeatherList[0].Clouds,
+				DayTemp = weather.WeatherList[0].DayTemp,
+				Description = weather.WeatherList[0].Description,
+				Humidity = weather.WeatherList[0].Humidity,
+				Icon = weather.WeatherList[0].Icon,
+				MaxTemp = weather.WeatherList[0].MaxTemp,
+				MinTemp = weather.WeatherList[0].MinTemp,
+				Pressure = weather.WeatherList[0].Pressure,
+				Time = weather.WeatherList[0].Time,
+				WindSpeed = weather.WeatherList[0].WindSpeed
+			};
+		}
+
+		private static HistoryResponse HistoryDb2HistoryResponse(HistoryItemDb history)
+		{
+			return new HistoryResponse
+			{
+				Id = history.Id,
+				Time = history.Time,
+				Weather = WeatherDb2Wearter(history.WeatherDb)
+			};
+		}
+
+		private static HistoryItemDb HistoryDbItemFromWeather(Weather weather)
+		{
+			var w = Weather2WearterDb(weather);
+			if (weather == null)
+				return null;
+			return new HistoryItemDb
+			{
+				Time = DateTime.Now,
+				WeatherDb = w
+			};
+		}
+
+		#endregion
 	}
 }

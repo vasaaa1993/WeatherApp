@@ -9,6 +9,7 @@ namespace WeatherApp.Controllers
 	{
 		private static IWeatherService _weatherService;
 		private static IDataRepository _repository;
+
 		public HomeController(IWeatherService service, IDataRepository repository)
 		{
 			_weatherService = service;
@@ -18,13 +19,11 @@ namespace WeatherApp.Controllers
 		public async Task<ActionResult> Index(string city, string time)
 		{
 			var list = _repository.GetAllCities();
-			ViewBag.DefaultCities = list; 
+			ViewBag.DefaultCities = list;
 
 			var weather = await _weatherService.GetWeatherByTownName(city, time ?? "1");
 			if (weather != null)
-			{
 				_repository.AddResponseToHistory(weather);
-			}
 			return View(weather);
 		}
 

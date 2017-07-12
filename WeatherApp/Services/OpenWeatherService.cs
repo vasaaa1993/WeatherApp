@@ -10,6 +10,7 @@ namespace WeatherApp.Services
 	public class OpenWeatherService : IWeatherService
 	{
 		private readonly IApiResponseConverter _converter;
+
 		//Weather curWeather;
 		public OpenWeatherService(IApiResponseConverter converter)
 		{
@@ -23,18 +24,19 @@ namespace WeatherApp.Services
 			int nDayPeriod;
 			if (!int.TryParse(dayPeriod, out nDayPeriod))
 				nDayPeriod = 1;
-			string sUrl = $"http://api.openweathermap.org/data/2.5/forecast/daily?q={name}&type=accurate&units=metric&cnt={nDayPeriod}&APPID={ConfigurationManager.AppSettings["apiKey"]}";
+			var sUrl =
+				$"http://api.openweathermap.org/data/2.5/forecast/daily?q={name}&type=accurate&units=metric&cnt={nDayPeriod}&APPID={ConfigurationManager.AppSettings["apiKey"]}";
 			try
 			{
-				using (HttpClient client = new HttpClient())
-				using (HttpResponseMessage response = await client.GetAsync(sUrl))
-				using (HttpContent content = response.Content)
+				using (var client = new HttpClient())
+				using (var response = await client.GetAsync(sUrl))
+				using (var content = response.Content)
 				{
-					string apiResponse = await content.ReadAsStringAsync();
+					var apiResponse = await content.ReadAsStringAsync();
 					return _converter.Convert(apiResponse);
 				}
 			}
-			catch(Exception)
+			catch (Exception)
 			{
 				return null;
 			}

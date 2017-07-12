@@ -2,8 +2,8 @@
 @model WeatherApp.Models.Weather
 @{
 	ViewBag.Title = "Index";
-	int CountOfDays = Model?.WeatherList?.Count ?? 0;
-	string sWeatherItemColonClass = "one-cols";
+	var CountOfDays = Model?.WeatherList?.Count ?? 0;
+	var sWeatherItemColonClass = "one-cols";
 	switch (CountOfDays)
 	{
 		case 3:
@@ -21,19 +21,19 @@
 		{
 			<div class="form-group">
 				<div class="col-xs-10 search-input">
-					@Html.TextBox("city", null, new { @class = "form-control col-xs-10", placeholder = "City name", required = "required" })
+					@Html.TextBox("city", null, new {@class = "form-control col-xs-10", placeholder = "City name", required = "required"})
 				</div>
 				<div class="col-xs-2">
-					<input type="submit" value="Find" class="btn btn-primary" />
+					<input type="submit" value="Find" class="btn btn-primary"/>
 				</div>
 			</div>
 		}
 	</div>
 	<div class="col-xs-8">
 		<ul class="list-inline">
-			@foreach(var cityName in (IEnumerable<City>) ViewBag.DefaultCities)
+			@foreach (var cityName in (IEnumerable<City>) ViewBag.DefaultCities)
 			{
-				<li>@Html.ActionLink(cityName.Name, "Index", new { city = cityName.Name })</li>
+				<li>@Html.ActionLink(cityName.Name, "Index", new {city = cityName.Name})</li>
 			}
 		</ul>
 	</div>
@@ -43,9 +43,9 @@
 		</ul>
 	</div>
 </div>
-<hr id="search-hr" />
+<hr id="search-hr"/>
 
-@if (@CountOfDays == 0)
+@if (CountOfDays == 0)
 {
 	<h2 class="text-center text-color-grey">Please, enter the city name...</h2>
 }
@@ -54,20 +54,22 @@ else
 	<div class="container">
 		<div class="city-name text-color-grey">
 			<h1 class=" text-center">@Model.CityName</h1>
-			<div class="text-center"><h4>@Model.CountryCodeOfTheCity</h4></div>
+			<div class="text-center">
+				<h4>@Model.CountryCodeOfTheCity</h4>
+			</div>
 		</div>
 		<h3 class="text-primary text-center">
 			Weather Forecast For
-			@((@CountOfDays == 1) ? "Current Day" :
-			(@CountOfDays == 3) ? "3 Days" : "7 Days")
+			@(CountOfDays == 1 ? "Current Day" :
+				  CountOfDays == 3 ? "3 Days" : "7 Days")
 		</h3>
 		<ul class="list-inline center-list">
-			<li>@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model.CityName })</li>
-			<li>@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model.CityName })</li>
-			<li>@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model.CityName })</li>
+			<li>@Html.ActionLink("Current Day", "Index", new {time = 1, city = Model.CityName})</li>
+			<li>@Html.ActionLink("3 Days", "Index", new {time = 3, city = Model.CityName})</li>
+			<li>@Html.ActionLink("7 Days", "Index", new {time = 7, city = Model.CityName})</li>
 		</ul>
 		<div class="row @sWeatherItemColonClass weather-container">
-			@foreach (var w in @Model.WeatherList)
+			@foreach (var w in Model.WeatherList)
 			{
 				<div class="col-sm-1 weather-item">
 					<div class="container">
@@ -142,5 +144,3 @@ else
 		</div>
 	</div>
 }
-
-

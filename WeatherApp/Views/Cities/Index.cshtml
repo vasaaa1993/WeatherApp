@@ -14,10 +14,10 @@
 				@*@Html.Label("Enter city name which you want to add")*@
 				<div class="form-group">
 					<div class="col-xs-10 search-input">
-						@Html.TextBox("name", null, new { @class = "form-control col-xs-10", placeholder = "City name", required = "required" })
+						@Html.TextBox("name", null, new {@class = "form-control col-xs-10", placeholder = "City name", required = "required"})
 					</div>
 					<div class="col-xs-2 city-btn-add-container">
-						<input type="submit" value="Add" class="btn btn-primary btn-block" />
+						<input type="submit" value="Add" class="btn btn-primary btn-block"/>
 					</div>
 				</div>
 			}
@@ -25,12 +25,14 @@
 	</div>
 </div>
 <div class="with50 center-container">
-	@foreach (var city in @Model)
+	@foreach (var city in Model)
 	{
 		<div class="row text-color-grey font-family-robobo city-container">
 			<div class="col-xs-6">
 				<div class="with80 center-container ">
-					<h4><strong>@city.Name</strong></h4>
+					<h4>
+						<strong>@city.Name</strong>
+					</h4>
 				</div>
 			</div>
 			<div class="col-xs-6 text-right">

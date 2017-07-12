@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<WeatherApp.Models.HistoryResponse>
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
-@if (@Model == null || !@Model.Any())
+@if (Model == null || !Model.Any())
 {
 	<div class="text-center text-color-grey">
 		<h2>Oops, the history is empty</h2>
@@ -12,21 +12,23 @@
 else
 {
 	<div class="with80 center-container text-color-grey">
-		<h1 class="text-color-grey"  id="history-page-title">History</h1>
+		<h1 class="text-color-grey" id="history-page-title">History</h1>
 		<div>
 			@Html.ActionLink("Clear History", "Clear")
 		</div>
-		@foreach (var item in @Model)
+		@foreach (var item in Model)
 		{
 			<div class="row history-item-container">
 
 				<div class="col-xs-3 history-item-left">
 					<div class="row text-primary">
-						<h3 id="history-time"><strong>@item.Time.ToString("dd MMM HH:mm:ss")</strong>
+						<h3 id="history-time">
+							<strong>@item.Time.ToString("dd MMM HH:mm:ss")</strong>
 						</h3>
 					</div>
 					<div class="row">
-						<h3 id="history-city"><strong>@item.Weather.CityName</strong>
+						<h3 id="history-city">
+							<strong>@item.Weather.CityName</strong>
 						</h3>
 					</div>
 					<div class="row">
@@ -36,16 +38,19 @@ else
 				<div class="col-xs-9 history-weather-container">
 					<div class="row vertical-align">
 						<div class="col-xs-4">
-							<img src="@($"/Content/WeatherIcons/{@item.Weather.WeatherList[0].Icon}")" alt="@item.Weather.WeatherList[0].Description" class="history-weather-img ">
+							<img src="@($"/Content/WeatherIcons/{item.Weather.WeatherList[0].Icon}")" alt="@item.Weather.WeatherList[0].Description" class="history-weather-img ">
 						</div>
 						<div class="col-xs-8" id="text-left">
 							<div class="row">
-								<h3 id="weather-temp-day"><strong>@item.Weather.WeatherList[0].DayTemp°</strong>
+								<h3 id="weather-temp-day">
+									<strong>@item.Weather.WeatherList[0].DayTemp°</strong>
 								</h3>
 							</div>
-							<div class="row"><h4 id="weather-date">@item.Weather.WeatherList[0].Time.ToString("M")</h4>
+							<div class="row">
+								<h4 id="weather-date">@item.Weather.WeatherList[0].Time.ToString("M")</h4>
 							</div>
-							<div class="row"><h4 id="weather-description">@item.Weather.WeatherList[0].Description</h4>
+							<div class="row">
+								<h4 id="weather-description">@item.Weather.WeatherList[0].Description</h4>
 							</div>
 						</div>
 					</div>
