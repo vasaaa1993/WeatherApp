@@ -2,10 +2,10 @@
 
 namespace WeatherApp.DataAccess.Entities
 {
-	public class HistoryItemDB
+	public class HistoryItemDb
 	{
 		public int Id { get; set; }
 		public DateTime Time { get; set; }
-		public WeatherDB WeatherDb { get; set; }
+		public WeatherDb WeatherDb { get; set; }
 	}
 }

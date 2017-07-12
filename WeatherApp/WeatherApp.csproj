@@ -166,10 +166,11 @@
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
-    <Compile Include="DataAccess\EnityFrameworkContext.cs" />
-    <Compile Include="DataAccess\Entities\CityDB.cs" />
-    <Compile Include="DataAccess\Entities\HistoryItemDB.cs" />
-    <Compile Include="DataAccess\Entities\WeatherDB.cs" />
+    <Compile Include="DataAccess\CitiesDbInitializer.cs" />
+    <Compile Include="DataAccess\EntityFrameworkContext.cs" />
+    <Compile Include="DataAccess\Entities\CityDb.cs" />
+    <Compile Include="DataAccess\Entities\HistoryItemDb.cs" />
+    <Compile Include="DataAccess\Entities\WeatherDb.cs" />
     <Compile Include="DataAccess\EntityFrameworkDataRepository.cs" />
     <Compile Include="DataAccess\IDataRepository.cs" />
     <Compile Include="Global.asax.cs">

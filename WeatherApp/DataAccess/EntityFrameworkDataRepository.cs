@@ -1,137 +1,138 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WeatherApp.DataAccess.Entities;
 using WeatherApp.Models;
 
 namespace WeatherApp.DataAccess
 {
 	public class EntityFrameworkDataRepository : IDataRepository
 	{
-		private List<City> _cities;
-		private int _id;
+		private readonly EntityFrameworkContext _ctx;
+
+		#region Helpers
+
+		private static City CityDb2City(CityDb city)
+		{
+			return new City()
+			{
+				Id = city.Id,
+				Name = city.Name
+			};
+		}
+		private static Weather WeatherDb2Wearter(WeatherDb weather)
+		{
+			return new Weather()
+			{
+				CityName = weather.City,
+				CountryCodeOfTheCity = weather.Country,
+				WeatherList = new List<WeatherListItem>()
+				{
+					new WeatherListItem()
+					{
+						Clouds = weather.Clouds,
+						DayTemp = weather.DayTemp,
+						Description = weather.Description,
+						Humidity = weather.Humidity,
+						Icon = weather.Icon,
+						MaxTemp = weather.MaxTemp,
+						MinTemp = weather.MinTemp,
+						Pressure = weather.Pressure,
+						Time = weather.Time,
+						WindSpeed = weather.WindSpeed
+					}
+				}
+
+			};
+		}
+		private static WeatherDb Weather2WearterDb(Weather weather)
+		{
+			if (weather == null || weather.WeatherList.Count == 0)
+				return null;
+
+			return new WeatherDb()
+			{
+				City = weather.CityName,
+				Country = weather.CountryCodeOfTheCity,
+				Clouds = weather.WeatherList[0].Clouds,
+				DayTemp = weather.WeatherList[0].DayTemp,
+				Description = weather.WeatherList[0].Description,
+				Humidity = weather.WeatherList[0].Humidity,
+				Icon = weather.WeatherList[0].Icon,
+				MaxTemp = weather.WeatherList[0].MaxTemp,
+				MinTemp = weather.WeatherList[0].MinTemp,
+				Pressure = weather.WeatherList[0].Pressure,
+				Time = weather.WeatherList[0].Time,
+				WindSpeed = weather.WeatherList[0].WindSpeed
+			};
+		}
+		private static HistoryResponse HistoryDb2HistoryResponse(HistoryItemDb history)
+		{
+			return new HistoryResponse()
+			{
+				Id = history.Id,
+				Time = history.Time,
+				Weather = WeatherDb2Wearter(history.WeatherDb)
+			};
+		}
+
+		private static HistoryItemDb HistoryDbItemFromWeather(Weather weather)
+		{
+			WeatherDb w = Weather2WearterDb(weather);
+			if (weather == null)
+				return null;
+			return new HistoryItemDb()
+			{
+				Time = DateTime.Now,
+				WeatherDb = w
+			};
+		}
+		#endregion
+
 		public EntityFrameworkDataRepository()
 		{
-			_id = 7;
-			_cities = new List<City>()
-			{
-				new City(){ Id=1, Name = "London"},
-				new City(){ Id=2, Name = "Kiev"},
-				new City(){ Id=3, Name = "Lviv"},
-				new City(){ Id=4, Name = "Kharkiv"},
-				new City(){ Id=5, Name = "Dnipropetrovsk"},
-				new City(){ Id=6, Name = "Odessa"}
-			};
+			_ctx = new EntityFrameworkContext();
 		}
 		public IEnumerable<City> GetAllCities()
 		{
-			return _cities;
+			return _ctx.Cities.Select(c => CityDb2City(c));
 		}
 
 		public void DeleteCityById(int id)
 		{
-			_cities.Remove(_cities.FirstOrDefault(c => c.Id == id));
+			_ctx.Cities.Remove(_ctx.Cities.FirstOrDefault(c => c.Id == id));
+			_ctx.SaveChanges();
 		}
 
 		public void AddCity(string name)
 		{
-			_cities.Add(new City(){Name = name, Id = _id});
-			_id++;
+			_ctx.Cities.Add(new CityDb()
+			{
+				Name = name
+			});
+			_ctx.SaveChanges();
 		}
 
 		public IEnumerable<HistoryResponse> GetAllHistoryItem()
 		{
-		  return new List<HistoryResponse>()
-		   {
-			   new HistoryResponse()
-			   {
-				   Id = 1,
-				   Time = DateTime.Now,
-				   Weather = new Weather()
-				   {
-					   CityName = "Lviv",
-					   CountryCodeOfTheCity = "UA",
-					   WeatherList = new List<WeatherListItem>()
-					   {
-						   new WeatherListItem()
-						   {
-							   Clouds = 20,
-							   DayTemp = 22,
-							   Description = "sky is clear",
-							   Humidity = 75,
-							   Icon = "800n.png",
-							   MaxTemp = 25,
-							   MinTemp = 18,
-							   Pressure = 815,
-							   Time = DateTime.Now,
-							   WindSpeed = 5
-						   }
-					   }
-				   }
-			   },
-			   new HistoryResponse()
-			   {
-			   Id = 2,
-			   Time = DateTime.Now,
-			   Weather = new Weather()
-			   {
-				   CityName = "Lviv",
-				   CountryCodeOfTheCity = "UA",
-				   WeatherList = new List<WeatherListItem>()
-				   {
-					   new WeatherListItem()
-					   {
-						   Clouds = 20,
-						   DayTemp = 22,
-						   Description = "sky is clear",
-						   Humidity = 75,
-						   Icon = "800n.png",
-						   MaxTemp = 25,
-						   MinTemp = 18,
-						   Pressure = 815,
-						   Time = DateTime.Now,
-						   WindSpeed = 5
-					   }
-				   }
-			   }
-		   },
-			   new HistoryResponse()
-			   {
-				   Id = 3,
-				   Time = DateTime.Now,
-				   Weather = new Weather()
-				   {
-					   CityName = "Lviv",
-					   CountryCodeOfTheCity = "UA",
-					   WeatherList = new List<WeatherListItem>()
-					   {
-						   new WeatherListItem()
-						   {
-							   Clouds = 20,
-							   DayTemp = 22,
-							   Description = "sky is clear",
-							   Humidity = 75,
-							   Icon = "800n.png",
-							   MaxTemp = 25,
-							   MinTemp = 18,
-							   Pressure = 815,
-							   Time = DateTime.Now,
-							   WindSpeed = 5
-						   }
-					   }
-				   }
-			   }
-
-		   };
+			return _ctx.History.Select(h => HistoryDb2HistoryResponse(h));
 		}
 
 		public void ClearHistory()
 		{
-			;
+			foreach (var item in _ctx.History)
+				_ctx.History.Remove(item);
+			_ctx.SaveChanges();
 		}
 
 		public void AddResponseToHistory(Weather weather)
 		{
-			;
+			var history= HistoryDbItemFromWeather(weather);
+			if (history!= null)
+			{
+				_ctx.History.Add(history);
+				_ctx.SaveChanges();
+			}
 		}
 	}
 }

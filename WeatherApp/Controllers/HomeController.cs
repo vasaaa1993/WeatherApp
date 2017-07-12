@@ -21,14 +21,7 @@ namespace WeatherApp.Controllers
 
 		public async Task<ActionResult> Index(string city, string time)
 		{
-			ViewBag.DefaultCities = new List<string>()
-			{
-				"Kiev",
-				"Lviv",
-				"Kharkiv",
-				"Dnipropetrovsk",
-				"Odessa"
-			};
+			ViewBag.DefaultCities = _repository.GetAllCities(); 
 
 			var weather = await _weatherService.GetWeatherByTownName(city, time ?? "1");
 			if (weather != null)

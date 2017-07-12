@@ -1,4 +1,5 @@
-﻿@model WeatherApp.Models.Weather
+﻿@using WeatherApp.Models
+@model WeatherApp.Models.Weather
 @{
 	ViewBag.Title = "Index";
 	int CountOfDays = Model?.WeatherList?.Count ?? 0;
@@ -30,9 +31,9 @@
 	</div>
 	<div class="col-xs-8">
 		<ul class="list-inline">
-			@foreach(var cityName in (List<string>) ViewBag.DefaultCities)
+			@foreach(var cityName in (IEnumerable<City>) ViewBag.DefaultCities)
 			{
-				<li>@Html.ActionLink(cityName, "Index", new { city = cityName })</li>
+				<li>@Html.ActionLink(cityName.Name, "Index", new { city = cityName.Name })</li>
 			}
 		</ul>
 	</div>
