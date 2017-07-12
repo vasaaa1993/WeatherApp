@@ -10,7 +10,7 @@ namespace WeatherApp.DataAccess.Entities
 	{
 		public EntityFrameworkContext():base("name=myConnectionString")
 		{
-			//Database.SetInitializer(new );
+			Database.SetInitializer(new CitiesDbInitializer());
 		}
 		public DbSet<CityDb> Cities { get; set; }
 		public DbSet<HistoryItemDb> History { get; set; }

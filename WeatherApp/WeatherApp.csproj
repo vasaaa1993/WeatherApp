@@ -177,6 +177,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectResolver .cs" />
+    <Compile Include="Migrations\201707121240391_InitialCreate.cs" />
+    <Compile Include="Migrations\201707121240391_InitialCreate.Designer.cs">
+      <DependentUpon>201707121240391_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707121423367_ChangedLenghtOfCityFieldInWeatherDb.cs" />
+    <Compile Include="Migrations\201707121423367_ChangedLenghtOfCityFieldInWeatherDb.Designer.cs">
+      <DependentUpon>201707121423367_ChangedLenghtOfCityFieldInWeatherDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\HistoryResponse.cs" />
     <Compile Include="Models\OpenWeather\City.cs" />
@@ -344,6 +353,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201707121240391_InitialCreate.resx">
+      <DependentUpon>201707121240391_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707121423367_ChangedLenghtOfCityFieldInWeatherDb.resx">
+      <DependentUpon>201707121423367_ChangedLenghtOfCityFieldInWeatherDb.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

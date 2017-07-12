@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherApp.DataAccess;
 using WeatherApp.Services;
@@ -21,7 +17,8 @@ namespace WeatherApp.Controllers
 
 		public async Task<ActionResult> Index(string city, string time)
 		{
-			ViewBag.DefaultCities = _repository.GetAllCities(); 
+			var list = _repository.GetAllCities();
+			ViewBag.DefaultCities = list; 
 
 			var weather = await _weatherService.GetWeatherByTownName(city, time ?? "1");
 			if (weather != null)

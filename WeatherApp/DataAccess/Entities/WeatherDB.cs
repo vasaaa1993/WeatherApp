@@ -7,7 +7,7 @@ namespace WeatherApp.DataAccess.Entities
 	[Table("Weather")]
 	public class WeatherDb
 	{
-		[ForeignKey("HistoryItemDb")]
+		[Key, ForeignKey("HistoryItemDb")]
 		public int Id { get; set; }
 		[Column(TypeName = "DateTime")]
 		public DateTime Time { get; set; }
@@ -16,7 +16,7 @@ namespace WeatherApp.DataAccess.Entities
 		public double MaxTemp { get; set; }
 		public double DayTemp { get; set; }
 
-		[StringLength(30)]
+		[StringLength(50)]
 		public string City { get; set; }
 		[StringLength(10)]
 		public string Country { get; set; }
@@ -30,6 +30,7 @@ namespace WeatherApp.DataAccess.Entities
 		[StringLength(20)]
 		public string Icon { get; set; }
 
+		public int StudentId { get; set; }
 		public virtual HistoryItemDb HistoryItemDb { get; set; }
 	}
 }

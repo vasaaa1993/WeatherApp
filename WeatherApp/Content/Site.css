@@ -310,12 +310,25 @@ textarea {
 	width: 80%;
 }
 .city-container {
-	margin: 10px 20px;
+	margin: 5px 0;
 	background-color:#BBDEFB;
-	border-radius: 10px;
+	border-radius: 5px;
+}
+
+.city-btn-add-container {
+	display: inline-block;
+	overflow: auto;
+	white-space: nowrap;
+	margin: 0 auto;
+	padding-right: 0;
+	padding-left: 10px
 }
 
 /*History List*/
+
+#history-page-title {
+	margin-bottom: 0;
+}
 #text-left {
 	display: block;
 }
@@ -355,7 +368,7 @@ textarea {
 }
 
 .history-item-container {
-	background-color: aquamarine;
+	background-color: #b2ebf2;
 	border-radius: 5px;
 	margin: 5px 0;
 	display: flex;
@@ -363,9 +376,7 @@ textarea {
 }
 .history-item-left {
 	padding: 20px 20px 20px 15px;
-	background-color: #008b8b;
-	/*float: none;
-	display: table-cell;*/
+	background-color: #80deea;
 }
 
 	.history-item-left .row {
@@ -374,6 +385,7 @@ textarea {
 
 .history-weather-container {
 	padding: 15px;
+	font-size: 15px;
 }
 .vertical-align {
 	display: flex;

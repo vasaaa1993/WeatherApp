@@ -12,8 +12,8 @@
 else
 {
 	<div class="with80 center-container text-color-grey">
-		<h2 class="text-center text-color-grey">History</h2>
-		<div class="text-center">
+		<h1 class="text-color-grey"  id="history-page-title">History</h1>
+		<div>
 			@Html.ActionLink("Clear History", "Clear")
 		</div>
 		@foreach (var item in @Model)
@@ -55,7 +55,7 @@ else
 								<div class="col-xs-6">
 									Pressure:
 								</div>
-								<div class="col-xs-6 text-right">
+								<div class="col-xs-6">
 									@item.Weather.WeatherList[0].Pressure hPa
 								</div>
 							</div>
@@ -63,7 +63,7 @@ else
 								<div class="col-xs-6">
 									Humidity:
 								</div>
-								<div class="col-xs-6 text-right">
+								<div class="col-xs-6 ">
 									@item.Weather.WeatherList[0].Humidity %
 								</div>
 							</div>
@@ -73,7 +73,7 @@ else
 								<div class="col-xs-6">
 									Clouds:
 								</div>
-								<div class="col-xs-6 text-right">
+								<div class="col-xs-6 ">
 									@item.Weather.WeatherList[0].Clouds %
 								</div>
 							</div>
@@ -81,7 +81,7 @@ else
 								<div class="col-xs-6">
 									Wind Speed:
 								</div>
-								<div class="col-xs-6 text-right">
+								<div class="col-xs-6">
 									@item.Weather.WeatherList[0].WindSpeed mps
 								</div>
 							</div>

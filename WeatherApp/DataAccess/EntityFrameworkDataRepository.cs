@@ -95,7 +95,12 @@ namespace WeatherApp.DataAccess
 		}
 		public IEnumerable<City> GetAllCities()
 		{
-			return _ctx.Cities.Select(c => CityDb2City(c));
+			IList<City> cities = new List<City>();
+			foreach (var cityDb in _ctx.Cities)
+			{
+				cities.Add(CityDb2City(cityDb));
+			}
+			return cities;
 		}
 
 		public void DeleteCityById(int id)
@@ -115,7 +120,13 @@ namespace WeatherApp.DataAccess
 
 		public IEnumerable<HistoryResponse> GetAllHistoryItem()
 		{
-			return _ctx.History.Select(h => HistoryDb2HistoryResponse(h));
+			IList<HistoryResponse> history = new List<HistoryResponse>();
+			foreach (var historyDb in _ctx.History.ToList())
+			{
+				var w = historyDb.WeatherDb;
+				history.Add(HistoryDb2HistoryResponse(historyDb));
+			}
+			return history;
 		}
 
 		public void ClearHistory()
