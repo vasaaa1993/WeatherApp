@@ -6,8 +6,8 @@ using System.Web;
 
 namespace WeatherApp.DataAccess
 {
-	public class EnityFraimworkContext : DbContext
+	public class EnityFrameworkContext : DbContext
 	{
-
+		public System.Data.Entity.DbSet<WeatherApp.DataAccess.Entities.CityDB> Cities { get; set; }
 	}
 }

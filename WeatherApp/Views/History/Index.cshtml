@@ -1,0 +1,83 @@
+﻿@model List<WeatherApp.Models.HistoryResponse>
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (@Model.Count == 0)
+{
+	<div class="text-center text-color-grey">
+		<h2>Oops, the history is empty</h2>
+	</div>
+}
+else
+{
+	<div class="with80 center-container text-color-grey">
+		@foreach (var item in @Model)
+		{
+			<div class="row history-item-container">
+			
+				<div class="col-xs-3 history-item-left">
+					<div class="row text-primary">
+						<h3 id="history-time"><strong>@item.Time.ToString("dd MMM HH:mm:ss")</strong></h3>
+					</div>
+					<div class="row">
+						<h3 id="history-city"><strong>@item.Weather.CityName</strong></h3>
+					</div>
+					<div class="row">
+						<h4 id="history-country">@item.Weather.CountryCodeOfTheCity</h4>
+					</div>
+				</div>
+				<div class="col-xs-9 history-weather-container">
+					<div class="row vertical-align">
+						<div class="col-xs-4">
+							<img src="@($"/Content/WeatherIcons/{@item.Weather.WeatherList[0].Icon}")" alt="@item.Weather.WeatherList[0].Description" class="history-weather-img ">
+						</div>
+						<div class="col-xs-8" id="text-left">
+							<div class="row"><h3 id="weather-temp-day"><strong>@item.Weather.WeatherList[0].DayTemp°</strong></h3></div>
+							<div class="row"><h4 id="weather-date">@item.Weather.WeatherList[0].Time.ToString("M")</h4></div>
+							<div class="row"><h4 id="weather-description">@item.Weather.WeatherList[0].Description</h4></div>
+						</div>
+					</div>
+					<div class="row weather-values-container ">
+						<div class="col-xs-6 weather-value-colum ">
+							<div class="row weather-value">
+								<div class="col-xs-6">
+									Pressure:
+								</div>
+								<div class="col-xs-6 text-right">
+									@item.Weather.WeatherList[0].Pressure hPa
+								</div>
+							</div>
+							<div class="row weather-value">
+								<div class="col-xs-6">
+									Humidity:
+								</div>
+								<div class="col-xs-6 text-right">
+									@item.Weather.WeatherList[0].Humidity %
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6 weather-value-colum ">
+							<div class="row weather-value">
+								<div class="col-xs-6">
+									Clouds:
+								</div>
+								<div class="col-xs-6 text-right">
+									@item.Weather.WeatherList[0].Clouds %
+								</div>
+							</div>
+							<div class="row weather-value">
+								<div class="col-xs-6">
+									Wind Speed:
+								</div>
+								<div class="col-xs-6 text-right">
+									@item.Weather.WeatherList[0].WindSpeed mps
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+}

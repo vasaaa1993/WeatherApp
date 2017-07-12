@@ -15,7 +15,7 @@ namespace WeatherApp.Services
 {
 	public class OpenWeatherService : IWeatherService
 	{
-		private IApiResponseConverter _converter;
+		private readonly IApiResponseConverter _converter;
 		//Weather curWeather;
 		public OpenWeatherService(IApiResponseConverter converter)
 		{

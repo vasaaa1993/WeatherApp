@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WeatherApp.Models.City>
+@{
+	ViewBag.Title = "Index";
+}
+
+<div class="text-center text-color-grey">
+	<h2>Cities</h2>
+</div>
+<div class="with50 center-container">
+	<div class="row">
+		<div class="col-xs-12 ">
+			@using (Html.BeginForm("Add", "Cities"))
+			{
+				@*@Html.Label("Enter city name which you want to add")*@
+				<div class="form-group">
+					<div class="col-xs-10 search-input">
+						@Html.TextBox("name", null, new { @class = "form-control col-xs-10", placeholder = "City name", required = "required" })
+					</div>
+					<div class="col-xs-2">
+						<input type="submit" value="Add" class="btn btn-primary" />
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+<div class="with80 center-container">
+	@foreach (var city in @Model)
+	{
+		<div class="row text-color-grey font-family-robobo city-container">
+			<div class="col-xs-6">
+				<div class="with80 center-container ">
+					<h4>@city.name</h4>
+				</div>
+			</div>
+			<div class="col-xs-6 text-right">
+				<div class="with80 center-container ">
+					<h4>@Html.ActionLink("Delete", "Delete", new { id = city.id })</h4>
+				</div>
+			</div>
+		</div>
+	}
+</div>

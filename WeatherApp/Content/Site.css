@@ -56,15 +56,12 @@ textarea {
 }
 
 .search-input {
-	padding-left: 0;
+	padding: 0;
 }
 
 #search-hr {
 	margin-bottom: 5px;
 	margin-top: 0;
-}
-
-.weather-container {
 }
 
 .weather-item {
@@ -96,6 +93,9 @@ textarea {
 
 .weather-value {
 	color: #455A64;
+}
+
+.font-family-robobo {
 	font-family: 'Roboto';
 }
 
@@ -294,4 +294,96 @@ textarea {
 		float: none;
 		margin: 0 auto;
 	}
+}
+
+/*Cities page*/
+
+.center-container {
+	float: none;
+	margin: 0 auto;
+}
+
+.with50 {
+	width: 50%;
+}
+.with80 {
+	width: 80%;
+}
+.city-container {
+	margin: 10px 20px;
+	background-color:#BBDEFB;
+	border-radius: 10px;
+}
+
+/*History List*/
+#text-left {
+	display: block;
+}
+#history-time {
+	
+}
+#history-city {
+	margin-bottom: 5px;
+	margin-top: 10px;
+}
+#history-country {
+	margin-top: 0;
+}
+
+#weather-temp-day {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+#weather-date {
+	margin-top: 0
+}
+.weather-value {
+	padding: 5px 0;
+}
+.weather-value-colum {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.weather-values-container {	
+	margin: 5px;
+	border-radius: 5px;
+}
+#weather-description {
+
+}
+
+.history-item-container {
+	background-color: aquamarine;
+	border-radius: 5px;
+	margin: 5px 0;
+	display: flex;
+	flex-direction: row;
+}
+.history-item-left {
+	padding: 20px 20px 20px 15px;
+	background-color: #008b8b;
+	/*float: none;
+	display: table-cell;*/
+}
+
+	.history-item-left .row {
+		margin: 0%;
+	}
+
+.history-weather-container {
+	padding: 15px;
+}
+.vertical-align {
+	display: flex;
+	flex-direction: row;
+}
+
+.vertical-align > [class^="col-"],
+.vertical-align > [class*=" col-"] {
+	display: flex;
+	align-items: center;
+	justify-content: center; /* Optional, to align inner items 
+                              horizontally inside the column */
 }

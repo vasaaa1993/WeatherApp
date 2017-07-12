@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WeatherApp.ApiResponseConvenrters;
+using WeatherApp.DataAccess;
 using WeatherApp.Services;
 
 namespace WeatherApp.Infrastructure
@@ -33,6 +34,7 @@ namespace WeatherApp.Infrastructure
 		{
 			kernel.Bind<IWeatherService>().To<OpenWeatherService>();
 			kernel.Bind<IApiResponseConverter>().To<JsonResponseConverter>();
+			kernel.Bind<IDataRepository>().To<EntityFrameworkDataRepository>();
 		}
 	}
 }

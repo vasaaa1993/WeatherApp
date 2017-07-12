@@ -5,9 +5,10 @@ using System.Web;
 
 namespace WeatherApp.Models
 {
-	public class City
+	public class HistoryResponse
 	{
 		public int Id { get; set; }
-		public string Name { get; set; }
+		public Weather Weather { get; set; }
+		public DateTime Time { get; set; }
 	}
 }
