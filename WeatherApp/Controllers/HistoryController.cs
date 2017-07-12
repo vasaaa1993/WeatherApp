@@ -4,97 +4,38 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Antlr.Runtime.Misc;
+using WeatherApp.DataAccess;
 using WeatherApp.Models;
 
 namespace WeatherApp.Controllers
 {
     public class HistoryController : Controller
     {
-        // GET: History
-        public ActionResult Index()
-        {
-            return View(new List<HistoryResponse>()
+	    private static IDataRepository _repository;
+		// GET: History
+	    public HistoryController(IDataRepository repository)
+	    {
+			if (_repository == null)
 			{
-				new HistoryResponse()
+				if (repository != null)
 				{
-					Id = 1,
-					Time = DateTime.Now,
-					Weather = new Weather()
-					{
-						CityName = "Lviv",
-						CountryCodeOfTheCity = "UA",
-						WeatherList = new ListStack<WeatherListItem>()
-						{
-							new WeatherListItem()
-							{
-								Clouds = 20,
-								DayTemp = 22,
-								Description = "sky is clear",
-								Humidity = 75,
-								Icon = "800n.png",
-								MaxTemp = 25,
-								MinTemp = 18,
-								Pressure = 815,
-								Time = DateTime.Now,
-								WindSpeed = 5
-							}
-						}
-					}
-				},
-				new HistoryResponse()
-				{
-				Id = 2,
-				Time = DateTime.Now,
-				Weather = new Weather()
-				{
-					CityName = "Lviv",
-					CountryCodeOfTheCity = "UA",
-					WeatherList = new ListStack<WeatherListItem>()
-					{
-						new WeatherListItem()
-						{
-							Clouds = 20,
-							DayTemp = 22,
-							Description = "sky is clear",
-							Humidity = 75,
-							Icon = "800n.png",
-							MaxTemp = 25,
-							MinTemp = 18,
-							Pressure = 815,
-							Time = DateTime.Now,
-							WindSpeed = 5
-						}
-					}
+					_repository = repository;
 				}
-			},
-				new HistoryResponse()
+				else
 				{
-					Id = 3,
-					Time = DateTime.Now,
-					Weather = new Weather()
-					{
-						CityName = "Lviv",
-						CountryCodeOfTheCity = "UA",
-						WeatherList = new ListStack<WeatherListItem>()
-						{
-							new WeatherListItem()
-							{
-								Clouds = 20,
-								DayTemp = 22,
-								Description = "sky is clear",
-								Humidity = 75,
-								Icon = "800n.png",
-								MaxTemp = 25,
-								MinTemp = 18,
-								Pressure = 815,
-								Time = DateTime.Now,
-								WindSpeed = 5
-							}
-						}
-					}
+					throw new ArgumentNullException("repository");
 				}
-
-			});
+			}
+		}
+		public ActionResult Index()
+        {
+	        return View(_repository.GetAllHistoryItem());
         }
-    }
+
+	    public ActionResult Clear()
+	    {
+			_repository.ClearHistory();
+		    return RedirectToAction("Index");
+	    }
+	}
 }

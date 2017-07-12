@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WeatherApp.DataAccess.Entities;
-using City = WeatherApp.Models.City;
+using WeatherApp.Models;
 
 namespace WeatherApp.DataAccess
 {
@@ -16,8 +16,8 @@ namespace WeatherApp.DataAccess
 		void AddCity(string name);
 		
 		//History
-		IEnumerable<HistoryItemDB> GetAllHistoryItem();
+		IEnumerable<HistoryResponse> GetAllHistoryItem();
 		void ClearHistory();
-		void AddHistory(string name);
+		void AddResponseToHistory(Weather weather);
 	}
 }

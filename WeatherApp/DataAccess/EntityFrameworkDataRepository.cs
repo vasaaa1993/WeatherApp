@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Antlr.Runtime.Tree;
-using WeatherApp.DataAccess.Entities;
 using WeatherApp.Models;
 
 namespace WeatherApp.DataAccess
@@ -41,19 +38,100 @@ namespace WeatherApp.DataAccess
 			_id++;
 		}
 
-		public IEnumerable<HistoryItemDB> GetAllHistoryItem()
+		public IEnumerable<HistoryResponse> GetAllHistoryItem()
 		{
-			throw new NotImplementedException();
+		  return new List<HistoryResponse>()
+		   {
+			   new HistoryResponse()
+			   {
+				   Id = 1,
+				   Time = DateTime.Now,
+				   Weather = new Weather()
+				   {
+					   CityName = "Lviv",
+					   CountryCodeOfTheCity = "UA",
+					   WeatherList = new List<WeatherListItem>()
+					   {
+						   new WeatherListItem()
+						   {
+							   Clouds = 20,
+							   DayTemp = 22,
+							   Description = "sky is clear",
+							   Humidity = 75,
+							   Icon = "800n.png",
+							   MaxTemp = 25,
+							   MinTemp = 18,
+							   Pressure = 815,
+							   Time = DateTime.Now,
+							   WindSpeed = 5
+						   }
+					   }
+				   }
+			   },
+			   new HistoryResponse()
+			   {
+			   Id = 2,
+			   Time = DateTime.Now,
+			   Weather = new Weather()
+			   {
+				   CityName = "Lviv",
+				   CountryCodeOfTheCity = "UA",
+				   WeatherList = new List<WeatherListItem>()
+				   {
+					   new WeatherListItem()
+					   {
+						   Clouds = 20,
+						   DayTemp = 22,
+						   Description = "sky is clear",
+						   Humidity = 75,
+						   Icon = "800n.png",
+						   MaxTemp = 25,
+						   MinTemp = 18,
+						   Pressure = 815,
+						   Time = DateTime.Now,
+						   WindSpeed = 5
+					   }
+				   }
+			   }
+		   },
+			   new HistoryResponse()
+			   {
+				   Id = 3,
+				   Time = DateTime.Now,
+				   Weather = new Weather()
+				   {
+					   CityName = "Lviv",
+					   CountryCodeOfTheCity = "UA",
+					   WeatherList = new List<WeatherListItem>()
+					   {
+						   new WeatherListItem()
+						   {
+							   Clouds = 20,
+							   DayTemp = 22,
+							   Description = "sky is clear",
+							   Humidity = 75,
+							   Icon = "800n.png",
+							   MaxTemp = 25,
+							   MinTemp = 18,
+							   Pressure = 815,
+							   Time = DateTime.Now,
+							   WindSpeed = 5
+						   }
+					   }
+				   }
+			   }
+
+		   };
 		}
 
 		public void ClearHistory()
 		{
-			throw new NotImplementedException();
+			;
 		}
 
-		public void AddHistory(string name)
+		public void AddResponseToHistory(Weather weather)
 		{
-			throw new NotImplementedException();
+			;
 		}
 	}
 }
