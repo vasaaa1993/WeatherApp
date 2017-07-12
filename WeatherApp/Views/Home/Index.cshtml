@@ -1,7 +1,8 @@
-﻿@model WeatherApp.Models.Weather
+﻿@using WeatherApp.Models
+@model WeatherApp.Models.Weather
 @{
 	ViewBag.Title = "Index";
-	int CountOfDays = Model?.list?.Count ?? 0;
+	int CountOfDays = Model?.WeatherList?.Count ?? 0;
 	string sWeatherItemColonClass = "one-cols";
 	switch (CountOfDays)
 	{
@@ -13,17 +14,7 @@
 			break;
 	}
 }
-<script>
-	function timeConverter(unixTimestamp) {
-        var a = new Date(unixTimestamp * 1000);
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        var year = a.getFullYear();
-        var month = months[a.getMonth()];
-        var date = a.getDate();
-        var time = date + ' ' + month + ' ' + year;
-        return time;
-    }
-</script>
+
 <div class="row search-panel">
 	<div class="col-xs-12 ">
 		@using (Html.BeginForm("Index", "Home"))
@@ -32,18 +23,23 @@
 				<div class="col-xs-10 search-input">
 					@Html.TextBox("city", null, new { @class = "form-control col-xs-10", placeholder = "City name", required = "required" })
 				</div>
-				<div class="col-xs-2" style="padding-left=0">
+				<div class="col-xs-2">
 					<input type="submit" value="Find" class="btn btn-primary" />
 				</div>
 			</div>
 		}
 	</div>
-	<div class="col-xs-9">
+	<div class="col-xs-8">
 		<ul class="list-inline">
-			@foreach(var cityName in ViewBag.DefaultCities as List<string>)
+			@foreach(var cityName in (IEnumerable<City>) ViewBag.DefaultCities)
 			{
-				<li>@Html.ActionLink(cityName, "Index", new { city = cityName })</li>
+				<li>@Html.ActionLink(cityName.Name, "Index", new { city = cityName.Name })</li>
 			}
+		</ul>
+	</div>
+	<div class="col-xs-2">
+		<ul class="list-inline pull-right">
+			<li>@Html.ActionLink("Edit cities", "Index", "Cities")</li>
 		</ul>
 	</div>
 </div>
@@ -57,8 +53,8 @@ else
 {
 	<div class="container">
 		<div class="city-name text-color-grey">
-			<h1 class=" text-center">@Model.city.name</h1>
-			<div class="text-center"><h4>@Model.city.country</h4></div>
+			<h1 class=" text-center">@Model.CityName</h1>
+			<div class="text-center"><h4>@Model.CountryCodeOfTheCity</h4></div>
 		</div>
 		<h3 class="text-primary text-center">
 			Weather Forecast For
@@ -66,28 +62,26 @@ else
 			(@CountOfDays == 3) ? "3 Days" : "7 Days")
 		</h3>
 		<ul class="list-inline center-list">
-			<li>@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.city?.name })</li>
-			<li>@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.city?.name })</li>
-			<li>@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.city?.name })</li>
+			<li>@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model.CityName })</li>
+			<li>@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model.CityName })</li>
+			<li>@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model.CityName })</li>
 		</ul>
 		<div class="row @sWeatherItemColonClass weather-container">
-			@foreach (var w in @Model.list)
+			@foreach (var w in @Model.WeatherList)
 			{
 				<div class="col-sm-1 weather-item">
 					<div class="container">
 						<div class="weather-item-header text-color-grey">
-							<h3>@w.temp.day°</h3>
+							<h3>@w.DayTemp°</h3>
 						</div>
 						<div class="weather-item-header text-color-grey">
-							<h4>
-								<script>document.write(timeConverter(@w.dt))</script>
-							</h4>
+							@w.Time.ToString("M")
 						</div>
 						<div class="row">
-							<img src="@($"/WeatherIcons/{w.weather[0].id}{w.weather[0].icon.ElementAt(2)}.png")" alt="@w.weather[0].description" class="weather-img ">
+							<img src="@($"/Content/WeatherIcons/{w.Icon}")" alt="@w.Description" class="weather-img ">
 						</div>
 						<div class="weather-item-header text-color-grey">
-							@w.weather[0].description
+							@w.Description
 						</div>
 						<div class="row text-center min-max-temp text-info">
 							<div class="row">
@@ -100,19 +94,11 @@ else
 							</div>
 							<div class="row">
 								<div class="col-sm-6">
-									<h5>@w.temp.min°</h5>
+									<h5>@w.MinTemp°</h5>
 								</div>
 								<div class="col-sm-6">
-									<h5>@w.temp.max°</h5>
+									<h5>@w.MaxTemp°</h5>
 								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6 weather-value">
-								Temp:
-							</div>
-							<div class="col-sm-6 weather-value  text-right">
-								@w.temp.day°
 							</div>
 						</div>
 
@@ -121,7 +107,7 @@ else
 								Pressure:
 							</div>
 							<div class="col-sm-6 weather-value text-right">
-								@(w.pressure) hPa
+								@(w.Pressure) hPa
 							</div>
 						</div>
 
@@ -130,7 +116,7 @@ else
 								Humidity:
 							</div>
 							<div class="col-sm-6 weather-value  text-right">
-								@w.humidity %
+								@w.Humidity %
 							</div>
 						</div>
 
@@ -139,7 +125,7 @@ else
 								Clouds:
 							</div>
 							<div class="col-sm-6 weather-value  text-right">
-								@w.clouds %
+								@w.Clouds %
 							</div>
 						</div>
 						<div class="row">
@@ -147,7 +133,7 @@ else
 								Wind speed
 							</div>
 							<div class="col-sm-6 weather-value  text-right">
-								@w.speed mps
+								@w.WindSpeed mps
 							</div>
 						</div>
 					</div>

@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace WeatherApp.Models
 {
 	public class Weather
 	{
-		public City city { get; set; }
-		public string cod { get; set; }
-		public double message { get; set; }
-		public int cnt { get; set; }
-		public List<WeatherListItem> list { get; set; }
+		public string CityName { get; set; }
+		public string CountryCodeOfTheCity { get; set; }
+		public List<WeatherListItem> WeatherList { get; set; }
+
+		public Weather()
+		{
+			WeatherList = new List<WeatherListItem>();
+		}
 	}
 }

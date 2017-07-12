@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -63,6 +69,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -156,17 +163,39 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\CitiesController.cs" />
+    <Compile Include="DataAccess\CitiesDbInitializer.cs" />
+    <Compile Include="DataAccess\EntityFrameworkContext.cs" />
+    <Compile Include="DataAccess\Entities\CityDb.cs" />
+    <Compile Include="DataAccess\Entities\HistoryItemDb.cs" />
+    <Compile Include="DataAccess\Entities\WeatherDb.cs" />
+    <Compile Include="DataAccess\EntityFrameworkDataRepository.cs" />
+    <Compile Include="DataAccess\IDataRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectResolver .cs" />
+    <Compile Include="Migrations\201707121240391_InitialCreate.cs" />
+    <Compile Include="Migrations\201707121240391_InitialCreate.Designer.cs">
+      <DependentUpon>201707121240391_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707121423367_ChangedLenghtOfCityFieldInWeatherDb.cs" />
+    <Compile Include="Migrations\201707121423367_ChangedLenghtOfCityFieldInWeatherDb.Designer.cs">
+      <DependentUpon>201707121423367_ChangedLenghtOfCityFieldInWeatherDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\City.cs" />
-    <Compile Include="Models\Coord.cs" />
-    <Compile Include="Models\Temperature.cs" />
-    <Compile Include="Models\WeatherInfo.cs" />
-    <Compile Include="Models\WeatherListItem.cs" />
+    <Compile Include="Models\HistoryResponse.cs" />
+    <Compile Include="Models\OpenWeather\City.cs" />
+    <Compile Include="Models\OpenWeather\Coord.cs" />
+    <Compile Include="Models\OpenWeather\Temperature.cs" />
+    <Compile Include="Models\OpenWeather\WeatherInfo.cs" />
+    <Compile Include="Models\OpenWeather\WeatherListItem.cs" />
+    <Compile Include="Models\OpenWeather\Weather.cs" />
     <Compile Include="Models\Weather.cs" />
+    <Compile Include="Models\WeatherListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IWeatherService.cs" />
     <Compile Include="Services\OpenWeatherService.cs" />
@@ -194,102 +223,102 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="WeatherIcons\200d.png" />
-    <Content Include="WeatherIcons\200n.png" />
-    <Content Include="WeatherIcons\201d.png" />
-    <Content Include="WeatherIcons\201n.png" />
-    <Content Include="WeatherIcons\202d.png" />
-    <Content Include="WeatherIcons\202n.png" />
-    <Content Include="WeatherIcons\210d.png" />
-    <Content Include="WeatherIcons\210n.png" />
-    <Content Include="WeatherIcons\211d.png" />
-    <Content Include="WeatherIcons\211n.png" />
-    <Content Include="WeatherIcons\212d.png" />
-    <Content Include="WeatherIcons\212n.png" />
-    <Content Include="WeatherIcons\221d.png" />
-    <Content Include="WeatherIcons\221n.png" />
-    <Content Include="WeatherIcons\230d.png" />
-    <Content Include="WeatherIcons\230n.png" />
-    <Content Include="WeatherIcons\231d.png" />
-    <Content Include="WeatherIcons\231n.png" />
-    <Content Include="WeatherIcons\232d.png" />
-    <Content Include="WeatherIcons\232n.png" />
-    <Content Include="WeatherIcons\300d.png" />
-    <Content Include="WeatherIcons\300n.png" />
-    <Content Include="WeatherIcons\301d.png" />
-    <Content Include="WeatherIcons\301n.png" />
-    <Content Include="WeatherIcons\302d.png" />
-    <Content Include="WeatherIcons\302n.png" />
-    <Content Include="WeatherIcons\310d.png" />
-    <Content Include="WeatherIcons\310n.png" />
-    <Content Include="WeatherIcons\311d.png" />
-    <Content Include="WeatherIcons\311n.png" />
-    <Content Include="WeatherIcons\312d.png" />
-    <Content Include="WeatherIcons\312n.png" />
-    <Content Include="WeatherIcons\321d.png" />
-    <Content Include="WeatherIcons\321n.png" />
-    <Content Include="WeatherIcons\500d.png" />
-    <Content Include="WeatherIcons\500n.png" />
-    <Content Include="WeatherIcons\501d.png" />
-    <Content Include="WeatherIcons\501n.png" />
-    <Content Include="WeatherIcons\502d.png" />
-    <Content Include="WeatherIcons\502n.png" />
-    <Content Include="WeatherIcons\503d.png" />
-    <Content Include="WeatherIcons\503n.png" />
-    <Content Include="WeatherIcons\504d.png" />
-    <Content Include="WeatherIcons\504n.png" />
-    <Content Include="WeatherIcons\511d.png" />
-    <Content Include="WeatherIcons\511n.png" />
-    <Content Include="WeatherIcons\520d.png" />
-    <Content Include="WeatherIcons\520n.png" />
-    <Content Include="WeatherIcons\521d.png" />
-    <Content Include="WeatherIcons\521n.png" />
-    <Content Include="WeatherIcons\522d.png" />
-    <Content Include="WeatherIcons\522n.png" />
-    <Content Include="WeatherIcons\600d.png" />
-    <Content Include="WeatherIcons\600n.png" />
-    <Content Include="WeatherIcons\601d.png" />
-    <Content Include="WeatherIcons\601n.png" />
-    <Content Include="WeatherIcons\602d.png" />
-    <Content Include="WeatherIcons\602n.png" />
-    <Content Include="WeatherIcons\611d.png" />
-    <Content Include="WeatherIcons\611n.png" />
-    <Content Include="WeatherIcons\621d.png" />
-    <Content Include="WeatherIcons\621n.png" />
-    <Content Include="WeatherIcons\701d.png" />
-    <Content Include="WeatherIcons\701n.png" />
-    <Content Include="WeatherIcons\711d.png" />
-    <Content Include="WeatherIcons\711n.png" />
-    <Content Include="WeatherIcons\721d.png" />
-    <Content Include="WeatherIcons\721n.png" />
-    <Content Include="WeatherIcons\731d.png" />
-    <Content Include="WeatherIcons\731n.png" />
-    <Content Include="WeatherIcons\741d.png" />
-    <Content Include="WeatherIcons\741n.png" />
-    <Content Include="WeatherIcons\800d.png" />
-    <Content Include="WeatherIcons\800n.png" />
-    <Content Include="WeatherIcons\801d.png" />
-    <Content Include="WeatherIcons\801n.png" />
-    <Content Include="WeatherIcons\802d.png" />
-    <Content Include="WeatherIcons\802n.png" />
-    <Content Include="WeatherIcons\803d.png" />
-    <Content Include="WeatherIcons\803n.png" />
-    <Content Include="WeatherIcons\804d.png" />
-    <Content Include="WeatherIcons\804n.png" />
-    <Content Include="WeatherIcons\900d.png" />
-    <Content Include="WeatherIcons\900n.png" />
-    <Content Include="WeatherIcons\901d.png" />
-    <Content Include="WeatherIcons\901n.png" />
-    <Content Include="WeatherIcons\902d.png" />
-    <Content Include="WeatherIcons\902n.png" />
-    <Content Include="WeatherIcons\903d.png" />
-    <Content Include="WeatherIcons\903n.png" />
-    <Content Include="WeatherIcons\904d.png" />
-    <Content Include="WeatherIcons\904n.png" />
-    <Content Include="WeatherIcons\905d.png" />
-    <Content Include="WeatherIcons\905n.png" />
-    <Content Include="WeatherIcons\906d.png" />
-    <Content Include="WeatherIcons\906n.png" />
+    <Content Include="Content\WeatherIcons\200d.png" />
+    <Content Include="Content\WeatherIcons\200n.png" />
+    <Content Include="Content\WeatherIcons\201d.png" />
+    <Content Include="Content\WeatherIcons\201n.png" />
+    <Content Include="Content\WeatherIcons\202d.png" />
+    <Content Include="Content\WeatherIcons\202n.png" />
+    <Content Include="Content\WeatherIcons\210d.png" />
+    <Content Include="Content\WeatherIcons\210n.png" />
+    <Content Include="Content\WeatherIcons\211d.png" />
+    <Content Include="Content\WeatherIcons\211n.png" />
+    <Content Include="Content\WeatherIcons\212d.png" />
+    <Content Include="Content\WeatherIcons\212n.png" />
+    <Content Include="Content\WeatherIcons\221d.png" />
+    <Content Include="Content\WeatherIcons\221n.png" />
+    <Content Include="Content\WeatherIcons\230d.png" />
+    <Content Include="Content\WeatherIcons\230n.png" />
+    <Content Include="Content\WeatherIcons\231d.png" />
+    <Content Include="Content\WeatherIcons\231n.png" />
+    <Content Include="Content\WeatherIcons\232d.png" />
+    <Content Include="Content\WeatherIcons\232n.png" />
+    <Content Include="Content\WeatherIcons\300d.png" />
+    <Content Include="Content\WeatherIcons\300n.png" />
+    <Content Include="Content\WeatherIcons\301d.png" />
+    <Content Include="Content\WeatherIcons\301n.png" />
+    <Content Include="Content\WeatherIcons\302d.png" />
+    <Content Include="Content\WeatherIcons\302n.png" />
+    <Content Include="Content\WeatherIcons\310d.png" />
+    <Content Include="Content\WeatherIcons\310n.png" />
+    <Content Include="Content\WeatherIcons\311d.png" />
+    <Content Include="Content\WeatherIcons\311n.png" />
+    <Content Include="Content\WeatherIcons\312d.png" />
+    <Content Include="Content\WeatherIcons\312n.png" />
+    <Content Include="Content\WeatherIcons\321d.png" />
+    <Content Include="Content\WeatherIcons\321n.png" />
+    <Content Include="Content\WeatherIcons\500d.png" />
+    <Content Include="Content\WeatherIcons\500n.png" />
+    <Content Include="Content\WeatherIcons\501d.png" />
+    <Content Include="Content\WeatherIcons\501n.png" />
+    <Content Include="Content\WeatherIcons\502d.png" />
+    <Content Include="Content\WeatherIcons\502n.png" />
+    <Content Include="Content\WeatherIcons\503d.png" />
+    <Content Include="Content\WeatherIcons\503n.png" />
+    <Content Include="Content\WeatherIcons\504d.png" />
+    <Content Include="Content\WeatherIcons\504n.png" />
+    <Content Include="Content\WeatherIcons\511d.png" />
+    <Content Include="Content\WeatherIcons\511n.png" />
+    <Content Include="Content\WeatherIcons\520d.png" />
+    <Content Include="Content\WeatherIcons\520n.png" />
+    <Content Include="Content\WeatherIcons\521d.png" />
+    <Content Include="Content\WeatherIcons\521n.png" />
+    <Content Include="Content\WeatherIcons\522d.png" />
+    <Content Include="Content\WeatherIcons\522n.png" />
+    <Content Include="Content\WeatherIcons\600d.png" />
+    <Content Include="Content\WeatherIcons\600n.png" />
+    <Content Include="Content\WeatherIcons\601d.png" />
+    <Content Include="Content\WeatherIcons\601n.png" />
+    <Content Include="Content\WeatherIcons\602d.png" />
+    <Content Include="Content\WeatherIcons\602n.png" />
+    <Content Include="Content\WeatherIcons\611d.png" />
+    <Content Include="Content\WeatherIcons\611n.png" />
+    <Content Include="Content\WeatherIcons\621d.png" />
+    <Content Include="Content\WeatherIcons\621n.png" />
+    <Content Include="Content\WeatherIcons\701d.png" />
+    <Content Include="Content\WeatherIcons\701n.png" />
+    <Content Include="Content\WeatherIcons\711d.png" />
+    <Content Include="Content\WeatherIcons\711n.png" />
+    <Content Include="Content\WeatherIcons\721d.png" />
+    <Content Include="Content\WeatherIcons\721n.png" />
+    <Content Include="Content\WeatherIcons\731d.png" />
+    <Content Include="Content\WeatherIcons\731n.png" />
+    <Content Include="Content\WeatherIcons\741d.png" />
+    <Content Include="Content\WeatherIcons\741n.png" />
+    <Content Include="Content\WeatherIcons\800d.png" />
+    <Content Include="Content\WeatherIcons\800n.png" />
+    <Content Include="Content\WeatherIcons\801d.png" />
+    <Content Include="Content\WeatherIcons\801n.png" />
+    <Content Include="Content\WeatherIcons\802d.png" />
+    <Content Include="Content\WeatherIcons\802n.png" />
+    <Content Include="Content\WeatherIcons\803d.png" />
+    <Content Include="Content\WeatherIcons\803n.png" />
+    <Content Include="Content\WeatherIcons\804d.png" />
+    <Content Include="Content\WeatherIcons\804n.png" />
+    <Content Include="Content\WeatherIcons\900d.png" />
+    <Content Include="Content\WeatherIcons\900n.png" />
+    <Content Include="Content\WeatherIcons\901d.png" />
+    <Content Include="Content\WeatherIcons\901n.png" />
+    <Content Include="Content\WeatherIcons\902d.png" />
+    <Content Include="Content\WeatherIcons\902n.png" />
+    <Content Include="Content\WeatherIcons\903d.png" />
+    <Content Include="Content\WeatherIcons\903n.png" />
+    <Content Include="Content\WeatherIcons\904d.png" />
+    <Content Include="Content\WeatherIcons\904n.png" />
+    <Content Include="Content\WeatherIcons\905d.png" />
+    <Content Include="Content\WeatherIcons\905n.png" />
+    <Content Include="Content\WeatherIcons\906d.png" />
+    <Content Include="Content\WeatherIcons\906n.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -304,10 +333,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\History\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -323,6 +353,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201707121240391_InitialCreate.resx">
+      <DependentUpon>201707121240391_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707121423367_ChangedLenghtOfCityFieldInWeatherDb.resx">
+      <DependentUpon>201707121423367_ChangedLenghtOfCityFieldInWeatherDb.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

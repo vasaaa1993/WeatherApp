@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using WeatherApp.DataAccess;
 using WeatherApp.Services;
 
 namespace WeatherApp.Controllers
@@ -11,23 +8,23 @@ namespace WeatherApp.Controllers
 	public class HomeController : Controller
 	{
 		private static IWeatherService _weatherService;
-		public HomeController(IWeatherService service)
+		private static IDataRepository _repository;
+		public HomeController(IWeatherService service, IDataRepository repository)
 		{
 			_weatherService = service;
+			_repository = repository;
 		}
 
 		public async Task<ActionResult> Index(string city, string time)
 		{
-			ViewBag.DefaultCities = new List<string>()
-			{
-				"Kiev",
-				"Lviv",
-				"Kharkiv",
-				"Dnipropetrovsk",
-				"Odessa"
-			};
+			var list = _repository.GetAllCities();
+			ViewBag.DefaultCities = list; 
 
 			var weather = await _weatherService.GetWeatherByTownName(city, time ?? "1");
+			if (weather != null)
+			{
+				_repository.AddResponseToHistory(weather);
+			}
 			return View(weather);
 		}
 
