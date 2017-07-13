@@ -9,7 +9,11 @@ namespace WeatherApp.ApiResponseConvenrters
 	{
 		public Weather Convert(string sResponse)
 		{
+			if (sResponse == null)
+				return null;
 			var weather = JsonConvert.DeserializeObject<Models.OpenWeather.Weather>(sResponse);
+			if (weather == null)
+				return null;
 			return OpenWeather2Weather(weather);
 		}
 

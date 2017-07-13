@@ -68,7 +68,7 @@ namespace WeatherApp.DataAccess
 
 		#region Helpers
 
-		private static City CityDb2City(CityDb city)
+		public static City CityDb2City(CityDb city)
 		{
 			return new City
 			{
@@ -77,7 +77,7 @@ namespace WeatherApp.DataAccess
 			};
 		}
 
-		private static Weather WeatherDb2Wearter(WeatherDb weather)
+		public static Weather WeatherDb2Wearter(WeatherDb weather)
 		{
 			return new Weather
 			{
@@ -102,7 +102,7 @@ namespace WeatherApp.DataAccess
 			};
 		}
 
-		private static WeatherDb Weather2WearterDb(Weather weather)
+		public static WeatherDb Weather2WearterDb(Weather weather)
 		{
 			if (weather == null || weather.WeatherList.Count == 0)
 				return null;
@@ -124,7 +124,7 @@ namespace WeatherApp.DataAccess
 			};
 		}
 
-		private static HistoryResponse HistoryDb2HistoryResponse(HistoryItemDb history)
+		public static HistoryResponse HistoryDb2HistoryResponse(HistoryItemDb history)
 		{
 			return new HistoryResponse
 			{
@@ -134,7 +134,7 @@ namespace WeatherApp.DataAccess
 			};
 		}
 
-		private static HistoryItemDb HistoryDbItemFromWeather(Weather weather)
+		public static HistoryItemDb HistoryDbItemFromWeather(Weather weather)
 		{
 			var w = Weather2WearterDb(weather);
 			if (weather == null)

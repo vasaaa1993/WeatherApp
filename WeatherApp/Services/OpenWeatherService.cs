@@ -14,6 +14,8 @@ namespace WeatherApp.Services
 		//Weather curWeather;
 		public OpenWeatherService(IApiResponseConverter converter)
 		{
+			if(converter == null)
+				throw new ArgumentNullException("converter");
 			_converter = converter;
 		}
 

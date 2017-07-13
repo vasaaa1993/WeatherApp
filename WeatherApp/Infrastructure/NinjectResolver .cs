@@ -32,7 +32,7 @@ namespace WeatherApp.Infrastructure
 		{
 			kernel.Bind<IWeatherService>().To<OpenWeatherService>();
 			kernel.Bind<IApiResponseConverter>().To<JsonResponseConverter>();
-			kernel.Bind<IDataRepository>().To<EntityFrameworkDataRepository>();
+			kernel.Bind<IDataRepository>().To<EntityFrameworkDataRepository>().InThreadScope();
 		}
 	}
 }
