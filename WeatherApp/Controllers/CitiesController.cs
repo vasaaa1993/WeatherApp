@@ -6,7 +6,7 @@ namespace WeatherApp.Controllers
 {
 	public class CitiesController : Controller
 	{
-		private static IDataRepository _repository;
+		private readonly IDataRepository _repository;
 
 		public CitiesController(IDataRepository repository)
 		{

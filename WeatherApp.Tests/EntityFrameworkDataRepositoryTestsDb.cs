@@ -7,10 +7,10 @@ using WeatherApp.Models;
 namespace WeatherApp.Tests
 {
 	[TestFixture]
-	class EntityFrameworkDataRepositoryIntigrationTests
+	class EntityFrameworkDataRepositoryTestsDb
 	{
 		private DbConnection connection;
-		EntityFrameworkContext context;
+		private EntityFrameworkContext context;
 		private EntityFrameworkDataRepository repo;
 
 		[SetUp]

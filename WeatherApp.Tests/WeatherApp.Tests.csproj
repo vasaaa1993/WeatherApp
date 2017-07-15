@@ -86,7 +86,7 @@
   <ItemGroup>
     <Compile Include="CitiesControllerTests.cs" />
     <Compile Include="EntityFrameworkDataRepositoryTestsDb.cs" />
-    <Compile Include="EntityFrameworkDataRepositoryTests.cs" />
+    <Compile Include="EntityFrameworkDataRepositoryTestsConvertion.cs" />
     <Compile Include="Fake\FakeRepository.cs" />
     <Compile Include="Fake\FakeService.cs" />
     <Compile Include="JsonResponseConverterTest.cs" />
