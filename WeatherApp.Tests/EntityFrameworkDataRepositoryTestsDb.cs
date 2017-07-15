@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework.Internal;
 using NUnit.Framework;
 using WeatherApp.DataAccess;
 using WeatherApp.Models;
@@ -12,17 +7,26 @@ using WeatherApp.Models;
 namespace WeatherApp.Tests
 {
 	[TestFixture]
-	class EntityFrameworkDataRepositoryTestsDb
+	class EntityFrameworkDataRepositoryIntigrationTests
 	{
-		private IDataRepository repo;
+		private DbConnection connection;
+		EntityFrameworkContext context;
+		private EntityFrameworkDataRepository repo;
+
 		[SetUp]
-		void TestSetup()
+		public  void Initialize()
 		{
-			DbConnection connection = Effort.DbConnectionFactory.CreateTransient();
-			var context = new EntityFrameworkContext(connection);
+			connection = Effort.DbConnectionFactory.CreateTransient();
+			context = new EntityFrameworkContext(connection);
 			repo = new EntityFrameworkDataRepository(context);
 		}
 
+		[TearDown]
+		public void TestTearDown()
+		{
+			context.Dispose();
+			connection.Dispose();
+		}
 		[Test]
 		[TestCase(null)]
 		[TestCase("")]
@@ -31,7 +35,7 @@ namespace WeatherApp.Tests
 			// Arrange
 			// Act
 			repo.AddCity(sCityName);
-
+			
 			//Assert
 			Assert.AreEqual(0, repo.GetAllCities().Count());
 		}
@@ -48,7 +52,7 @@ namespace WeatherApp.Tests
 			{
 				repo.AddCity(city);
 			}
-
+			
 			//Assert
 			Assert.AreEqual(cities.Length, repo.GetAllCities().Count());
 		}
@@ -61,10 +65,10 @@ namespace WeatherApp.Tests
 		{
 			// Arrange
 			repo.AddCity("Termopil");
-
+			
 			// Act
 			repo.DeleteCityById(nId);
-
+			
 			//Assert
 			Assert.AreEqual(1, repo.GetAllCities().Count());
 
@@ -90,7 +94,7 @@ namespace WeatherApp.Tests
 		}
 
 		[Test]
-		public void ClearHistory_Must_delete_all_history_items_from_repository()
+		public void ClearHistory_Test()
 		{
 			// Arrange
 			repo.AddResponseToHistory(new Weather());
