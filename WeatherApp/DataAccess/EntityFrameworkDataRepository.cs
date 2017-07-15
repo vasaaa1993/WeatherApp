@@ -10,9 +10,9 @@ namespace WeatherApp.DataAccess
 	{
 		private readonly EntityFrameworkContext _ctx;
 
-		public EntityFrameworkDataRepository()
+		public EntityFrameworkDataRepository(EntityFrameworkContext ctx = null)
 		{
-			_ctx = new EntityFrameworkContext();
+			_ctx = ctx ?? new EntityFrameworkContext();
 		}
 
 		public IEnumerable<City> GetAllCities()
@@ -25,12 +25,18 @@ namespace WeatherApp.DataAccess
 
 		public void DeleteCityById(int id)
 		{
-			_ctx.Cities.Remove(_ctx.Cities.FirstOrDefault(c => c.Id == id));
-			_ctx.SaveChanges();
+			var city = _ctx.Cities.FirstOrDefault(c => c.Id == id);
+			if (city != null)
+			{
+				_ctx.Cities.Remove(city);
+				_ctx.SaveChanges();
+			}
 		}
 
 		public void AddCity(string name)
 		{
+			if (string.IsNullOrEmpty(name))
+				return;
 			_ctx.Cities.Add(new CityDb
 			{
 				Name = name
@@ -70,6 +76,8 @@ namespace WeatherApp.DataAccess
 
 		public static City CityDb2City(CityDb city)
 		{
+			if (city == null)
+				return null;
 			return new City
 			{
 				Id = city.Id,
@@ -79,6 +87,8 @@ namespace WeatherApp.DataAccess
 
 		public static Weather WeatherDb2Wearter(WeatherDb weather)
 		{
+			if (weather == null)
+				return null;
 			return new Weather
 			{
 				CityName = weather.City,

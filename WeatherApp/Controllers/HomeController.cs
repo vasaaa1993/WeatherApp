@@ -22,8 +22,7 @@ namespace WeatherApp.Controllers
 			ViewBag.DefaultCities = list;
 
 			var weather = await _weatherService.GetWeatherByTownName(city, time ?? "1");
-			if (weather != null)
-				_repository.AddResponseToHistory(weather);
+			_repository.AddResponseToHistory(weather);
 			return View(weather);
 		}
 

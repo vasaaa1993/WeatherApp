@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,7 @@ using WeatherApp.Models;
 namespace WeatherApp.Tests
 {
 	[TestFixture]
-	class EntityFrameworkDataRepositoryTests
+	class EntityFrameworkDataRepositoryTestsConvertion
 	{
 		[Test]
 		public void CityDb2City_When_Invalid_parameters_passed_Then_return_null()
