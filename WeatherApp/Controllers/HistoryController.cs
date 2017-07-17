@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Web.Mvc;
-using WeatherApp.DataAccess;
+using WeatherApp.Services.Data;
 
 namespace WeatherApp.Controllers
 {
 	public class HistoryController : Controller
 	{
-		private static IDataRepository _repository;
+		private static IDataService _dataService;
 
 		// GET: History
-		public HistoryController(IDataRepository repository)
+		public HistoryController(IDataService dataService)
 		{
-			if (_repository == null)
-				if (repository != null)
-					_repository = repository;
+			if (_dataService == null)
+				if (dataService != null)
+					_dataService = dataService;
 				else
-					throw new ArgumentNullException("repository");
+					throw new ArgumentNullException("dataService");
 		}
 
 		public ActionResult Index()
 		{
-			return View(_repository.GetAllHistoryItem());
+			return View(_dataService.GetAllHistoryItems());
 		}
 
 		public ActionResult Clear()
 		{
-			_repository.ClearHistory();
+			_dataService.ClearHistory();
 			return RedirectToAction("Index");
 		}
 	}

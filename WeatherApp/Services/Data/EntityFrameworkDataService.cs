@@ -1,65 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WeatherApp.DataAccess;
 using WeatherApp.DataAccess.Entities;
 using WeatherApp.Models;
 
-namespace WeatherApp.DataAccess
+namespace WeatherApp.Services.Data
 {
-	public class EntityFrameworkDataRepository : IDataRepository
+	public class EntityFrameworkDataService : IDataService
 	{
-		private readonly EntityFrameworkContext _ctx;
+		readonly RepositoriesUnitOfWork _repo;
 
-		public EntityFrameworkDataRepository(EntityFrameworkContext ctx = null)
+		public EntityFrameworkDataService()
 		{
-			_ctx = ctx ?? new EntityFrameworkContext();
+			_repo = new RepositoriesUnitOfWork();
 		}
+		public EntityFrameworkDataService(RepositoriesUnitOfWork repo)
+		{
+			if(repo != null)
+				_repo = repo;
+			else 
+				_repo = new RepositoriesUnitOfWork();
 
+		}
 		public IEnumerable<City> GetAllCities()
 		{
-			IList<City> cities = new List<City>();
-			foreach (var cityDb in _ctx.Cities)
-				cities.Add(CityDb2City(cityDb));
-			return cities;
+			return _repo.Cities.GetAll().Select(CityDb2City).ToList();
 		}
 
-		public void DeleteCityById(int id)
+		public void DeleteCity(int id)
 		{
-			var city = _ctx.Cities.FirstOrDefault(c => c.Id == id);
-			if (city != null)
-			{
-				_ctx.Cities.Remove(city);
-				_ctx.SaveChanges();
-			}
+			_repo.Cities.Delete(id);
+			_repo.Save();
 		}
 
 		public void AddCity(string name)
 		{
-			if (string.IsNullOrEmpty(name))
-				return;
-			_ctx.Cities.Add(new CityDb
-			{
-				Name = name
-			});
-			_ctx.SaveChanges();
+			if (string.IsNullOrEmpty(name)) return;
+			_repo.Cities.Add(new CityDb(){Name = name});
+			_repo.Save();
 		}
 
-		public IEnumerable<HistoryResponse> GetAllHistoryItem()
+		public IEnumerable<HistoryResponse> GetAllHistoryItems()
 		{
-			IList<HistoryResponse> history = new List<HistoryResponse>();
-			foreach (var historyDb in _ctx.History.ToList())
-			{
-				var w = historyDb.WeatherDb;
-				history.Add(HistoryDb2HistoryResponse(historyDb));
-			}
-			return history;
+			return _repo.History.GetAll().Select(HistoryDb2HistoryResponse).ToList();
 		}
 
 		public void ClearHistory()
 		{
-			foreach (var item in _ctx.History)
-				_ctx.History.Remove(item);
-			_ctx.SaveChanges();
+			_repo.History.ClearAll();
+			_repo.Save();
 		}
 
 		public void AddResponseToHistory(Weather weather)
@@ -67,8 +57,8 @@ namespace WeatherApp.DataAccess
 			var history = HistoryDbItemFromWeather(weather);
 			if (history != null)
 			{
-				_ctx.History.Add(history);
-				_ctx.SaveChanges();
+				_repo.History.Add(history);
+				_repo.Save();
 			}
 		}
 
@@ -79,6 +69,17 @@ namespace WeatherApp.DataAccess
 			if (city == null)
 				return null;
 			return new City
+			{
+				Id = city.Id,
+				Name = city.Name
+			};
+		}
+
+		public static CityDb City2CityDb(City city)
+		{
+			if (city == null)
+				return null;
+			return new CityDb
 			{
 				Id = city.Id,
 				Name = city.Name
@@ -136,6 +137,8 @@ namespace WeatherApp.DataAccess
 
 		public static HistoryResponse HistoryDb2HistoryResponse(HistoryItemDb history)
 		{
+			if (history == null)
+				return null;
 			return new HistoryResponse
 			{
 				Id = history.Id,
@@ -155,6 +158,7 @@ namespace WeatherApp.DataAccess
 				WeatherDb = w
 			};
 		}
+
 
 		#endregion
 	}

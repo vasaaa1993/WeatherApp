@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using WeatherApp.Models;
 
-namespace WeatherApp.DataAccess
+namespace WeatherApp.Services.Data
 {
-	public interface IDataRepository
+	public interface IDataService
 	{
 		//Cities
 		IEnumerable<City> GetAllCities();
 
-		void DeleteCityById(int id);
+		void DeleteCity(int id);
 		void AddCity(string name);
 
 		//History
-		IEnumerable<HistoryResponse> GetAllHistoryItem();
+		IEnumerable<HistoryResponse> GetAllHistoryItems();
 
 		void ClearHistory();
 		void AddResponseToHistory(Weather weather);

@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using WeatherApp.DataAccess.Entities;
 
-namespace WeatherApp.DataAccess
+namespace WeatherApp.DataAccess.Contexts
 {
 	public class CitiesDbInitializer : CreateDatabaseIfNotExists<EntityFrameworkContext>
 	{

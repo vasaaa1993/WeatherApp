@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WeatherApp.ApiResponseConvenrters;
 using WeatherApp.Models;
 
-namespace WeatherApp.Services
+namespace WeatherApp.Services.API
 {
 	public class OpenWeatherService : IWeatherService
 	{
@@ -14,9 +14,9 @@ namespace WeatherApp.Services
 		//Weather curWeather;
 		public OpenWeatherService(IApiResponseConverter converter)
 		{
-			if(converter == null)
-				throw new ArgumentNullException("converter");
-			_converter = converter;
+			if (converter != null)
+				_converter = converter;
+			else throw new ArgumentNullException("converter");
 		}
 
 		public async Task<Weather> GetWeatherByTownName(string name, string dayPeriod)

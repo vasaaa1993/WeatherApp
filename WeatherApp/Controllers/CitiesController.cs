@@ -1,37 +1,37 @@
 ﻿using System;
 using System.Web.Mvc;
-using WeatherApp.DataAccess;
+using WeatherApp.Services.Data;
 
 namespace WeatherApp.Controllers
 {
 	public class CitiesController : Controller
 	{
-		private readonly IDataRepository _repository;
+		private readonly IDataService _dataService;
 
-		public CitiesController(IDataRepository repository)
+		public CitiesController(IDataService dataService)
 		{
-			if (_repository == null)
-				if (repository != null)
-					_repository = repository;
+			if (_dataService == null)
+				if (dataService != null)
+					_dataService = dataService;
 				else
-					throw new ArgumentNullException("repository");
+					throw new ArgumentNullException("dataService");
 		}
 
 		// GET: Product
 		public ActionResult Index()
 		{
-			return View(_repository.GetAllCities());
+			return View(_dataService.GetAllCities());
 		}
 
 		public ActionResult Add(string name)
 		{
-			_repository.AddCity(name);
+			_dataService.AddCity(name);
 			return RedirectToAction("Index");
 		}
 
 		public ActionResult Delete(int id)
 		{
-			_repository.DeleteCityById(id);
+			_dataService.DeleteCity(id);
 			return RedirectToAction("Index");
 		}
 	}

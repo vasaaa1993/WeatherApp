@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Ninject;
 using WeatherApp.ApiResponseConvenrters;
-using WeatherApp.DataAccess;
-using WeatherApp.Services;
+using WeatherApp.Services.Data;
+using WeatherApp.Services.API;
 
 namespace WeatherApp.Infrastructure
 {
@@ -32,7 +32,7 @@ namespace WeatherApp.Infrastructure
 		{
 			kernel.Bind<IWeatherService>().To<OpenWeatherService>();
 			kernel.Bind<IApiResponseConverter>().To<JsonResponseConverter>();
-			kernel.Bind<IDataRepository>().To<EntityFrameworkDataRepository>().InThreadScope();
+			kernel.Bind<IDataService>().To<EntityFrameworkDataService>();
 		}
 	}
 }

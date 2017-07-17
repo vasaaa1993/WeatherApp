@@ -166,13 +166,17 @@
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
-    <Compile Include="DataAccess\CitiesDbInitializer.cs" />
-    <Compile Include="DataAccess\EntityFrameworkContext.cs" />
+    <Compile Include="DataAccess\Contexts\CitiesDbInitializer.cs" />
+    <Compile Include="DataAccess\Contexts\EntityFrameworkContext.cs" />
+    <Compile Include="DataAccess\Repositories\CityDbRepository.cs" />
     <Compile Include="DataAccess\Entities\CityDb.cs" />
     <Compile Include="DataAccess\Entities\HistoryItemDb.cs" />
     <Compile Include="DataAccess\Entities\WeatherDb.cs" />
-    <Compile Include="DataAccess\EntityFrameworkDataRepository.cs" />
-    <Compile Include="DataAccess\IDataRepository.cs" />
+    <Compile Include="DataAccess\Repositories\HistoryDbRepository.cs" />
+    <Compile Include="Services\Data\EntityFrameworkDataService.cs" />
+    <Compile Include="Services\Data\IDataService.cs" />
+    <Compile Include="DataAccess\Repositories\IRepository.cs" />
+    <Compile Include="DataAccess\RepositoriesUnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,8 +192,8 @@
     <Compile Include="Models\Weather.cs" />
     <Compile Include="Models\WeatherListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IWeatherService.cs" />
-    <Compile Include="Services\OpenWeatherService.cs" />
+    <Compile Include="Services\API\IWeatherService.cs" />
+    <Compile Include="Services\API\OpenWeatherService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

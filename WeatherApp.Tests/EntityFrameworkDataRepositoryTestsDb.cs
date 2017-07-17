@@ -2,7 +2,9 @@
 using System.Linq;
 using NUnit.Framework;
 using WeatherApp.DataAccess;
+using WeatherApp.DataAccess.Contexts;
 using WeatherApp.Models;
+using WeatherApp.Services.Data;
 
 namespace WeatherApp.Tests
 {
@@ -11,14 +13,14 @@ namespace WeatherApp.Tests
 	{
 		private DbConnection connection;
 		private EntityFrameworkContext context;
-		private EntityFrameworkDataRepository repo;
+		private EntityFrameworkDataService dataService;
 
 		[SetUp]
 		public  void Initialize()
 		{
 			connection = Effort.DbConnectionFactory.CreateTransient();
 			context = new EntityFrameworkContext(connection);
-			repo = new EntityFrameworkDataRepository(context);
+			dataService = new EntityFrameworkDataService(new RepositoriesUnitOfWork(context));
 		}
 
 		[TearDown]
@@ -34,10 +36,10 @@ namespace WeatherApp.Tests
 		{
 			// Arrange
 			// Act
-			repo.AddCity(sCityName);
+			dataService.AddCity(sCityName);
 			
 			//Assert
-			Assert.AreEqual(0, repo.GetAllCities().Count());
+			Assert.AreEqual(0, dataService.GetAllCities().Count());
 		}
 
 		[Test]
@@ -50,11 +52,11 @@ namespace WeatherApp.Tests
 			// Act
 			foreach (var city in cities)
 			{
-				repo.AddCity(city);
+				dataService.AddCity(city);
 			}
 			
 			//Assert
-			Assert.AreEqual(cities.Length, repo.GetAllCities().Count());
+			Assert.AreEqual(cities.Length, dataService.GetAllCities().Count());
 		}
 
 		[Test]
@@ -64,13 +66,13 @@ namespace WeatherApp.Tests
 		public void DeleteCityById_When_Input_parameters_invalid_Then_do_Nothing(int nId)
 		{
 			// Arrange
-			repo.AddCity("Termopil");
-			
+			dataService.AddCity("Termopil");
+
 			// Act
-			repo.DeleteCityById(nId);
+			dataService.DeleteCity(nId);
 			
 			//Assert
-			Assert.AreEqual(1, repo.GetAllCities().Count());
+			Assert.AreEqual(1, dataService.GetAllCities().Count());
 
 		}
 
@@ -81,15 +83,15 @@ namespace WeatherApp.Tests
 		public void DeleteCityById_When_Input_parameters_valid_Then_delete_city(int nId)
 		{
 			// Arrange
-			repo.AddCity("Termopil");
-			repo.AddCity("Lviv");
-			repo.AddCity("Madrid");
+			dataService.AddCity("Termopil");
+			dataService.AddCity("Lviv");
+			dataService.AddCity("Madrid");
 
 			// Act
-			repo.DeleteCityById(nId);
+			dataService.DeleteCity(nId);
 
 			//Assert
-			Assert.AreEqual(2, repo.GetAllCities().Count());
+			Assert.AreEqual(2, dataService.GetAllCities().Count());
 
 		}
 
@@ -97,14 +99,14 @@ namespace WeatherApp.Tests
 		public void ClearHistory_Test()
 		{
 			// Arrange
-			repo.AddResponseToHistory(new Weather());
-			repo.AddResponseToHistory(new Weather());
+			dataService.AddResponseToHistory(new Weather());
+			dataService.AddResponseToHistory(new Weather());
 
 			// Act
-			repo.ClearHistory();
+			dataService.ClearHistory();
 
 			//Assert
-			Assert.AreEqual(0, repo.GetAllCities().Count());
+			Assert.AreEqual(0, dataService.GetAllCities().Count());
 		}
 	}
 }

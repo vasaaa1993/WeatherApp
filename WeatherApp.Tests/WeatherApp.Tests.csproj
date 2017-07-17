@@ -89,6 +89,7 @@
     <Compile Include="EntityFrameworkDataRepositoryTestsConvertion.cs" />
     <Compile Include="Fake\FakeRepository.cs" />
     <Compile Include="Fake\FakeService.cs" />
+    <Compile Include="Fake\IDataRepository.cs" />
     <Compile Include="JsonResponseConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

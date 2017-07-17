@@ -1,28 +1,29 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using WeatherApp.DataAccess;
-using WeatherApp.Services;
+using WeatherApp.Services.Data;
+using WeatherApp.Services.API;
 
 namespace WeatherApp.Controllers
 {
 	public class HomeController : Controller
 	{
-		private static IWeatherService _weatherService;
-		private static IDataRepository _repository;
+		private readonly IWeatherService _weatherService;
+		private readonly IDataService _dataService;
 
-		public HomeController(IWeatherService service, IDataRepository repository)
+		public HomeController(IWeatherService service, IDataService dataService)
 		{
 			_weatherService = service;
-			_repository = repository;
+			_dataService = dataService;
 		}
 
 		public async Task<ActionResult> Index(string city, string time)
 		{
-			var list = _repository.GetAllCities();
+			var list = _dataService.GetAllCities();
 			ViewBag.DefaultCities = list;
 
 			var weather = await _weatherService.GetWeatherByTownName(city, time ?? "1");
-			_repository.AddResponseToHistory(weather);
+			_dataService.AddResponseToHistory(weather);;
 			return View(weather);
 		}
 

@@ -6,7 +6,9 @@ using Moq;
 using NUnit.Framework;
 using WeatherApp.Controllers;
 using WeatherApp.DataAccess;
+using WeatherApp.DataAccess.Contexts;
 using WeatherApp.Models;
+using WeatherApp.Services.Data;
 
 namespace WeatherApp.Tests
 {
@@ -17,15 +19,15 @@ namespace WeatherApp.Tests
 		public void IndexMethod_Return_ViewResult_With_ListOfCiriesModel_When_RepoReturnValidData()
 		{
 			//Arrange
-			var _repoMock = new Mock<IDataRepository>();
-			_repoMock.Setup(m => m.GetAllCities()).Returns(new List<City>()
+			var repoMock = new Mock<IDataService>();
+			repoMock.Setup(m => m.GetAllCities()).Returns(new List<City>()
 			{
 				new City(){Id = 1,Name = "London"},
 				new City(){Id = 2, Name = "Paris"},
 				new City(){Id = 3, Name = "Lviv"},
 				new City(){Id = 4, Name = "Odessa"},
 			});
-			var cityController = new CitiesController(_repoMock.Object);
+			var cityController = new CitiesController(repoMock.Object);
 			
 			//Act
 			var result = cityController.Index();
@@ -36,26 +38,26 @@ namespace WeatherApp.Tests
 		}
 
 		//Intigration tests
-		private DbConnection connection;
-		private EntityFrameworkContext context;
-		private EntityFrameworkDataRepository repo;
-		private CitiesController controller;
+		private DbConnection _connection;
+		private EntityFrameworkContext _context;
+		private EntityFrameworkDataService _service;
+		private CitiesController _controller;
 
 		[SetUp]
 		public void InitTests()
 		{
-			connection = Effort.DbConnectionFactory.CreateTransient();
-			context = new EntityFrameworkContext(connection);
-			repo = new EntityFrameworkDataRepository(context);
-			controller = new CitiesController(repo);
+			_connection = Effort.DbConnectionFactory.CreateTransient();
+			_context = new EntityFrameworkContext(_connection);
+			_service = new EntityFrameworkDataService(new RepositoriesUnitOfWork(_context));
+			_controller = new CitiesController(_service);
 		}
-		
+
 		[TearDown]
 		public void TearDownTests()
 		{
-			controller.Dispose();
-			context.Dispose();
-			connection.Dispose();
+			_controller.Dispose();
+			_context.Dispose();
+			_connection.Dispose();
 
 		}
 
@@ -63,12 +65,12 @@ namespace WeatherApp.Tests
 		public void Index_Return_view_Model_with_List_of_3_items()
 		{
 			//Arrage
-			repo.AddCity("London");
-			repo.AddCity("Lviv");
-			repo.AddCity("Kiev");
+			_service.AddCity("London");
+			_service.AddCity("Lviv");
+			_service.AddCity("Kiev");
 
 			//Act
-			var result = controller.Index();
+			var result = _controller.Index();
 			//Assert
 
 			Assert.IsInstanceOf<ViewResult>(result);
@@ -85,15 +87,15 @@ namespace WeatherApp.Tests
 		public void Delete_When_Input_param_valid_Then_delete_item(int nId)
 		{
 			//Arrage
-			repo.AddCity("London");
-			repo.AddCity("Lviv");
-			repo.AddCity("Kiev");
+			_service.AddCity("London");
+			_service.AddCity("Lviv");
+			_service.AddCity("Kiev");
 
 			//Act
-			var result = controller.Delete(nId);
+			var result = _controller.Delete(nId);
 			
 			//Assert
-			Assert.AreEqual(2, repo.GetAllCities().Count());
+			Assert.AreEqual(2, _service.GetAllCities().Count());
 
 		}
 
@@ -104,15 +106,15 @@ namespace WeatherApp.Tests
 		public void Delete_When_Input_param_Invalid_Then_dont_delete_any_item(int nId)
 		{
 			//Arrage
-			repo.AddCity("London");
-			repo.AddCity("Lviv");
-			repo.AddCity("Kiev");
+			_service.AddCity("London");
+			_service.AddCity("Lviv");
+			_service.AddCity("Kiev");
 
 			//Act
-			var result = controller.Delete(nId);
+			var result = _controller.Delete(nId);
 			
 			//Assert
-			Assert.AreEqual(3,repo.GetAllCities().Count());
+			Assert.AreEqual(3, _service.GetAllCities().Count());
 		}
 
 		[Test]
@@ -123,10 +125,10 @@ namespace WeatherApp.Tests
 		{
 			//Arrage
 			//Act
-			var result = controller.Add(name);
+			var result = _controller.Add(name);
 			
 			//Assert
-			Assert.AreEqual(1, repo.GetAllCities().Count());
+			Assert.AreEqual(1, _service.GetAllCities().Count());
 
 		}
 
@@ -137,10 +139,10 @@ namespace WeatherApp.Tests
 		{
 			//Arrage
 			//Act
-			var result = controller.Add(name);
+			var result = _controller.Add(name);
 
 			//Assert
-			Assert.AreEqual(0, repo.GetAllCities().Count());
+			Assert.AreEqual(0, _service.GetAllCities().Count());
 
 		}
 	}
