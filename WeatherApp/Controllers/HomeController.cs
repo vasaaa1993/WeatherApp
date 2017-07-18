@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherApp.Services.Data;
-using WeatherApp.Services.API;
+using WeatherApp.Services.WeatherAPI;
 
 namespace WeatherApp.Controllers
 {

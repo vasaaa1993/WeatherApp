@@ -35,10 +35,9 @@ namespace WeatherApp.DataAccess.Repositories
 				_ctx.History.Remove(history);
 		}
 
-		public void Add(HistoryItemDb item)
+		public HistoryItemDb Add(HistoryItemDb item)
 		{
-			if(item != null)
-				_ctx.History.Add(item);
+			return item != null ? _ctx.History.Add(item) : null;
 		}
 	}
 }

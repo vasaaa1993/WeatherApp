@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WeatherApp.Models;
 using WeatherApp.Services;
-using WeatherApp.Services.API;
+using WeatherApp.Services.WeatherAPI;
 
 namespace WeatherApp.Tests.Fake
 {

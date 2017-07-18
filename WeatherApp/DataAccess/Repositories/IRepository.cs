@@ -12,6 +12,6 @@ namespace WeatherApp.DataAccess.Repositories
 		void ClearAll();
 		TEntity Get(int id);
 		void Delete(int id);
-		void Add(TEntity item);
+		TEntity Add(TEntity item);
 	}
 }

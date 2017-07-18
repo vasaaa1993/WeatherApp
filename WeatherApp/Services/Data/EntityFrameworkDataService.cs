@@ -34,11 +34,17 @@ namespace WeatherApp.Services.Data
 			_repo.Save();
 		}
 
-		public void AddCity(string name)
+		public City GetCity(int id)
 		{
-			if (string.IsNullOrEmpty(name)) return;
-			_repo.Cities.Add(new CityDb(){Name = name});
+			return CityDb2City(_repo.Cities.Get(id));
+		}
+
+		public City AddCity(string name)
+		{
+			if (string.IsNullOrEmpty(name)) return null;
+			var city = _repo.Cities.Add(new CityDb(){Name = name});
 			_repo.Save();
+			return CityDb2City(city);
 		}
 
 		public IEnumerable<HistoryResponse> GetAllHistoryItems()

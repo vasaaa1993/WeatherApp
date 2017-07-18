@@ -35,10 +35,9 @@ namespace WeatherApp.DataAccess.Repositories
 				_ctx.Cities.Remove(city);
 		}
 
-		public void Add(CityDb item)
+		public CityDb Add(CityDb item)
 		{
-			if(item != null)
-				_ctx.Cities.Add(item);
+			return item != null ? _ctx.Cities.Add(item) : null;
 		}
 	}
 }

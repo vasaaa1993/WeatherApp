@@ -14,7 +14,6 @@ namespace WeatherApp.App_Start
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
-
         /// <summary>
         /// Starts the application
         /// </summary>
@@ -44,8 +43,8 @@ namespace WeatherApp.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-
-                RegisterServices(kernel);
+	            System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = new Ninject.WebApi.DependencyResolver.NinjectDependencyResolver(kernel);
+				RegisterServices(kernel);
                 return kernel;
             }
             catch

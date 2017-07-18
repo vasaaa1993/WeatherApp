@@ -15,6 +15,15 @@ namespace WeatherApp.DataAccess.Contexts
 		{
 		}
 
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<HistoryItemDb>()
+				.HasOptional(h => h.WeatherDb)
+				.WithRequired(ad => ad.HistoryItemDb)
+				.WillCascadeOnDelete(true);
+			base.OnModelCreating(modelBuilder);
+		}
+
 		public DbSet<CityDb> Cities { get; set; }
 		public DbSet<HistoryItemDb> History { get; set; }
 	}

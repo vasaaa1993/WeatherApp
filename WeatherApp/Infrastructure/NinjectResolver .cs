@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Ninject;
 using WeatherApp.ApiResponseConvenrters;
 using WeatherApp.Services.Data;
-using WeatherApp.Services.API;
+using WeatherApp.Services.WeatherAPI;
 
 namespace WeatherApp.Infrastructure
 {
@@ -32,7 +32,7 @@ namespace WeatherApp.Infrastructure
 		{
 			kernel.Bind<IWeatherService>().To<OpenWeatherService>();
 			kernel.Bind<IApiResponseConverter>().To<JsonResponseConverter>();
-			kernel.Bind<IDataService>().To<EntityFrameworkDataService>();
+			kernel.Bind<IDataService>().To<EntityFrameworkDataService>().InSingletonScope();
 		}
 	}
 }

@@ -9,7 +9,8 @@ namespace WeatherApp.Services.Data
 		IEnumerable<City> GetAllCities();
 
 		void DeleteCity(int id);
-		void AddCity(string name);
+		City GetCity(int id);
+		City AddCity(string name);
 
 		//History
 		IEnumerable<HistoryResponse> GetAllHistoryItems();

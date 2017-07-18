@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using WeatherApp.Models;
 
-namespace WeatherApp.Services.API
+namespace WeatherApp.Services.WeatherAPI
 {
 	public interface IWeatherService
 	{

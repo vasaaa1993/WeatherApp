@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WeatherApp.ApiResponseConvenrters;
 using WeatherApp.Models;
 
-namespace WeatherApp.Services.API
+namespace WeatherApp.Services.WeatherAPI
 {
 	public class OpenWeatherService : IWeatherService
 	{
