@@ -67,81 +67,159 @@ else
 				</ul>
 			</div>
 		</div>
-		
-		<div class="row @sWeatherItemColonClass weather-container">
-			@foreach (var w in Model.WeatherList)
-			{
-				<div class="col-sm-1 weather-item">
-					<div class="container">
-						<div class="weather-item-header text-color-grey">
-							<h3>@w.DayTemp°</h3>
-						</div>
-						<div class="weather-item-header text-color-grey">
-							@w.Time.ToString("M")
-						</div>
-						<div class="row">
-							<img src="@($"/Content/WeatherIcons/{w.Icon}")" alt="@w.Description" class="weather-img ">
-						</div>
-						<div class="weather-item-header text-color-grey">
-							@w.Description
-						</div>
-						<div class="row text-center min-max-temp text-info">
-							<div class="row">
-								<div class="col-sm-6">
-									<h5>Min</h5>
-								</div>
-								<div class="col-sm-6">
-									<h5>Max</h5>
-								</div>
+		@if (Model.WeatherList.Count == 1)
+		{
+			var w = @Model.WeatherList[0];
+			<div class="text-color-grey">
+				<div class="col-xs-3 home-single-weather-left">
+					<div class="text-primary">
+						@w.DayTemp°
+					</div>
+					<div class="">
+						@w.Time.ToString("M")
+					</div>
+					<div class="row">
+						<img src="@($"/Content/WeatherIcons/{w.Icon}")" alt="@w.Description" class="weather-img ">
+					</div>
+					<div class="">
+						@w.Description
+					</div>
+				</div>
+				<div class="col-xs-9">
+					<div class="row text-center mix-max-container">
+						<div>
+							<div class="col-sm-6 text-primary">
+								Min
 							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<h5>@w.MinTemp°</h5>
-								</div>
-								<div class="col-sm-6">
-									<h5>@w.MaxTemp°</h5>
-								</div>
+							<div class="col-sm-6 text-primary">
+								Max
 							</div>
 						</div>
-
+						<div>
+							<div class="col-sm-6">
+								@w.MinTemp°
+							</div>
+							<div class="col-sm-6">
+								@w.MaxTemp°
+							</div>
+						</div>
+					</div>
+					<div class="home-single-weater-info-container text-center">
 						<div class="row">
-							<div class="col-sm-6 weather-value">
+							<div class="col-sm-6">
 								Pressure:
 							</div>
-							<div class="col-sm-6 weather-value text-right">
+							<div class="col-sm-6">
 								@(w.Pressure) hPa
 							</div>
 						</div>
 
 						<div class="row">
-							<div class="col-sm-6 weather-value">
+							<div class="col-sm-6">
 								Humidity:
 							</div>
-							<div class="col-sm-6 weather-value  text-right">
+							<div class="col-sm-6">
 								@w.Humidity %
 							</div>
 						</div>
 
 						<div class="row">
-							<div class="col-sm-6 weather-value">
+							<div class="col-sm-6">
 								Clouds:
 							</div>
-							<div class="col-sm-6 weather-value  text-right">
+							<div class="col-sm-6">
 								@w.Clouds %
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-6 weather-value">
+							<div class="col-sm-6 ">
 								Wind speed
 							</div>
-							<div class="col-sm-6 weather-value  text-right">
+							<div class="col-sm-6">
 								@w.WindSpeed mps
 							</div>
 						</div>
 					</div>
 				</div>
-			}
-		</div>
+			</div>
+		}
+		else
+		{
+			<div class="row @sWeatherItemColonClass weather-container">
+				@foreach (var w in Model.WeatherList)
+				{
+					<div class="col-sm-1 weather-item">
+						<div class="container">
+							<div class="weather-item-header text-primary">
+								@w.DayTemp°
+							</div>
+							<div class="weather-item-header text-color-grey">
+								@w.Time.ToString("M")
+							</div>
+							<div class="row">
+								<img src="@($"/Content/WeatherIcons/{w.Icon}")" alt="@w.Description" class="weather-img ">
+							</div>
+							<div class="weather-item-header text-color-grey">
+								@w.Description
+							</div>
+							<div class="row text-center min-max-temp text-info">
+								<div class="row">
+									<div class="col-sm-6">
+										Min
+									</div>
+									<div class="col-sm-6">
+										Max
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										@w.MinTemp°
+									</div>
+									<div class="col-sm-6">
+										@w.MaxTemp°
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-6 weather-value">
+									Pressure:
+								</div>
+								<div class="col-sm-6 weather-value text-right">
+									@(w.Pressure) hPa
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-6 weather-value">
+									Humidity:
+								</div>
+								<div class="col-sm-6 weather-value  text-right">
+									@w.Humidity %
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-6 weather-value">
+									Clouds:
+								</div>
+								<div class="col-sm-6 weather-value  text-right">
+									@w.Clouds %
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6 weather-value">
+									Wind speed
+								</div>
+								<div class="col-sm-6 weather-value  text-right">
+									@w.WindSpeed mps
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		}
 	</div>
 }
 @*@if (CountOfDays == 0)
