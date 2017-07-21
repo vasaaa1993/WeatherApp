@@ -1,6 +1,6 @@
 # WeatherApp
 BSA Homework
-New Design
+## New Design
 Home
 ![home](https://user-images.githubusercontent.com/5454020/28460070-05253440-6e19-11e7-8968-0d1ca3c02ece.png)
 History
@@ -8,7 +8,7 @@ History
 Cities
 ![cities](https://user-images.githubusercontent.com/5454020/28460067-01400b48-6e19-11e7-82ad-f8e15a287dcc.png)
 
-Old Designe
+## Old Designe
 Home
 ![index](https://user-images.githubusercontent.com/5454020/27907338-eeafccea-624f-11e7-9c7f-a45bb9c7132b.png)
 History
