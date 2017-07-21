@@ -1,5 +1,4 @@
 # WeatherApp
-BSA Homework
 ## New Design
 Home
 ![home](https://user-images.githubusercontent.com/5454020/28460070-05253440-6e19-11e7-8968-0d1ca3c02ece.png)
