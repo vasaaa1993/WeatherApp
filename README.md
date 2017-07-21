@@ -1,7 +1,7 @@
 # WeatherApp
 ## New Design
 Home
-![home](https://user-images.githubusercontent.com/5454020/28460070-05253440-6e19-11e7-8968-0d1ca3c02ece.png)
+![home](https://user-images.githubusercontent.com/5454020/28460603-71abdec8-6e1b-11e7-9690-c212d3595239.png)
 History
 ![history](https://user-images.githubusercontent.com/5454020/28460068-03c250ba-6e19-11e7-9ed8-6145a6c208f3.png)
 Cities
