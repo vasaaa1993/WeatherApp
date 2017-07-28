@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using UwpWeatherClient.Models;
 using Newtonsoft.Json;
+using UwpWeatherClient.Services;
 
 namespace UwpWeatherClient.ViewModels
 {
@@ -29,34 +30,17 @@ namespace UwpWeatherClient.ViewModels
 
 		public StartPageViewModel()
 		{
-			var rez = GetWeatherByTownName("Lviv", "1");
+			//var service = new WeatherService();
+			//var rez = service.GetWeather("London", 3);
 			Title = "Hello Mia.";
+			Some();
+		}
+		public async void Some()
+		{
+			var ser = new CitiesService();
+			var rez = await ser.AddCity(new City() { Name = "Poltava" });
+			int a = 3;
 		}
 
-		public async Task<Weather> GetWeatherByTownName(string name, string dayPeriod)
-		{
-			if (name == null)
-				return null;
-			int nDayPeriod;
-			if (!int.TryParse(dayPeriod, out nDayPeriod))
-				nDayPeriod = 1;
-			var sUrl =
-				$"http://localhost:50185/api/Weather/{name}/{dayPeriod}";
-			try
-			{
-				using (var client = new HttpClient())
-				using (var response = await client.GetAsync(sUrl))
-				using (var content = response.Content)
-				{
-					var apiResponse = await content.ReadAsStringAsync();
-					var rez = JsonConvert.DeserializeObject<Weather>(apiResponse);
-					return rez;
-				}
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-		}
 	}
 }

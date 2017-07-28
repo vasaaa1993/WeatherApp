@@ -8,7 +8,7 @@ namespace UwpWeatherClient.Services
 	{
 		protected static string baseApiPath = "http://localhost:50185/api/";
 
-		public async Task<T> GetApiResponse<T>(string sUrl)
+		protected async Task<T> GetApiResponse<T>(string sUrl)
 		{
 			using (var client = new HttpClient())
 			using (var response = await client.GetAsync(sUrl))
@@ -20,7 +20,7 @@ namespace UwpWeatherClient.Services
 			}
 		}
 
-		public async Task<bool> DeleteApiResponse(string sUrl)
+		protected async Task<bool> DeleteApiResponse(string sUrl)
 		{
 			using (var client = new HttpClient())
 			using (var response = await client.DeleteAsync(sUrl))
@@ -29,7 +29,7 @@ namespace UwpWeatherClient.Services
 			}
 		}
 
-		public async Task<bool> PostApiResponse<T>(string sUrl, T obj)
+		protected async Task<bool> PostApiResponse<T>(string sUrl, T obj)
 		{
 			using (var client = new HttpClient())
 			{
