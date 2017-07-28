@@ -299,6 +299,11 @@ textarea { max-width: 280px; }
 
 /* 1 day*/
 
+.home-single-weather-container {
+	background-color: #BBDEFB;
+	margin: 0;
+}
+
 .home-single-weather-left {
 	font-size: 2em;
 	text-align: center;
