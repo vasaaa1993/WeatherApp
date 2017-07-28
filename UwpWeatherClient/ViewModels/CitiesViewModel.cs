@@ -10,7 +10,7 @@ using UwpWeatherClient.Services;
 
 namespace UwpWeatherClient.ViewModels
 {
-	class CitiesViewModel : BaseViewModel
+	public class CitiesViewModel : BaseViewModel
 	{
 		private INavigationService _navigationService;
 		private ICitiesService _citiesService;

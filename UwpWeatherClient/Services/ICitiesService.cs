@@ -4,7 +4,7 @@ using UwpWeatherClient.Models;
 
 namespace UwpWeatherClient.Services
 {
-	interface ICitiesService
+	public interface ICitiesService
 	{
 		Task<IEnumerable<City>> GetAllCities();
 

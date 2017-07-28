@@ -10,7 +10,7 @@ using UwpWeatherClient.Services;
 
 namespace UwpWeatherClient.ViewModels
 {
-	class HistoryViewModel : BaseViewModel
+	public class HistoryViewModel : BaseViewModel
 	{
 		private INavigationService _navigationService;
 		private IHistoryService _historyService;

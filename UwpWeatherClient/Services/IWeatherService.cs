@@ -7,7 +7,7 @@ using UwpWeatherClient.Models;
 
 namespace UwpWeatherClient.Services
 {
-	interface IWeatherService
+	public interface IWeatherService
 	{
 		Task<Weather> GetWeather(string city, int period);
 	}

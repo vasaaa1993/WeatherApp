@@ -3,7 +3,7 @@ using UwpWeatherClient.Models;
 
 namespace UwpWeatherClient.Services
 {
-	class WeatherService : BaseService, IWeatherService
+	public class WeatherService : BaseService, IWeatherService
 	{
 		public async Task<Weather> GetWeather(string city, int period)
 		{

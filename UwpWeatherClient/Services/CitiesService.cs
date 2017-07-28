@@ -4,7 +4,7 @@ using UwpWeatherClient.Models;
 
 namespace UwpWeatherClient.Services
 {
-	class CitiesService : BaseService, ICitiesService 
+	public class CitiesService : BaseService, ICitiesService 
 	{
 		private static string _cities = "Cities";
 		public async Task<bool> AddCity(City city)

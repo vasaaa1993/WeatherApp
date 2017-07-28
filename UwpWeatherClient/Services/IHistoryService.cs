@@ -4,7 +4,7 @@ using UwpWeatherClient.Models;
 
 namespace UwpWeatherClient.Services
 {
-	interface IHistoryService
+	public interface IHistoryService
 	{
 		Task<IEnumerable<History>> GetHistory();
 		Task<bool> ClearHistory();

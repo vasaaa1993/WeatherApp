@@ -81,7 +81,7 @@ Students.Add(student);
 */
 namespace UwpWeatherClient.ViewModels
 {
-	class WeatherViewModel : BaseViewModel
+	public class WeatherViewModel : BaseViewModel
 	{
 		private INavigationService _navigationService;
 		private IWeatherService _weatherService;

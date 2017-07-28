@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace UwpWeatherClient.Services
 {
-	abstract class BaseService
+	public abstract class BaseService
 	{
 		protected static string baseApiPath = "http://localhost:50185/api/";
 

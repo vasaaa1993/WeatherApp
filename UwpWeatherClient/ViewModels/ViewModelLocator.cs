@@ -2,12 +2,8 @@
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UwpWeatherClient.ViewModels;
+using UwpWeatherClient.Services;
+using UwpWeatherClient.Views;
 
 namespace UwpWeatherClient.ViewModels
 {
@@ -23,6 +19,12 @@ namespace UwpWeatherClient.ViewModels
 		public ViewModelLocator()
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+			var navigationService = new NavigationService();
+			navigationService.Configure(nameof(WeatherViewModel), typeof(WeatherView));
+			navigationService.Configure(nameof(CitiesViewModel), typeof(CitiesView));
+			navigationService.Configure(nameof(HistoryViewModel), typeof(HistoryView));
+
 			if (ViewModelBase.IsInDesignModeStatic)
 			{
 				// Create design time view services and models
@@ -33,23 +35,59 @@ namespace UwpWeatherClient.ViewModels
 			}
 
 			//Register your services used here
-			SimpleIoc.Default.Register<INavigationService, NavigationService>();
-			SimpleIoc.Default.Register<StartPageViewModel>();
+			SimpleIoc.Default.Register<INavigationService>(() => navigationService);
+
+			// Register services 
+			SimpleIoc.Default.Register<IWeatherService, WeatherService>();
+			SimpleIoc.Default.Register<IHistoryService, HistoryService>();
+			SimpleIoc.Default.Register<ICitiesService, CitiesService>();
+
+			SimpleIoc.Default.Register<WeatherViewModel>();
+			SimpleIoc.Default.Register<CitiesViewModel>();
+			SimpleIoc.Default.Register<HistoryViewModel>();
 
 		}
 
 
 		// <summary>
-		// Gets the StartPage view model.
+		// Gets the History view model.
 		// </summary>
 		// <value>
-		// The StartPage view model.
+		// The History view model.
 		// </value>
-		public StartPageViewModel StartPageInstance
+		public HistoryViewModel HistoryVMInstance
 		{
 			get
 			{
-				return ServiceLocator.Current.GetInstance<StartPageViewModel>();
+				return ServiceLocator.Current.GetInstance<HistoryViewModel>();
+			}
+		}
+
+		// <summary>
+		// Gets the Weather view model.
+		// </summary>
+		// <value>
+		// The Weather view model.
+		// </value>
+		public WeatherViewModel WeatherVMInstance
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<WeatherViewModel>();
+			}
+		}
+
+		// <summary>
+		// Gets the Cities view model.
+		// </summary>
+		// <value>
+		// The Cities view model.
+		// </value>
+		public CitiesViewModel CitiesVWInstance
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<CitiesViewModel>();
 			}
 		}
 
