@@ -9,7 +9,11 @@ namespace UwpWeatherClient.Services
 		private static string _cities = "Cities";
 		public async Task<bool> AddCity(City city)
 		{
-			return await PostApiResponse($"{baseApiPath}{_cities}", city);
+
+			return await PostApiResponse($"{baseApiPath}{_cities}", new Dictionary<string, string>()
+			{
+				{ "name", city.Name }
+			});
 		}
 
 		public async Task<bool> DeleteCity(int id)

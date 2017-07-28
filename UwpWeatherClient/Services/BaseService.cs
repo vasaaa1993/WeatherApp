@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -29,16 +30,14 @@ namespace UwpWeatherClient.Services
 			}
 		}
 
-		protected async Task<bool> PostApiResponse<T>(string sUrl, T obj)
+		protected async Task<bool> PostApiResponse(string sUrl, IDictionary<string, string> values)
 		{
 			using (var client = new HttpClient())
+			using (var content = new FormUrlEncodedContent(values))
+			using (var response = await client.PostAsync(sUrl, content))
 			{
-				string json = JsonConvert.SerializeObject(obj);
-				using (var response = await client.PostAsync(sUrl, new StringContent(json)))
-				{
-					return response.StatusCode == System.Net.HttpStatusCode.OK;
-				}
-			}			
+				return response.StatusCode == System.Net.HttpStatusCode.OK;
+			}
 		}
 	}
 }

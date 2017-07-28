@@ -19,7 +19,7 @@
 			<ColumnDefinition Width="1*"/>
 		</Grid.ColumnDefinitions>
 
-		<Rectangle Fill="{StaticResource TealBrush}" Grid.Row="0" Grid.ColumnSpan="3"/>
+		<!--<Rectangle Fill="{StaticResource TealBrush}" Grid.Row="0" Grid.ColumnSpan="3"/>
 		<TextBlock Text="{Binding Title}"
             Margin="18"
             Style="{StaticResource PageTitle}"
@@ -80,6 +80,6 @@
 					</Grid>
 				</DataTemplate>
 			</ListView.ItemTemplate>
-		</ListView>
+		</ListView>-->
 	</Grid>
 </Page>

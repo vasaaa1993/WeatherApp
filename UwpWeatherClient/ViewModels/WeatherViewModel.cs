@@ -99,20 +99,19 @@ namespace UwpWeatherClient.ViewModels
 			_weatherService = weatherService;
 
 			Cities = new ObservableCollection<City>();
-			GetWeather();
+			//GetWeather();
 		}
 
-		private async void GetWeather()
-		{
-			var w = await _weatherService.GetWeather("London", 7);
-			if(w != null)
-			{
-				Weather = w;
-				RaisePropertyChanged(() => Weather);
-			}
-		}
-
-
-
+		//private async void GetWeather()
+		//{
+		//	var ser = new CitiesService();
+		//	var rez = await ser.AddCity(new City() { Name = "Pop" });
+		//	var w = await _weatherService.GetWeather("London", 7);
+		//	if(w != null)
+		//	{
+		//		Weather = w;
+		//		RaisePropertyChanged(() => Weather);
+		//	}
+		//}
 	}
 }
