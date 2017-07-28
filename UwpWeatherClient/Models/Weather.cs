@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WeatherApp.Models
+namespace UwpWeatherClient.Models
 {
 	public class Weather
 	{

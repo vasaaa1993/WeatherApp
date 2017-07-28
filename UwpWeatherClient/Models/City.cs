@@ -1,4 +1,4 @@
-﻿namespace WeatherApp.Models
+﻿namespace UwpWeatherClient.Models
 {
 	public class City
 	{

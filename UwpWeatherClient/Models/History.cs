@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace WeatherApp.Models
+namespace UwpWeatherClient.Models
 {
-	public class HistoryResponse
+	public class History
 	{
 		public int Id { get; set; }
 		public Weather Weather { get; set; }
