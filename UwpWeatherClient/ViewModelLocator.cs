@@ -3,9 +3,10 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using UwpWeatherClient.Services;
+using UwpWeatherClient.ViewModels;
 using UwpWeatherClient.Views;
 
-namespace UwpWeatherClient.ViewModels
+namespace UwpWeatherClient
 {
 	/// <summary>
 	/// This class contains static references to all the view models in the
@@ -24,7 +25,6 @@ namespace UwpWeatherClient.ViewModels
 			navigationService.Configure(nameof(WeatherViewModel), typeof(WeatherView));
 			navigationService.Configure(nameof(CitiesViewModel), typeof(CitiesView));
 			navigationService.Configure(nameof(HistoryViewModel), typeof(HistoryView));
-
 			if (ViewModelBase.IsInDesignModeStatic)
 			{
 				// Create design time view services and models
@@ -47,7 +47,6 @@ namespace UwpWeatherClient.ViewModels
 			SimpleIoc.Default.Register<HistoryViewModel>();
 
 		}
-
 
 		// <summary>
 		// Gets the History view model.

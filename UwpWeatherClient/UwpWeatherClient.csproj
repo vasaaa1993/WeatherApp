@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DateFormatConverter.cs" />
+    <Compile Include="Converters\WeatherIconPathConverter.cs" />
+    <Compile Include="Converters\RadioButtonParamToIntConverter.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\History.cs" />
     <Compile Include="Models\Weather.cs" />
@@ -110,7 +113,10 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CitiesViewModel.cs" />
     <Compile Include="ViewModels\HistoryViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\WeatherViewModel.cs" />
     <Compile Include="Views\CitiesView.xaml.cs">
       <DependentUpon>CitiesView.xaml</DependentUpon>
@@ -129,6 +135,148 @@
     <None Include="UwpWeatherClient_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-125.png" />
+    <Content Include="Assets\BadgeLogo.scale-150.png" />
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\LargeTile.scale-100.png" />
+    <Content Include="Assets\LargeTile.scale-125.png" />
+    <Content Include="Assets\LargeTile.scale-150.png" />
+    <Content Include="Assets\LargeTile.scale-200.png" />
+    <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\SmallTile.scale-100.png" />
+    <Content Include="Assets\SmallTile.scale-125.png" />
+    <Content Include="Assets\SmallTile.scale-150.png" />
+    <Content Include="Assets\SmallTile.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\WeatherIcons\200d.png" />
+    <Content Include="Assets\WeatherIcons\200n.png" />
+    <Content Include="Assets\WeatherIcons\201d.png" />
+    <Content Include="Assets\WeatherIcons\201n.png" />
+    <Content Include="Assets\WeatherIcons\202d.png" />
+    <Content Include="Assets\WeatherIcons\202n.png" />
+    <Content Include="Assets\WeatherIcons\210d.png" />
+    <Content Include="Assets\WeatherIcons\210n.png" />
+    <Content Include="Assets\WeatherIcons\211d.png" />
+    <Content Include="Assets\WeatherIcons\211n.png" />
+    <Content Include="Assets\WeatherIcons\212d.png" />
+    <Content Include="Assets\WeatherIcons\212n.png" />
+    <Content Include="Assets\WeatherIcons\221d.png" />
+    <Content Include="Assets\WeatherIcons\221n.png" />
+    <Content Include="Assets\WeatherIcons\230d.png" />
+    <Content Include="Assets\WeatherIcons\230n.png" />
+    <Content Include="Assets\WeatherIcons\231d.png" />
+    <Content Include="Assets\WeatherIcons\231n.png" />
+    <Content Include="Assets\WeatherIcons\232d.png" />
+    <Content Include="Assets\WeatherIcons\232n.png" />
+    <Content Include="Assets\WeatherIcons\300d.png" />
+    <Content Include="Assets\WeatherIcons\300n.png" />
+    <Content Include="Assets\WeatherIcons\301d.png" />
+    <Content Include="Assets\WeatherIcons\301n.png" />
+    <Content Include="Assets\WeatherIcons\302d.png" />
+    <Content Include="Assets\WeatherIcons\302n.png" />
+    <Content Include="Assets\WeatherIcons\310d.png" />
+    <Content Include="Assets\WeatherIcons\310n.png" />
+    <Content Include="Assets\WeatherIcons\311d.png" />
+    <Content Include="Assets\WeatherIcons\311n.png" />
+    <Content Include="Assets\WeatherIcons\312d.png" />
+    <Content Include="Assets\WeatherIcons\312n.png" />
+    <Content Include="Assets\WeatherIcons\321d.png" />
+    <Content Include="Assets\WeatherIcons\321n.png" />
+    <Content Include="Assets\WeatherIcons\500d.png" />
+    <Content Include="Assets\WeatherIcons\500n.png" />
+    <Content Include="Assets\WeatherIcons\501d.png" />
+    <Content Include="Assets\WeatherIcons\501n.png" />
+    <Content Include="Assets\WeatherIcons\502d.png" />
+    <Content Include="Assets\WeatherIcons\502n.png" />
+    <Content Include="Assets\WeatherIcons\503d.png" />
+    <Content Include="Assets\WeatherIcons\503n.png" />
+    <Content Include="Assets\WeatherIcons\504d.png" />
+    <Content Include="Assets\WeatherIcons\504n.png" />
+    <Content Include="Assets\WeatherIcons\511d.png" />
+    <Content Include="Assets\WeatherIcons\511n.png" />
+    <Content Include="Assets\WeatherIcons\520d.png" />
+    <Content Include="Assets\WeatherIcons\520n.png" />
+    <Content Include="Assets\WeatherIcons\521d.png" />
+    <Content Include="Assets\WeatherIcons\521n.png" />
+    <Content Include="Assets\WeatherIcons\522d.png" />
+    <Content Include="Assets\WeatherIcons\522n.png" />
+    <Content Include="Assets\WeatherIcons\600d.png" />
+    <Content Include="Assets\WeatherIcons\600n.png" />
+    <Content Include="Assets\WeatherIcons\601d.png" />
+    <Content Include="Assets\WeatherIcons\601n.png" />
+    <Content Include="Assets\WeatherIcons\602d.png" />
+    <Content Include="Assets\WeatherIcons\602n.png" />
+    <Content Include="Assets\WeatherIcons\611d.png" />
+    <Content Include="Assets\WeatherIcons\611n.png" />
+    <Content Include="Assets\WeatherIcons\621d.png" />
+    <Content Include="Assets\WeatherIcons\621n.png" />
+    <Content Include="Assets\WeatherIcons\701d.png" />
+    <Content Include="Assets\WeatherIcons\701n.png" />
+    <Content Include="Assets\WeatherIcons\711d.png" />
+    <Content Include="Assets\WeatherIcons\711n.png" />
+    <Content Include="Assets\WeatherIcons\721d.png" />
+    <Content Include="Assets\WeatherIcons\721n.png" />
+    <Content Include="Assets\WeatherIcons\731d.png" />
+    <Content Include="Assets\WeatherIcons\731n.png" />
+    <Content Include="Assets\WeatherIcons\741d.png" />
+    <Content Include="Assets\WeatherIcons\741n.png" />
+    <Content Include="Assets\WeatherIcons\800d.png" />
+    <Content Include="Assets\WeatherIcons\800n.png" />
+    <Content Include="Assets\WeatherIcons\801d.png" />
+    <Content Include="Assets\WeatherIcons\801n.png" />
+    <Content Include="Assets\WeatherIcons\802d.png" />
+    <Content Include="Assets\WeatherIcons\802n.png" />
+    <Content Include="Assets\WeatherIcons\803d.png" />
+    <Content Include="Assets\WeatherIcons\803n.png" />
+    <Content Include="Assets\WeatherIcons\804d.png" />
+    <Content Include="Assets\WeatherIcons\804n.png" />
+    <Content Include="Assets\WeatherIcons\900d.png" />
+    <Content Include="Assets\WeatherIcons\900n.png" />
+    <Content Include="Assets\WeatherIcons\901d.png" />
+    <Content Include="Assets\WeatherIcons\901n.png" />
+    <Content Include="Assets\WeatherIcons\902d.png" />
+    <Content Include="Assets\WeatherIcons\902n.png" />
+    <Content Include="Assets\WeatherIcons\903d.png" />
+    <Content Include="Assets\WeatherIcons\903n.png" />
+    <Content Include="Assets\WeatherIcons\904d.png" />
+    <Content Include="Assets\WeatherIcons\904n.png" />
+    <Content Include="Assets\WeatherIcons\905d.png" />
+    <Content Include="Assets\WeatherIcons\905n.png" />
+    <Content Include="Assets\WeatherIcons\906d.png" />
+    <Content Include="Assets\WeatherIcons\906n.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -157,6 +305,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="ThemeResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CitiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

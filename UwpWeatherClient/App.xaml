@@ -5,6 +5,17 @@
     xmlns:local="using:UwpWeatherClient"
     RequestedTheme="Light">
 	<Application.Resources>
-		<vm:ViewModelLocator xmlns:vm="using:UwpWeatherClient.ViewModels" x:Key="Locator" />
+		<vm:ViewModelLocator xmlns:vm="using:UwpWeatherClient" x:Key="Locator" />
+
+		<Color x:Key="Teal">#009688</Color>
+		<Color x:Key="Indigo">#5C6BC0</Color>
+		<Color x:Key="Gray1">#676767</Color>
+		<Color x:Key="Gray2">#545861</Color>
+
+		<SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}" />
+		<SolidColorBrush x:Key="TealBrush" Color="{StaticResource Teal}" />
+		<SolidColorBrush x:Key="IndigoBrush" Color="{StaticResource Indigo}" />
+
+
 	</Application.Resources>
 </Application>
