@@ -5,7 +5,6 @@ using System.Windows.Input;
 using UwpWeatherClient.Common;
 using UwpWeatherClient.Models;
 using UwpWeatherClient.Services;
-using Windows.UI.ViewManagement;
 
 namespace UwpWeatherClient.ViewModels
 {

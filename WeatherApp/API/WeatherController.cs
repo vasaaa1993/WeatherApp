@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Web.Http;
+using WeatherApp.Services.Data;
 using WeatherApp.Services.WeatherAPI;
 
 namespace WeatherApp.API
@@ -8,13 +9,19 @@ namespace WeatherApp.API
     public class WeatherController : ApiController
     {
 		readonly IWeatherService _weatherService;
+		private readonly IDataService _dataService;
 
-	    public WeatherController(IWeatherService weatherService)
+		public WeatherController(IWeatherService weatherService, IDataService dataService)
 	    {
 			if(weatherService != null)
 				_weatherService = weatherService;
 			else
 				throw new ArgumentNullException("WeatherService");
+
+			if (dataService != null)
+				_dataService = dataService;
+			else
+				throw new ArgumentNullException("dataService");
 		}
 		//GET: api/Weather/{name}/{period}
 		[Route("api/Weather/{city}/{period}")]
@@ -28,6 +35,7 @@ namespace WeatherApp.API
 		    var weather = await _weatherService.GetWeatherByTownName(city, period);
 			if(weather == null)
 				return NotFound();
+			_dataService.AddResponseToHistory(weather);
 			return Ok(weather);
 	    }
     }

@@ -21,10 +21,6 @@ namespace UwpWeatherClient
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-			var navigationService = new NavigationService();
-			navigationService.Configure(nameof(WeatherViewModel), typeof(WeatherView));
-			navigationService.Configure(nameof(CitiesViewModel), typeof(CitiesView));
-			navigationService.Configure(nameof(HistoryViewModel), typeof(HistoryView));
 			if (ViewModelBase.IsInDesignModeStatic)
 			{
 				// Create design time view services and models
@@ -35,7 +31,7 @@ namespace UwpWeatherClient
 			}
 
 			//Register your services used here
-			SimpleIoc.Default.Register<INavigationService>(() => navigationService);
+			SimpleIoc.Default.Register<INavigationService, NavigationService>();
 
 			// Register services 
 			SimpleIoc.Default.Register<IWeatherService, WeatherService>();

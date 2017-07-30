@@ -21,13 +21,6 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
-
-		<Rectangle Grid.Row="0" Grid.ColumnSpan="3"/>
-		<TextBlock Text="{Binding Title}"
-            Margin="18"
-            TextAlignment="Center"
-            Grid.Row="0"
-            Grid.Column="0"/>
 		
 		<StackPanel  
 			Grid.Row="0"
