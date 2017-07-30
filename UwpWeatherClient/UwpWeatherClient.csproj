@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\DeleteCityCommand.cs" />
     <Compile Include="Converters\DateFormatConverter.cs" />
     <Compile Include="Converters\WeatherIconPathConverter.cs" />
     <Compile Include="Converters\RadioButtonParamToIntConverter.cs" />
@@ -140,6 +141,9 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\Home.png" />
+    <Content Include="Assets\History.png" />
+    <Content Include="Assets\City.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />

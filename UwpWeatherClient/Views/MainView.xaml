@@ -16,8 +16,8 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
-		
-		<CommandBar Grid.Column="0" Grid.Row="0">
+
+		<CommandBar Grid.Column="0" Grid.Row="0" Background="{StaticResource TealBrush}">
 			<CommandBar.Content>
 				<Grid Padding="5">
 					<Grid.RowDefinitions>
@@ -41,12 +41,25 @@
 						FontSize="25"
 						FontFamily="Segoe UI Light"
 						VerticalAlignment="Center"
-						FontWeight="Bold"/>
+						FontWeight="Bold"
+						Foreground="White"/>
 				</Grid>
 			</CommandBar.Content>
-			<AppBarButton Icon="Accept" Label="Home" Click="NavigateToWeatherView"/>
-			<AppBarButton Icon="Account" Label="Cities" Click="NavigateToCitiesView"/>
-			<AppBarButton Icon="Cancel" Label="History" Click="NavigateToHistoryView"/>
+			<AppBarButton Foreground="White" Label="Home" Click="NavigateToWeatherView">
+				<AppBarButton.Icon>
+					<BitmapIcon UriSource="ms-appx:///Assets/Home.png"/>
+				</AppBarButton.Icon>
+			</AppBarButton>
+			<AppBarButton Foreground="White" Label="Cities" Click="NavigateToCitiesView">
+				<AppBarButton.Icon>
+					<BitmapIcon UriSource="ms-appx:///Assets/City.png"/>
+				</AppBarButton.Icon>
+			</AppBarButton>
+			<AppBarButton Foreground="White" Label="History" Click="NavigateToHistoryView">
+				<AppBarButton.Icon>
+					<BitmapIcon UriSource="ms-appx:///Assets/History.png"/>
+				</AppBarButton.Icon>
+			</AppBarButton>
 		</CommandBar>
 
 		<Frame Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" x:Name="MainFrame">

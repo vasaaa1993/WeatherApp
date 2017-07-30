@@ -1,11 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using UwpWeatherClient.Models;
 using UwpWeatherClient.Services;
@@ -42,6 +37,7 @@ namespace UwpWeatherClient.ViewModels
 			var h = await _historyService.GetHistory();
 			if (h != null)
 			{
+				History.Clear();
 				foreach(var item in h)
 					History. Add(item);
 
@@ -52,8 +48,11 @@ namespace UwpWeatherClient.ViewModels
 		private async void ClearHistory()
 		{
 			var rez = await _historyService.ClearHistory();
-			if(rez)
+			if (rez)
+			{
+				History.Clear();
 				RaisePropertyChanged(() => History);
+			}
 		}
 	}
 }

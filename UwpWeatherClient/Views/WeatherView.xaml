@@ -19,12 +19,10 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="1*"/>
-			<ColumnDefinition Width="3*"/>
-			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="{StaticResource TealBrush}" />
+		<Rectangle Grid.Row="0" Grid.ColumnSpan="3"/>
 		<TextBlock Text="{Binding Title}"
             Margin="18"
             TextAlignment="Center"
@@ -32,27 +30,35 @@
             Grid.Column="0"/>
 		
 		<StackPanel  
-			Grid.Row="0"
-            Grid.Column="1">
+			Grid.Row="0">
 
 			<Grid HorizontalAlignment="Stretch">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition Width="auto"/>
 				</Grid.ColumnDefinitions>
 
 				<TextBox Grid.Row="0" Grid.Column="0" 
 					Text="{Binding CityName, Mode=TwoWay}"
-					Margin="18, 18, 18, 5"
+					Margin="18, 18, 0, 5"
 					TextAlignment="Left"
-					PlaceholderText="City name..."/>
-
-				<Button Grid.Row="0" Grid.Column="1"
+					PlaceholderText="City name..."
+					x:Name="CityNameTxt"/>
+				<ComboBox
+					Grid.Column="1"
+					Margin="0, 18, 10, 5"
+					ItemsSource="{Binding Cities}"
+					DisplayMemberPath="Name"
+					MinWidth="100"
+					SelectionChanged="ComboBox_SelectionChanged">
+				</ComboBox>
+				<Button Grid.Row="0" Grid.Column="2"
 					Content="Search"
 					Command= "{Binding SearchCommand}"
 					HorizontalAlignment="Stretch"
 					Foreground="White"
-					Margin="18, 18, 18, 5"/>
+					Margin="0, 18, 18, 5"/>
 			</Grid>
 
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -62,7 +68,7 @@
 			</StackPanel>
 		</StackPanel>
 
-		<Grid Grid.ColumnSpan="3" Grid.Row="1" >
+		<Grid Grid.Row="1" >
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="*"/>

@@ -36,7 +36,7 @@ namespace UwpWeatherClient.Services
 			using (var content = new FormUrlEncodedContent(values))
 			using (var response = await client.PostAsync(sUrl, content))
 			{
-				return response.StatusCode == System.Net.HttpStatusCode.OK;
+				return response.StatusCode == System.Net.HttpStatusCode.Created;
 			}
 		}
 	}

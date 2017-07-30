@@ -36,9 +36,9 @@ namespace UwpWeatherClient.ViewModels
 		private void InitValues()
 		{
 			Cities = new ObservableCollection<City>();
-			Period = 7;
-			CityName = "Lviv";
+			Period = 1;
 			SearchCommand = new RelayCommand(Search);
+			ReloadCities();
 		}
 		public ICommand SearchCommand { get; set; }
 
@@ -49,6 +49,19 @@ namespace UwpWeatherClient.ViewModels
 			{
 				Weather = w;
 				RaisePropertyChanged(() => Weather);
+			}
+		}
+
+		private async void ReloadCities()
+		{
+			var rez = await _citiesService.GetAllCities();
+			if (rez != null)
+			{
+				Cities.Clear();
+				foreach (var item in rez)
+					Cities.Add(item);
+
+				RaisePropertyChanged(() => Cities);
 			}
 		}
 	}

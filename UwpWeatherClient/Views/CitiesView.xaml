@@ -5,9 +5,59 @@
     xmlns:local="using:UwpWeatherClient.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+	DataContext="{Binding CitiesVWInstance, Source={StaticResource Locator}}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<TextBlock Text="Cities View"></TextBlock>
+    <Grid 
+		Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+		Padding="10">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<StackPanel 
+			Orientation="Horizontal" 
+			Grid.Row="0">
+			<TextBox 
+				Text="{Binding CityName, Mode=TwoWay}"
+				TextAlignment="Left"
+				MinWidth="200"
+				PlaceholderText="City name..."/>
+
+			<Button
+				Content="Add"
+				HorizontalAlignment="Left"
+				Command="{Binding AddCityCommand}"/>
+		</StackPanel>
+		<GridView 
+				Grid.Row="1"
+				ItemsSource="{Binding Cities}"
+				x:Name="CitiesGrid"
+				SelectedItem="{Binding SelectedCity}">
+			<GridView.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal" Background="{ThemeResource AppBarBorderThemeBrush}" MinHeight="70" Margin="15" Padding="1">
+						<TextBlock 
+							Text="{Binding Name}"
+							VerticalAlignment="Center"
+							MinWidth="160"
+							FontFamily="Segoe UI Light"
+							Foreground="Gray"
+							FontSize="24"
+							Padding="20, 10, 10, 10"/>
+						<Button 
+							
+								Background="#F44336"
+								Width="30"
+								VerticalAlignment="Stretch"
+								CommandParameter="{Binding Id}"
+								Command="{Binding DataContext.DeleteCityCommand, ElementName=CitiesGrid }"/>
+					</StackPanel>
+				</DataTemplate>
+			</GridView.ItemTemplate>
+		</GridView>
 	</Grid>
 </Page>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UwpWeatherClient.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,15 @@ namespace UwpWeatherClient.Views
 		public WeatherView()
 		{
 			this.InitializeComponent();
+		}
+
+		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			var cb = sender as ComboBox;
+			if (cb != null && cb.SelectedItem != null)
+			{
+				CityNameTxt.Text = ((City)cb.SelectedItem).Name;
+			}
 		}
 	}
 }

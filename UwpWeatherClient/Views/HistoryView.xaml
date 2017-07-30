@@ -34,11 +34,13 @@
 				Grid.Column="0"
 				Content="Reload"
 				HorizontalAlignment="Left"
+				MinWidth="150"
 				Command="{Binding ReloadHistoryCommand}"/>
 			<Button
 				Grid.Column="1"
 				Content="Clear"
 				HorizontalAlignment="Right"
+				MinWidth="150"
 				Command="{Binding ClearHistoryCommand}"/>
 
 		</Grid>
@@ -96,13 +98,13 @@
 								Grid.Row="0"
 								Orientation="Horizontal">
 								<Image 
-								Width="100"
-								Height="100"
-								Grid.Column="0"
-								Grid.Row="0"
-								Margin="0,20,0,0"
-								VerticalAlignment="Top"
-								Source="{Binding Weather.WeatherList[0].Icon , Converter={StaticResource WeatherIconPathConverter}}"/>
+									Width="100"
+									Height="100"
+									Grid.Column="0"
+									Grid.Row="0"
+									Margin="0,20,0,0"
+									VerticalAlignment="Top"
+									Source="{Binding Weather.WeatherList[0].Icon , Converter={StaticResource WeatherIconPathConverter}}"/>
 								<StackPanel>
 									<TextBlock 
 									Margin="5"
