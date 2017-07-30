@@ -28,10 +28,9 @@ namespace UwpWeatherClient.Views
 			this.InitializeComponent();
 		}
 
-		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void citiesCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var cb = sender as ComboBox;
-			if (cb != null && cb.SelectedItem != null)
+			if (sender is ComboBox cb && cb.SelectedItem != null)
 			{
 				CityNameTxt.Text = ((City)cb.SelectedItem).Name;
 			}

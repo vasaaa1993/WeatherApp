@@ -35,17 +35,18 @@
 
 				<TextBox Grid.Row="0" Grid.Column="0" 
 					Text="{Binding CityName, Mode=TwoWay}"
-					Margin="18, 0, 0, 5"
+					Margin="15, 0, 0, 5"
 					TextAlignment="Left"
 					PlaceholderText="City name..."
 					x:Name="CityNameTxt"/>
 				<ComboBox
+					x:Name="citiesCb"
 					Grid.Column="1"
 					Margin="0, 0, 10, 5"
 					ItemsSource="{Binding Cities}"
 					DisplayMemberPath="Name"
 					MinWidth="150"
-					SelectionChanged="ComboBox_SelectionChanged">
+					SelectionChanged="citiesCb_SelectionChanged">
 				</ComboBox>
 				<Button Grid.Row="0" Grid.Column="2"
 					Content="Search"
