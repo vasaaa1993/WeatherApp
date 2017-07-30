@@ -3,7 +3,7 @@ using Windows.UI.Xaml.Data;
 
 namespace UwpWeatherClient.Converters
 {
-	class DateFormatConverter:IValueConverter
+	class DateShortFormatConverter:IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, string language)
 		{

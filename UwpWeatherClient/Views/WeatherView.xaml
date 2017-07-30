@@ -11,7 +11,7 @@
 	<Page.Resources>
 		<converter:RadioButtonParamToIntConverter x:Name="RadioButtonParamToIntConverter"/>
 		<converter:WeatherIconPathConverter x:Name="WeatherIconPathConverter"/>
-		<converter:DateFormatConverter x:Name="DateFormatConverter"/>
+		<converter:DateShortFormatConverter x:Name="DateShortFormatConverter"/>
 	</Page.Resources>
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<Grid.RowDefinitions>
@@ -30,7 +30,8 @@
             Grid.Column="0"/>
 		
 		<StackPanel  
-			Grid.Row="0">
+			Grid.Row="0"
+			Padding="5">
 
 			<Grid HorizontalAlignment="Stretch">
 				<Grid.ColumnDefinitions>
@@ -41,16 +42,16 @@
 
 				<TextBox Grid.Row="0" Grid.Column="0" 
 					Text="{Binding CityName, Mode=TwoWay}"
-					Margin="18, 18, 0, 5"
+					Margin="18, 0, 0, 5"
 					TextAlignment="Left"
 					PlaceholderText="City name..."
 					x:Name="CityNameTxt"/>
 				<ComboBox
 					Grid.Column="1"
-					Margin="0, 18, 10, 5"
+					Margin="0, 0, 10, 5"
 					ItemsSource="{Binding Cities}"
 					DisplayMemberPath="Name"
-					MinWidth="100"
+					MinWidth="150"
 					SelectionChanged="ComboBox_SelectionChanged">
 				</ComboBox>
 				<Button Grid.Row="0" Grid.Column="2"
@@ -58,7 +59,7 @@
 					Command= "{Binding SearchCommand}"
 					HorizontalAlignment="Stretch"
 					Foreground="White"
-					Margin="0, 18, 18, 5"/>
+					Margin="0, 0, 18, 5"/>
 			</Grid>
 
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -85,20 +86,23 @@
 				<TextBlock
 					Text="{Binding Weather.CityName}"
 					Foreground="Black"
-					FontSize="16"
-					Padding="5,0,0,0"/>
+					FontFamily="Segoe UI Light"
+					FontSize="24"
+					Margin="15,0,0,5"/>
 
 				<TextBlock
 					Text="{Binding Weather.CountryCodeOfTheCity}"
 					Foreground="Black"
+					FontFamily="Segoe UI Light"
 					FontSize="16"
-					Padding="5,0,0,0"/>
+					Margin="15,0,0,5"/>
 			</StackPanel>
 
 			<ListView 
 				Grid.Row="1"
 				Grid.Column="0"
-				ItemsSource="{Binding Weather.WeatherList}">
+				ItemsSource="{Binding Weather.WeatherList}"
+				Background="#FAFAFA">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<Grid Margin="5">
@@ -109,7 +113,7 @@
 							<Grid.RowDefinitions>
 								<RowDefinition Height="auto"/>
 							</Grid.RowDefinitions>
-							<Rectangle Grid.RowSpan="1" Grid.ColumnSpan="2" Fill="AliceBlue" />
+							<Rectangle Grid.RowSpan="1" Grid.ColumnSpan="2" Fill="White" />
 							<Image 
 								Width="100"
 								Height="100"
@@ -123,21 +127,22 @@
 								Grid.Row="0">
 								<!--Weather Header-->
 								<TextBlock 
-									Margin="5"
+									Margin="5,10,0,0"
 									FontFamily="Segoe UI Light"
-									Foreground="Gray"
-									FontSize="24">
+									Foreground="#F44336"
+									FontSize="26"
+									FontWeight="Bold">
 									<Run Text="{Binding DayTemp}"></Run>
 									<Run Text="°"></Run>
 								</TextBlock>
 
-								<TextBlock Text="{Binding Time, Converter={StaticResource DateFormatConverter}}"
-									Margin="5"
+								<TextBlock Text="{Binding Time, Converter={StaticResource DateShortFormatConverter}}"
+									Margin="5,0,0,0"
 									FontFamily="Segoe UI Light"
 									Foreground="Gray"
 									FontSize="24"/>
 								<TextBlock Text="{Binding Description}"
-									Margin="5"
+									Margin="5,0,0,0"
 									FontFamily="Segoe UI Light"
 									Foreground="Gray"
 									FontSize="16"/>

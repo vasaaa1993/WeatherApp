@@ -11,7 +11,8 @@
 	<Page.Resources>
 		<converter:RadioButtonParamToIntConverter x:Name="RadioButtonParamToIntConverter"/>
 		<converter:WeatherIconPathConverter x:Name="WeatherIconPathConverter"/>
-		<converter:DateFormatConverter x:Name="DateFormatConverter"/>
+		<converter:DateLongFormatConverter x:Name="DateLongFormatConverter"/>
+		<converter:DateShortFormatConverter x:Name="DateShortFormatConverter"/>
 	</Page.Resources>
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<Grid.RowDefinitions>
@@ -46,10 +47,12 @@
 		</Grid>
 		<ListView 
 				Grid.Row="1"
-				ItemsSource="{Binding History}">
+				ItemsSource="{Binding History}"
+				Background="#FAFAFA">
 			<ListView.ItemTemplate>
 				<DataTemplate>
-					<Grid Margin="5">
+					<Grid Margin="5"
+						  Background="White">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="auto"/>
 							<ColumnDefinition Width="*"/>
@@ -57,22 +60,24 @@
 						<Grid.RowDefinitions>
 							<RowDefinition Height="auto"/>
 						</Grid.RowDefinitions>
-						<Rectangle Grid.RowSpan="1" Grid.ColumnSpan="2" Fill="AliceBlue" />
-						<StackPanel Width="150"
+						
+						<StackPanel Width="170"
 							Grid.Column="0"
 							Padding="10"
-							Grid.Row="0" Background="{ThemeResource AppBarButtonBackgroundPressed}">
+							Grid.Row="0" 
+							Background="#80CBC4">
 							<TextBlock 
 									Margin="5"
 									FontFamily="Segoe UI Light"
-									Foreground="Gray"
+									Foreground="#F44336"
+									FontWeight="Bold"
 									FontSize="20"
-								Text="{Binding Time, Converter={StaticResource DateFormatConverter}}"/>
+								Text="{Binding Time, Converter={StaticResource DateLongFormatConverter}}"/>
 
 							<TextBlock 
 									Margin="5"
 									FontFamily="Segoe UI Light"
-									Foreground="Gray"
+									Foreground="Black"
 									FontSize="16"
 									Text="{Binding Weather.CityName}"
 									TextTrimming="CharacterEllipsis"/>
@@ -80,15 +85,14 @@
 							<TextBlock 
 									Margin="5"
 									FontFamily="Segoe UI Light"
-									Foreground="Gray"
+									Foreground="Black"
 									FontSize="16"
 									Text="{Binding Weather.CountryCodeOfTheCity}"/>
 
 						</StackPanel>
 						<Grid
 								Grid.Column="1"
-								Grid.Row="0"
-								Background="{ThemeResource AppBarBorderThemeBrush}">
+								Grid.Row="0">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="auto"/>
 								<RowDefinition Height="*"/>
@@ -107,24 +111,24 @@
 									Source="{Binding Weather.WeatherList[0].Icon , Converter={StaticResource WeatherIconPathConverter}}"/>
 								<StackPanel>
 									<TextBlock 
-									Margin="5"
-									FontFamily="Segoe UI Light"
-									Foreground="Gray"
-									FontSize="24">
-									<Run Text="{Binding Weather.WeatherList[0].DayTemp}"></Run>
-									<Run Text="°"></Run>
+										Margin="5,10,0,0"
+										FontFamily="Segoe UI Light"
+										Foreground="Gray"
+										FontSize="26">
+											<Run Text="{Binding Weather.WeatherList[0].DayTemp}"></Run>
+											<Run Text="°"></Run>
 									</TextBlock>
 
-									<TextBlock Text="{Binding Weather.WeatherList[0].Time, Converter={StaticResource DateFormatConverter}}"
-									Margin="5"
-									FontFamily="Segoe UI Light"
-									Foreground="Gray"
-									FontSize="24"/>
+									<TextBlock Text="{Binding Weather.WeatherList[0].Time, Converter={StaticResource DateShortFormatConverter}}"
+										Margin="5,0,0,0"
+										FontFamily="Segoe UI Light"
+										Foreground="Gray"
+										FontSize="24"/>
 									<TextBlock Text="{Binding Weather.WeatherList[0].Description}"
-									Margin="5"
-									FontFamily="Segoe UI Light"
-									Foreground="Gray"
-									FontSize="16"/>
+										Margin="5,0,0,0"
+										FontFamily="Segoe UI Light"
+										Foreground="Gray"
+										FontSize="16"/>
 
 								</StackPanel>
 							</StackPanel>

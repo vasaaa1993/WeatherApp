@@ -10,7 +10,7 @@
 
     <Grid 
 		Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-		Padding="10">
+		Padding="5">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
@@ -20,7 +20,8 @@
 		</Grid.RowDefinitions>
 		<StackPanel 
 			Orientation="Horizontal" 
-			Grid.Row="0">
+			Grid.Row="0"
+			Margin="15, 0, 0, 0">
 			<TextBox 
 				Text="{Binding CityName, Mode=TwoWay}"
 				TextAlignment="Left"
@@ -39,7 +40,7 @@
 				SelectedItem="{Binding SelectedCity}">
 			<GridView.ItemTemplate>
 				<DataTemplate>
-					<StackPanel Orientation="Horizontal" Background="{ThemeResource AppBarBorderThemeBrush}" MinHeight="70" Margin="15" Padding="1">
+					<StackPanel Orientation="Horizontal" Background="#E0F7FA" MinHeight="70" Margin="15">
 						<TextBlock 
 							Text="{Binding Name}"
 							VerticalAlignment="Center"
@@ -47,7 +48,7 @@
 							FontFamily="Segoe UI Light"
 							Foreground="Gray"
 							FontSize="24"
-							Padding="20, 10, 10, 10"/>
+							Margin="20, 10, 10, 10"/>
 						<Button 
 							
 								Background="#F44336"

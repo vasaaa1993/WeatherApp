@@ -98,7 +98,8 @@
     <Compile Include="Commands\DeleteCityCommand.cs" />
     <Compile Include="Common\ReloadCitiesEvent.cs" />
     <Compile Include="Common\ReloadHistoryEvent.cs" />
-    <Compile Include="Converters\DateFormatConverter.cs" />
+    <Compile Include="Converters\DateLongFormatConverter.cs" />
+    <Compile Include="Converters\DateShortFormatConverter.cs" />
     <Compile Include="Converters\WeatherIconPathConverter.cs" />
     <Compile Include="Converters\RadioButtonParamToIntConverter.cs" />
     <Compile Include="Models\City.cs" />
