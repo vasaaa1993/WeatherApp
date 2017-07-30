@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using UwpWeatherClient.Common;
 using UwpWeatherClient.Models;
 using UwpWeatherClient.Services;
 
@@ -30,6 +31,12 @@ namespace UwpWeatherClient.ViewModels
 			History = new ObservableCollection<History>();
 			ReloadHistoryCommand =  new RelayCommand(ReloadHistory);
 			ClearHistoryCommand = new RelayCommand(ClearHistory);
+
+			MessengerInstance.Register<ReloadHistoryEvent>(this, reloadEvent =>
+			{
+				ReloadHistory();
+			});
+
 			ReloadHistory();
 		}
 		private async void ReloadHistory()

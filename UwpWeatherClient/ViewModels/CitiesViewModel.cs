@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using UwpWeatherClient.Commands;
+using UwpWeatherClient.Common;
 using UwpWeatherClient.Models;
 using UwpWeatherClient.Services;
 
@@ -47,6 +48,7 @@ namespace UwpWeatherClient.ViewModels
 					Cities.Add(item);
 
 				RaisePropertyChanged(() => Cities);
+				MessengerInstance.Send(new ReloadCitiesEvent());
 			}
 		}
 

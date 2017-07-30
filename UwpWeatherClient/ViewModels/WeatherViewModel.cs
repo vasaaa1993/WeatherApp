@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using UwpWeatherClient.Common;
 using UwpWeatherClient.Models;
 using UwpWeatherClient.Services;
 using Windows.UI.ViewManagement;
@@ -38,6 +39,12 @@ namespace UwpWeatherClient.ViewModels
 			Cities = new ObservableCollection<City>();
 			Period = 1;
 			SearchCommand = new RelayCommand(Search);
+
+			MessengerInstance.Register<ReloadCitiesEvent>(this, reloadEvent =>
+			{
+				ReloadCities();
+			});
+
 			ReloadCities();
 		}
 		public ICommand SearchCommand { get; set; }
@@ -49,6 +56,7 @@ namespace UwpWeatherClient.ViewModels
 			{
 				Weather = w;
 				RaisePropertyChanged(() => Weather);
+				MessengerInstance.Send(new ReloadHistoryEvent());
 			}
 		}
 

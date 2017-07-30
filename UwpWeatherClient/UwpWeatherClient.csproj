@@ -96,6 +96,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\DeleteCityCommand.cs" />
+    <Compile Include="Common\ReloadCitiesEvent.cs" />
+    <Compile Include="Common\ReloadHistoryEvent.cs" />
     <Compile Include="Converters\DateFormatConverter.cs" />
     <Compile Include="Converters\WeatherIconPathConverter.cs" />
     <Compile Include="Converters\RadioButtonParamToIntConverter.cs" />
