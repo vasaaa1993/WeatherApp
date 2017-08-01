@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import { BaceService } from "./base.service";
 import { City } from "../models/city";
 
+import { Observable } from "rxjs/Observable";
+
 @Injectable()
 export class CitiesService extends BaceService{
   cities: City[];
@@ -15,13 +17,17 @@ export class CitiesService extends BaceService{
     this.parUrl = 'cities';
   }
 
-  getDataObservable(url:string){
-   return this.http.get(url)
-        .map(res => res.json());
+  getCities(): Observable<City[]>{
+   return this.getData(this.generateUrl());
   }
 
-  deleteDataObservable(id: number){
-    return this.http.delete(this.baseUrl + this.parUrl + '/' + id);
+  deleteCity(id: number){
+    debugger
+    return this.deleteData(this.generateUrl() + '/' + id);
+  }
+
+  addCity(name: string){
+    return this.http.post(this.generateUrl(), {'Name': name});
   }
 
 }

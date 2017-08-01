@@ -1,9 +1,73 @@
-<p>
-  history works!
-</p>
-<ul *ngFor="let item of history | async">
-  <li>
-    {{item.Time}}
-  </li>
-</ul>
-
+<div class="with80 center-container text-color-grey">
+		<div class="page-title">
+			History
+		</div>
+		<div id="clear-history">
+			<button (click)="clearHistory()"> Clear History</button>
+    </div>
+    <div *ngFor="let item of history | async">
+			<div class="row history-item-container">
+				<div class="col-xs-3 history-item-left">
+					<div class="text-primary">
+						<strong>{{item.Time | date:'medium'}}</strong>
+					</div>
+					<div class="history-city">
+						<strong>{{item.Weather.CityName}}</strong>
+					</div>
+					<div class="history-country">
+						{{item.Weather.CountryCodeOfTheCity}}
+					</div>
+				</div>
+				<div class="col-xs-9 history-item-right">
+					<div class="history-weather-header-container">
+						<div id="history-img-container">
+							<img src="{{'assets/img/weather/' + item.Weather.WeatherList[0].Icon}}" alt="weather">
+						</div>
+						<div>
+							<div class="row text-primary history-weather-temp"><strong>{{item.Weather.WeatherList[0].DayTemp}}°</strong></div>
+							<div class="row history-weather-date">{{item.Weather.WeatherList[0].Time | date:'ddMMMM' }}</div>
+							<div class="row history-weather-description">{{item.Weather.WeatherList[0].Description}}</div>
+						</div>
+					</div>
+					<div class="row weather-values-container">
+						<div class="col-xs-6 weather-value-colum ">
+							<div class="row weather-value">
+								<div class="col-xs-6">
+									Pressure:
+								</div>
+								<div class="col-xs-6">
+									{{item.Weather.WeatherList[0].Pressure}} hPa
+								</div>
+							</div>
+							<div class="row weather-value">
+								<div class="col-xs-6">
+									Humidity:
+								</div>
+								<div class="col-xs-6 ">
+									{{item.Weather.WeatherList[0].Humidity}} %
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6 weather-value-colum ">
+							<div class="row weather-value">
+								<div class="col-xs-6">
+									Clouds:
+								</div>
+								<div class="col-xs-6 ">
+									{{item.Weather.WeatherList[0].Clouds}} %
+								</div>
+							</div>
+							<div class="row weather-value">
+								<div class="col-xs-6">
+									Wind Speed:
+								</div>
+								<div class="col-xs-6">
+									{{item.Weather.WeatherList[0].WindSpeed}} mps
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

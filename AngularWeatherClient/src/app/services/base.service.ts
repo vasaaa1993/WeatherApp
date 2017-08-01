@@ -12,12 +12,19 @@ export class BaceService {
             this.baseUrl = 'http://localhost:50185/api/';
         }
 
-    protected getDataObservable(url:string){
+    protected generateUrl():string{
+        return this.baseUrl + this.parUrl;
+    }
+    protected getData(url:string){
         return this.http.get(url)
             .map(res => res.json());
     }
     
-    protected putDataObservable(url:string, body: any){
+    protected putData(url:string, body: any){
         return this.http.put(url, body);
+    }
+
+    protected deleteData(url:string){
+        return this.http.delete(url);
     }
 }

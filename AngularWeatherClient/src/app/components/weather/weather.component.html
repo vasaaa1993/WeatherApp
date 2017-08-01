@@ -1,3 +1,116 @@
-<p>
-  weather works!
-</p>
+<div class="row search-panel">
+<div class="col-xs-12 ">
+  <div class="form-group">
+    <div class="col-xs-10 search-input">
+        <input [(ngModel)]="cityName" type="search" class = "form-control col-xs-10 input-lg" placeholder="City name..." required/>
+    </div>
+    <div class="col-xs-2">
+      <button (click)="onGetWeather()" class="btn btn-primary input-lg btn-block">Find</button>
+    </div>
+  </div>
+</div>
+<div class="col-xs-10 home-cities-container">
+  <div class="list-inline" *ngFor="let city of cities | async">
+    <button (click)="onGetWeather(city.Name)" class="btn-city">{{city.Name}}</button>
+  </div>
+  <div class="list-inline">
+    <button (click)="onGoToCities()" class="btn-city">Edit cities</button>
+  </div>
+</div>
+</div>
+
+<div class="myContainer" *ngIf="weather | async; let w">
+  <div class="home-city-name-container text-color-grey">
+    <div class="home-city-name-container-top">
+      <div>{{w.CityName}}</div>
+      <div>
+        Weather Forecast For {{period}}
+      </div>
+    </div>
+    <div class="home-city-name-container-bottom">
+      <div>{{w.CountryCodeOfTheCity}}</div>
+      <ul class="list-inline">
+        <li><label><input type="radio" [(ngModel)]="period"
+                      value="1" name="optradio">Current Day</label></li>
+        <li><label><input type="radio" [(ngModel)]="period"  
+                      value="3" name="optradio">3 Days</label></li>
+        <li><label><input type="radio" [(ngModel)]="period"  
+                      value="7" name="optradio">7 Days</label></li>
+      </ul>
+    </div>
+  </div>
+ <div *ngFor="let item of w.WeatherList; let item">
+  <div class="row text-color-grey home-single-weather-container">
+    <div class="col-xs-3 home-single-weather-left">
+      <div class="text-primary">
+        {{item.DayTemp}}°
+      </div>
+      <div>
+        {{item.Time | date:'ddMMMM' }}
+      </div>
+      <div class="row">
+        <img src="{{'assets/img/weather/' + item.Icon}}" alt="weather" class="weather-img">
+      </div>
+      <div>
+        {{item.Description}}
+      </div>
+    </div>
+    <div class="col-xs-9">
+      <div class="row text-center mix-max-container">
+        <div>
+          <div class="col-sm-6 text-primary">
+            Min
+          </div>
+          <div class="col-sm-6 text-primary">
+            Max
+          </div>
+        </div>
+        <div>
+          <div class="col-sm-6">
+            {{item.MinTemp}}°
+          </div>
+          <div class="col-sm-6">
+            {{item.MaxTemp}}°
+          </div>
+        </div>
+      </div>
+      <div class="home-single-weater-info-container text-center">
+        <div class="row">
+          <div class="col-sm-6">
+            Pressure:
+          </div>
+          <div class="col-sm-6">
+            {{item.Pressure}} hPa
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            Humidity:
+          </div>
+          <div class="col-sm-6">
+            {{item.Humidity}} %
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            Clouds:
+          </div>
+          <div class="col-sm-6">
+            {{item.Clouds}} %
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 ">
+            Wind speed
+          </div>
+          <div class="col-sm-6">
+            {{item.WindSpeed}} mps
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

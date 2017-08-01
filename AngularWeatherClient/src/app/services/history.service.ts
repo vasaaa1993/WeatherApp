@@ -15,9 +15,12 @@ export class HistoryService  extends BaceService {
     this.parUrl = 'history';
   }
 
-  getHistory(): Observable<HistoryItem[]>
-  {
-    return this.getDataObservable(this.baseUrl + this.parUrl);
+  getHistory(): Observable<HistoryItem[]> {
+    return this.getData(this.baseUrl + this.parUrl);
+  }
+
+  clearHistory(){
+    return this.deleteData(this.baseUrl + this.parUrl);
   }
 
 }

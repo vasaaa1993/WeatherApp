@@ -1,3 +1,16 @@
-<p>
-  cities works!
-</p>
+<div class="myContainer">
+  <div class="form-group cities-form">
+    <div class="page-title">Cities</div>
+    <input #cityName class = "form-control city-input-name input-lg" placeholder="City name..."/>
+    <button (click)="addCity(cityName.value); cityName.value=''">Add</button>
+  </div>
+  
+  <div class="default-cities-container" *ngFor="let city of cities | async">
+      <div class="city-item">
+        <div class="city-item-title">
+          {{city.Name}}
+        </div>
+        <button (click)="deleteCity(city.Id)" class="city-item-delete"></button>
+      </div>
+  </div> 
+</div>

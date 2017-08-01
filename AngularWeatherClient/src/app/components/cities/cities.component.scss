@@ -1,0 +1,89 @@
+.cities-form {
+	margin-left: 1.3%;
+	max-width: 400px;
+}
+
+.city-input-name {
+	display: inline-block;
+	width: 80%;
+}
+
+.default-cities-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.city-item {
+	background-color: cadetblue;
+	font-family: "Lucida Console";
+	font-size: 2.5em;
+	height: 100px;
+	margin: 2.5%;
+	position: relative;
+	text-align: center;
+	width: 45%;
+}
+
+.city-item-title {
+	display: inline-block;
+	line-height: 100px;
+	margin-right: 15px;
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.city-item-delete {
+	background-color: brown;
+	float: right;
+	float: right;
+	height: 100px;
+    width: 15px;
+    border: none;   
+}
+
+.city-item-delete:hover { background-color: red; }
+
+@media (min-width: 768px) {
+	.city-item {
+		margin: 2.5%;
+		width: 45%;
+	}
+
+	.city-item-title { max-width: 200px; }
+}
+
+@media (min-width: 992px) {
+	.city-item {
+		margin: 2.5%;
+		width: 45%;
+	}
+
+	.city-item-title { max-width: 250px; }
+}
+
+
+@media (min-width: 1200px) {
+	.city-item {
+		margin: 1.3%;
+		width: 30%;
+	}
+
+	.city-item-title { max-width: 300px; }
+}
+
+.city-container {
+	background-color: #BBDEFB;
+	border-radius: 5px;
+	margin: 5px 0;
+}
+
+.city-btn-add-container {
+	display: inline-block;
+	margin: 0 auto;
+	overflow: auto;
+	padding-left: 10px;
+	padding-right: 0;
+	white-space: nowrap;
+}

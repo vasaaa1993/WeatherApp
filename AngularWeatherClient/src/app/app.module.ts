@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { HttpModule } from "@angular/http";
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from "./components/app/app.component";
 import { HistoryComponent } from './components/history/history.component';
@@ -25,7 +26,8 @@ import { WeatherService } from "./services/weather.service";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [
     CitiesService,
