@@ -1,0 +1,78 @@
+#clear-history { font-family: "Lucida Console"; }
+
+.history-item-container {
+	background-color: #b2ebf2;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: row;
+	margin: 5px 0;
+}
+
+.history-item-left {
+	background-color: #80deea;
+	font-size: 1.75em;
+	min-width: 200px;
+	padding: 20px 20px 20px 15px;
+}
+
+.history-item-left .row { margin: 0; }
+
+.history-city {
+	margin-bottom: 5px;
+	margin-top: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.history-country {
+	font-size: 1.5rem;
+	margin-top: 0;
+}
+
+.history-item-right { padding-right: 0; }
+
+.history-weather-header-container {
+	display: flex;
+	flex-direction: row;
+	font-size: 1.5em;
+	padding: 15px;
+}
+
+.history-item-container .history-img-container { margin-right: 20px; }
+
+.history-weather-temp { font-size: 3rem; }
+
+.weather-temp-day {
+	margin-bottom: 5px;
+	margin-top: 10px;
+}
+
+.weather-date { margin-top: 0 }
+
+
+.vertical-align {
+	display: flex;
+	flex-direction: row;
+}
+
+.vertical-align > [class^="col-"],
+.vertical-align > [class*=" col-"] {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+
+
+.weather-value { padding: 5px 0; }
+
+.weather-value-colum {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.weather-values-container {
+	background-color: darkturquoise;
+	margin: 5px;
+}
