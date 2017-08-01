@@ -1,0 +1,10 @@
+<h1>
+Welcome to {{title}}!!
+</h1>
+<h1>
+{{data.length | async}}
+</h1>
+<h1 *ngFor="let city of data | async">
+{{city.Name }}
+</h1>
+<router-outlet></router-outlet>

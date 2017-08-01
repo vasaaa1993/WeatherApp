@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using WeatherApp.DataAccess.Entities;
 using WeatherApp.Models;
@@ -8,7 +9,8 @@ using WeatherApp.Services.Data;
 
 namespace WeatherApp.API
 {
-    public class CitiesController : ApiController
+	[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+	public class CitiesController : ApiController
     {
 	    private readonly IDataService _dataService;
 

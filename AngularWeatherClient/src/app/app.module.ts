@@ -1,11 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpModule } from "@angular/http";
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HistoryComponent } from './history/history.component';
-import { CitiesComponent } from './cities/cities.component';
-import { WeatherComponent } from './weather/weather.component';
+
+import { AppComponent } from "./components/app/app.component";
+import { HistoryComponent } from './components/history/history.component';
+import { CitiesComponent } from './components/cities/cities.component';
+import { WeatherComponent } from './components/weather/weather.component';
+
+import { CitiesService } from "./services/cities.service";
+import { HistoryService } from "./services/history.service";
+import { WeatherService } from "./services/weather.service";
+
+
 
 @NgModule({
   declarations: [
@@ -16,9 +24,14 @@ import { WeatherComponent } from './weather/weather.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    CitiesService,
+    HistoryService,
+    WeatherService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

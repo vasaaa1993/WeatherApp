@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using WeatherApp.Services.Data;
 using WeatherApp.Services.WeatherAPI;
 
 namespace WeatherApp.API
 {
-    public class WeatherController : ApiController
+	[EnableCors(origins: "http://localhost:50185", headers: "*", methods: "*")]
+	public class WeatherController : ApiController
     {
 		readonly IWeatherService _weatherService;
 		private readonly IDataService _dataService;
