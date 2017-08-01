@@ -7,7 +7,7 @@ using WeatherApp.Services.WeatherAPI;
 
 namespace WeatherApp.API
 {
-	[EnableCors(origins: "http://localhost:50185", headers: "*", methods: "*")]
+	[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
 	public class WeatherController : ApiController
     {
 		readonly IWeatherService _weatherService;

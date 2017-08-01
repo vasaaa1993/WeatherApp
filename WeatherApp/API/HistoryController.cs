@@ -7,7 +7,7 @@ using WeatherApp.Services.Data;
 
 namespace WeatherApp.API
 {
-	[EnableCors(origins: "http://localhost:50185", headers: "*", methods: "*")]
+	[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
 	public class HistoryController : ApiController
     {
 	    private readonly IDataService _dataService;
