@@ -22,7 +22,6 @@ export class CitiesService extends BaceService{
   }
 
   deleteCity(id: number){
-    debugger
     return this.deleteData(this.generateUrl() + '/' + id);
   }
 

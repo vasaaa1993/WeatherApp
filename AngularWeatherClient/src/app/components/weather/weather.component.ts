@@ -15,9 +15,7 @@ import { CitiesService } from "../../services/cities.service";
 })
 export class WeatherComponent implements OnInit {
 
-  @Input()
   cityName: string;
-  @Input()
   period: string;
   weather: Observable<Weather>;
   cities: Observable<City[]>;
