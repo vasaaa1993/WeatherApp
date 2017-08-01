@@ -1,3 +1,44 @@
+.navbar {
+	background-color: #428bca;
+    border: none;
+    min-height: 100px;
+}
+
+.navbar-nav {
+	float: right;
+	font-size: 1.5em;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: white;
+	line-height: 110px;
+	padding: 0 50px;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover { color: #01579B; }
+
+.navbar-inverse .navbar-nav:last-child a { padding-right: 0px; }
+
+.navbar-inverse .navbar-brand { color: white; }
+
+.navbar-fixed-top { position: absolute; }
+.navbar-brand>img {
+    display: inline-block; 
+}
+.logo-img {
+	height: 100px;
+    width: 100px;
+}
+
+.navbar-brand {
+	font-family: "Lucida Console";
+	font-size: 40px;
+	padding: 5px;
+}
+
+.navbar-brand:hover { color: white; }
+
+
 body {
 	background-color: white;
 	min-height: 100vh;
@@ -47,35 +88,22 @@ body {
 @media (min-width: 768px) {
 	.myContainer { max-width: 750px; }
 
-	.body-content { padding-bottom: 100px; }
+    .body-content { padding-bottom: 100px; }
 }
 
 @media (min-width: 992px) {
 	.myContainer { max-width: 970px; }
 
-	.body-content { padding-bottom: 80px; }
+    .body-content { padding-bottom: 80px; }
 }
 
 @media (min-width: 1200px) {
 	.myContainer { max-width: 1170px; }
 
-	.body-content { padding-bottom: 70px; }
+    .body-content { padding-bottom: 70px; }
 }
 
-/* Set padding to keep content from hitting the edges */
-
-/*.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}*/
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-
 .dl-horizontal dt { white-space: normal; }
-
-/* Set width on the form input elements since they're 100% wide by default */
 
 select,
 textarea { max-width: 280px; }
@@ -102,4 +130,9 @@ textarea { max-width: 280px; }
 .center-container {
 	float: none;
 	margin: 0 auto;
+}
+
+.text-color-grey {
+	color: #455A64;
+	font-family: 'Roboto';
 }

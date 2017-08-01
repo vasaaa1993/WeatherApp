@@ -39,6 +39,9 @@
 	padding: 15px;
 }
 
+.history-weather-header{
+    padding-left: 20px;
+}
 .history-item-container .history-img-container { margin-right: 20px; }
 
 .history-weather-temp { font-size: 3rem; }
@@ -75,4 +78,14 @@
 .weather-values-container {
 	background-color: darkturquoise;
 	margin: 5px;
+}
+
+.btn-clear{
+    border: none;
+    background: none;
+    color: #428bd3;
+}
+
+.btn-clear:hover{
+    color: #0D47A1;
 }

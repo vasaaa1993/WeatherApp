@@ -34,6 +34,8 @@ export class WeatherComponent implements OnInit {
   onGetWeather(city?: string):void{
     if(city != null)
       this.cityName = city;
+    if(this.cityName == '')
+      return;
     this.weather = this.weatherService.getWeather(this.cityName, this.period);
     this.weather.subscribe(item => console.log(item));
   }

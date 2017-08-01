@@ -1,6 +1,51 @@
  <nav>
-    <a routerLink="/weather" routerLinkActive="active">Weather</a>
-    <a routerLink="/history" routerLinkActive="active">History</a>
-    <a routerLink="/cities" routerLinkActive="active">Cities</a>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="myContainer">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a routerLink="/weather" routerLinkActive="active" class="navbar-brand">
+                    <img src="assets/img/Logo.png" alt="Logo" class="logo-img"><label>Weather UA</label>
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a routerLink="/weather" routerLinkActive="active">Weather</a></li>
+                    <li><a routerLink="/history" routerLinkActive="active">History</a></li>
+                    <li><a routerLink="/cities" routerLinkActive="active">Cities</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </nav>
-<router-outlet></router-outlet>
+<div class="myContainer body-content">
+    <router-outlet></router-outlet>
+</div>
+<footer class="footer">
+	<div class="myContainer footer-container">
+		<div class="footer-item">
+			<div class="footer-item-header">
+				About
+			</div>
+			<div>
+				Join us and discover a work experience where diverse ideas are met with enthusiasm, and where you can learn and grow to your full potential
+			</div>
+		</div>
+		<div class="footer-item">
+			<div class="footer-item-header">
+				Contact us
+			</div>
+			<div>
+				<p><strong>Address: </strong>Viacheslava Chornovola Ave, 59, L'viv, Lviv Oblast, 79000
+				</p>
+				<p><strong>Phone: </strong>+380442233519
+				</p>
+				<p><strong>Email: </strong><a>weather.ua@gmail.com</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>

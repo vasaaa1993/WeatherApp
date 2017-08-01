@@ -24,8 +24,8 @@
 					@Html.TextBox("city", null, new { @class = "form-control col-xs-10 input-lg", placeholder = "City name", required = "required" })
 				</div>
 				<div class="col-xs-1">
-					<input type="submit" value="Find" class="" />
-				</div>btn btn-primary input-lg btn-block
+					<input type="submit" value="Find" class="btn btn-primary input-lg btn-block" />
+				</div>
 			</div>
 		}
 	</div>
@@ -222,3 +222,102 @@ else
 		}
 	</div>
 }
+@*@if (CountOfDays == 0)
+	{
+		<h2 class="text-center text-color-grey">Please, enter the city name...</h2>
+	}
+	else
+	{
+		<div class="container">
+			<div class="city-name text-color-grey">
+				<h1 class=" text-center">@Model.CityName</h1>
+				<div class="text-center">
+					<h4>@Model.CountryCodeOfTheCity</h4>
+				</div>
+			</div>
+			<h3 class="text-primary text-center">
+				Weather Forecast For
+				@(CountOfDays == 1 ? "Current Day" :
+					  CountOfDays == 3 ? "3 Days" : "7 Days")
+			</h3>
+			<ul class="list-inline center-list">
+				<li>@Html.ActionLink("Current Day", "Index", new {time = 1, city = Model.CityName})</li>
+				<li>@Html.ActionLink("3 Days", "Index", new {time = 3, city = Model.CityName})</li>
+				<li>@Html.ActionLink("7 Days", "Index", new {time = 7, city = Model.CityName})</li>
+			</ul>
+			<div class="row @sWeatherItemColonClass weather-container">
+				@foreach (var w in Model.WeatherList)
+				{
+					<div class="col-sm-1 weather-item">
+						<div class="container">
+							<div class="weather-item-header text-color-grey">
+								<h3>@w.DayTemp°</h3>
+							</div>
+							<div class="weather-item-header text-color-grey">
+								@w.Time.ToString("M")
+							</div>
+							<div class="row">
+								<img src="@($"/Content/WeatherIcons/{w.Icon}")" alt="@w.Description" class="weather-img ">
+							</div>
+							<div class="weather-item-header text-color-grey">
+								@w.Description
+							</div>
+							<div class="row text-center min-max-temp text-info">
+								<div class="row">
+									<div class="col-sm-6">
+										<h5>Min</h5>
+									</div>
+									<div class="col-sm-6">
+										<h5>Max</h5>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<h5>@w.MinTemp°</h5>
+									</div>
+									<div class="col-sm-6">
+										<h5>@w.MaxTemp°</h5>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-6 weather-value">
+									Pressure:
+								</div>
+								<div class="col-sm-6 weather-value text-right">
+									@(w.Pressure) hPa
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-6 weather-value">
+									Humidity:
+								</div>
+								<div class="col-sm-6 weather-value  text-right">
+									@w.Humidity %
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-6 weather-value">
+									Clouds:
+								</div>
+								<div class="col-sm-6 weather-value  text-right">
+									@w.Clouds %
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6 weather-value">
+									Wind speed
+								</div>
+								<div class="col-sm-6 weather-value  text-right">
+									@w.WindSpeed mps
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	}*@
