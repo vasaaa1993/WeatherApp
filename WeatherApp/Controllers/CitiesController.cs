@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherApp.Services.Data;
 
@@ -18,20 +19,21 @@ namespace WeatherApp.Controllers
 		}
 
 		// GET: Product
-		public ActionResult Index()
+		public async Task<ActionResult> Index()
 		{
-			return View(_dataService.GetAllCities());
+			var cities = await _dataService.GetAllCities();
+			return View(cities);
 		}
 
-		public ActionResult Add(string name)
+		public async Task<ActionResult> Add(string name)
 		{
-			_dataService.AddCity(name);
+			await _dataService.AddCity(name);
 			return RedirectToAction("Index");
 		}
 
-		public ActionResult Delete(int id)
+		public async Task<ActionResult> Delete(int id)
 		{
-			_dataService.DeleteCity(id);
+			await _dataService.DeleteCity(id);
 			return RedirectToAction("Index");
 		}
 	}

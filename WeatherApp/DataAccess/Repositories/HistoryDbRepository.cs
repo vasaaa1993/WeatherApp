@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using WeatherApp.DataAccess.Contexts;
 using WeatherApp.DataAccess.Entities;
 
@@ -12,32 +14,42 @@ namespace WeatherApp.DataAccess.Repositories
 		{
 			_ctx = ctx;
 		}
-		public IEnumerable<HistoryItemDb> GetAll()
+		public async Task<IEnumerable<HistoryItemDb>> GetAll()
 		{
-			return _ctx.History.ToList();
+			return await _ctx.History.ToArrayAsync();
 		}
 
-		public void ClearAll()
+		public async Task<bool> ClearAll()
 		{
-			foreach (var historyItemDb in _ctx.History)
-				_ctx.History.Remove(historyItemDb);
+			return await Task.Run(() => {
+				_ctx.History.RemoveRange(_ctx.History);
+				return true;
+				});
 		}
 
-		public HistoryItemDb Get(int id)
+		public async Task<HistoryItemDb> Get(int id)
 		{
-			return _ctx.History.FirstOrDefault(h => h.Id == id);
+			return await _ctx.History.FirstOrDefaultAsync(h => h.Id == id);
 		}
 
-		public void Delete(int id)
+		public async Task<bool> Delete(int id)
 		{
-			var history = _ctx.History.FirstOrDefault(h => h.Id == id);
-			if (history != null)
-				_ctx.History.Remove(history);
+			var history = await _ctx.History.FirstOrDefaultAsync(h => h.Id == id);
+			return await Task.Run(() =>
+			{
+				if (history != null)
+				{
+					_ctx.History.Remove(history);
+					return true;
+				}
+				return false;
+			});
+			
 		}
 
-		public HistoryItemDb Add(HistoryItemDb item)
+		public async Task<HistoryItemDb> Add(HistoryItemDb item)
 		{
-			return item != null ? _ctx.History.Add(item) : null;
+			return await Task.Run(() => { return item != null ? _ctx.History.Add(item) : null; });
 		}
 	}
 }

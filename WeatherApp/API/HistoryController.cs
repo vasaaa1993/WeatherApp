@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
@@ -16,17 +17,17 @@ namespace WeatherApp.API
 		    _dataService = service;
 	    }
 		// GET: api/History
-	    public IEnumerable<HistoryResponse> GetHistory()
+	    public async Task<IEnumerable<HistoryResponse>> GetHistory()
 	    {
-		    return _dataService.GetAllHistoryItems();
+		    return await _dataService.GetAllHistoryItems();
 	    }
 
 		// Delete /api/History
 	    [ResponseType(typeof(void))]
 	    [HttpDelete]
-	    public IHttpActionResult ClearHistory()
+	    public async Task<IHttpActionResult> ClearHistory()
 	    {
-		    _dataService.ClearHistory();
+		    var rez = await _dataService.ClearHistory();
 		    return Ok();
 	    }
 	}

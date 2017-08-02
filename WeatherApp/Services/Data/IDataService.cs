@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using WeatherApp.Models;
 
 namespace WeatherApp.Services.Data
@@ -6,16 +7,16 @@ namespace WeatherApp.Services.Data
 	public interface IDataService
 	{
 		//Cities
-		IEnumerable<City> GetAllCities();
+		Task<IEnumerable<City>> GetAllCities();
 
-		void DeleteCity(int id);
-		City GetCity(int id);
-		City AddCity(string name);
+		Task<bool> DeleteCity(int id);
+		Task<City> GetCity(int id);
+		Task<City> AddCity(string name);
 
 		//History
-		IEnumerable<HistoryResponse> GetAllHistoryItems();
+		Task<IEnumerable<HistoryResponse>> GetAllHistoryItems();
 
-		void ClearHistory();
-		void AddResponseToHistory(Weather weather);
+		Task<bool> ClearHistory();
+		Task<bool> AddResponseToHistory(Weather weather);
 	}
 }

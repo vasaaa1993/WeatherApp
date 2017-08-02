@@ -8,10 +8,10 @@ namespace WeatherApp.DataAccess.Repositories
 {
 	public interface IRepository<TEntity> where TEntity : class
 	{
-		IEnumerable<TEntity> GetAll();
-		void ClearAll();
-		TEntity Get(int id);
-		void Delete(int id);
-		TEntity Add(TEntity item);
+		Task<IEnumerable<TEntity>> GetAll();
+		Task<bool> ClearAll();
+		Task<TEntity> Get(int id);
+		Task<bool> Delete(int id);
+		Task<TEntity> Add(TEntity item);
 	}
 }

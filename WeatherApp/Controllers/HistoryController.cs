@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherApp.Services.Data;
 
@@ -18,14 +19,14 @@ namespace WeatherApp.Controllers
 					throw new ArgumentNullException("dataService");
 		}
 
-		public ActionResult Index()
+		public async Task<ActionResult> Index()
 		{
-			return View(_dataService.GetAllHistoryItems());
+			return View(await _dataService.GetAllHistoryItems());
 		}
 
-		public ActionResult Clear()
+		public async Task<ActionResult> Clear()
 		{
-			_dataService.ClearHistory();
+			await _dataService.ClearHistory();
 			return RedirectToAction("Index");
 		}
 	}

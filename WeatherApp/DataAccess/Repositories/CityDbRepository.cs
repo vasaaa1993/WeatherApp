@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using WeatherApp.DataAccess.Contexts;
 using WeatherApp.DataAccess.Entities;
 
@@ -12,32 +14,45 @@ namespace WeatherApp.DataAccess.Repositories
 		{
 			_ctx = ctx;
 		}
-		public IEnumerable<CityDb> GetAll()
+
+		public async Task<IEnumerable<CityDb>> GetAll()
 		{
-			return _ctx.Cities.ToList();
+			return await _ctx.Cities.ToArrayAsync();
 		}
 
-		public void ClearAll()
+		public async Task<bool> ClearAll()
 		{
-			foreach (var item in _ctx.Cities)
-				_ctx.Cities.Remove(item);
+			return await Task.Run(() => {
+				_ctx.Cities.RemoveRange(_ctx.Cities);
+				return true;
+			});
 		}
 
-		public CityDb Get(int id)
+		public async Task<CityDb> Get(int id)
 		{
-			return _ctx.Cities.FirstOrDefault(c => c.Id == id);
+			return await _ctx.Cities.FirstOrDefaultAsync(c => c.Id == id);
 		}
 
-		public void Delete(int id)
+		public async Task<bool> Delete(int id)
 		{
-			var city = _ctx.Cities.FirstOrDefault(c => c.Id == id);
-			if (city != null)
-				_ctx.Cities.Remove(city);
+			var city = await _ctx.Cities.FirstOrDefaultAsync(c => c.Id == id);
+			return await Task.Run(() =>
+			{
+				if (city != null)
+				{
+					_ctx.Cities.Remove(city);
+					return true;
+				}
+				return false;
+			});
+
 		}
 
-		public CityDb Add(CityDb item)
+
+		public async Task<CityDb> Add(CityDb item)
 		{
-			return item != null ? _ctx.Cities.Add(item) : null;
+			return await Task.Run(() => { return  item != null ? _ctx.Cities.Add(item) : null; });
 		}
+
 	}
 }

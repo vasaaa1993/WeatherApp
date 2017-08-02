@@ -19,11 +19,11 @@ namespace WeatherApp.Controllers
 
 		public async Task<ActionResult> Index(string city, string time)
 		{
-			var list = _dataService.GetAllCities();
+			var list = await _dataService.GetAllCities();
 			ViewBag.DefaultCities = list;
 
 			var weather = await _weatherService.GetWeatherByTownName(city, time ?? "1");
-			_dataService.AddResponseToHistory(weather);;
+			await _dataService.AddResponseToHistory(weather);;
 			return View(weather);
 		}
 

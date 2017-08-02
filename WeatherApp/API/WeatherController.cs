@@ -37,7 +37,7 @@ namespace WeatherApp.API
 		    var weather = await _weatherService.GetWeatherByTownName(city, period);
 			if(weather == null)
 				return NotFound();
-			_dataService.AddResponseToHistory(weather);
+			await _dataService.AddResponseToHistory(weather);
 			return Ok(weather);
 	    }
     }

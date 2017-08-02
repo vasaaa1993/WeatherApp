@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WeatherApp.DataAccess;
 using WeatherApp.DataAccess.Entities;
 using WeatherApp.Models;
@@ -23,49 +24,55 @@ namespace WeatherApp.Services.Data
 				_repo = new RepositoriesUnitOfWork();
 
 		}
-		public IEnumerable<City> GetAllCities()
+		public async Task<IEnumerable<City>> GetAllCities()
 		{
-			return _repo.Cities.GetAll().Select(CityDb2City).ToList();
+			var arr = await _repo.Cities.GetAll();
+			return arr.Select(CityDb2City).ToArray();
 		}
 
-		public void DeleteCity(int id)
+		public async Task<bool> DeleteCity(int id)
 		{
-			_repo.Cities.Delete(id);
+			bool rez = await _repo.Cities.Delete(id);
 			_repo.Save();
+			return rez;
 		}
 
-		public City GetCity(int id)
+		public async Task<City> GetCity(int id)
 		{
-			return CityDb2City(_repo.Cities.Get(id));
+			return CityDb2City( await _repo.Cities.Get(id));
 		}
 
-		public City AddCity(string name)
+		public async Task<City> AddCity(string name)
 		{
 			if (string.IsNullOrEmpty(name)) return null;
-			var city = _repo.Cities.Add(new CityDb(){Name = name});
+			var city = await _repo.Cities.Add(new CityDb(){Name = name});
 			_repo.Save();
 			return CityDb2City(city);
 		}
 
-		public IEnumerable<HistoryResponse> GetAllHistoryItems()
+		public async Task<IEnumerable<HistoryResponse>> GetAllHistoryItems()
 		{
-			return _repo.History.GetAll().Select(HistoryDb2HistoryResponse).ToList();
+			var history =  await _repo.History.GetAll();
+			return history.Select(HistoryDb2HistoryResponse).ToArray();
 		}
 
-		public void ClearHistory()
+		public async Task<bool> ClearHistory()
 		{
-			_repo.History.ClearAll();
+			var rez = await _repo.History.ClearAll();
 			_repo.Save();
+			return rez;
 		}
 
-		public void AddResponseToHistory(Weather weather)
+		public async Task<bool> AddResponseToHistory(Weather weather)
 		{
 			var history = HistoryDbItemFromWeather(weather);
+			HistoryItemDb item = null;
 			if (history != null)
 			{
-				_repo.History.Add(history);
+				item = await _repo.History.Add(history);
 				_repo.Save();
 			}
+			return (item == null) ? true : false;
 		}
 
 		#region Helpers
@@ -164,8 +171,6 @@ namespace WeatherApp.Services.Data
 				WeatherDb = w
 			};
 		}
-
-
 		#endregion
 	}
 }
