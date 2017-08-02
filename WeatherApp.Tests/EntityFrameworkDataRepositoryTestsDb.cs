@@ -32,47 +32,47 @@ namespace WeatherApp.Tests
 		[Test]
 		[TestCase(null)]
 		[TestCase("")]
-		public void AddCity_When_Invalid_parameters_passed_Then_city_wasnt_Added(string sCityName)
+		public async void AddCity_When_Invalid_parameters_passed_Then_city_wasnt_Added(string sCityName)
 		{
 			// Arrange
 			// Act
-			dataService.AddCity(sCityName);
+			await dataService.AddCity(sCityName);
 			
 			//Assert
-			Assert.AreEqual(0, dataService.GetAllCities().Count());
+			Assert.AreEqual(0, (await dataService.GetAllCities()).Count());
 		}
 
 		[Test]
 		[TestCase("London", "Kiev")]
 		[TestCase("Paris, Berlin")]
 		[TestCase("Vakanda")]
-		public void AddCity_When_Valid_parameters_passed_Then_cites_was_Added(params string[] cities)
+		public async void AddCity_When_Valid_parameters_passed_Then_cites_was_Added(params string[] cities)
 		{
 			// Arrange
 			// Act
 			foreach (var city in cities)
 			{
-				dataService.AddCity(city);
+				await dataService.AddCity(city);
 			}
 			
 			//Assert
-			Assert.AreEqual(cities.Length, dataService.GetAllCities().Count());
+			Assert.AreEqual(cities.Length, (await dataService.GetAllCities()).Count());
 		}
 
 		[Test]
 		[TestCase(0)]
 		[TestCase(-1)]
 		[TestCase(2)]
-		public void DeleteCityById_When_Input_parameters_invalid_Then_do_Nothing(int nId)
+		public async void DeleteCityById_When_Input_parameters_invalid_Then_do_Nothing(int nId)
 		{
 			// Arrange
-			dataService.AddCity("Termopil");
+			await dataService.AddCity("Termopil");
 
 			// Act
-			dataService.DeleteCity(nId);
+			await dataService.DeleteCity(nId);
 			
 			//Assert
-			Assert.AreEqual(1, dataService.GetAllCities().Count());
+			Assert.AreEqual(1, (await dataService.GetAllCities()).Count());
 
 		}
 
@@ -80,33 +80,33 @@ namespace WeatherApp.Tests
 		[TestCase(1)]
 		[TestCase(2)]
 		[TestCase(3)]
-		public void DeleteCityById_When_Input_parameters_valid_Then_delete_city(int nId)
+		public async void DeleteCityById_When_Input_parameters_valid_Then_delete_city(int nId)
 		{
 			// Arrange
-			dataService.AddCity("Termopil");
-			dataService.AddCity("Lviv");
-			dataService.AddCity("Madrid");
+			await dataService.AddCity("Termopil");
+			await dataService.AddCity("Lviv");
+			await dataService.AddCity("Madrid");
 
 			// Act
-			dataService.DeleteCity(nId);
+			await dataService.DeleteCity(nId);
 
 			//Assert
-			Assert.AreEqual(2, dataService.GetAllCities().Count());
+			Assert.AreEqual(2, (await dataService.GetAllCities()).Count());
 
 		}
 
 		[Test]
-		public void ClearHistory_Test()
+		public async void ClearHistory_Test()
 		{
 			// Arrange
-			dataService.AddResponseToHistory(new Weather());
-			dataService.AddResponseToHistory(new Weather());
+			await dataService.AddResponseToHistory(new Weather());
+			await dataService.AddResponseToHistory(new Weather());
 
 			// Act
-			dataService.ClearHistory();
+			await dataService.ClearHistory();
 
 			//Assert
-			Assert.AreEqual(0, dataService.GetAllCities().Count());
+			Assert.AreEqual(0, (await dataService.GetAllCities()).Count());
 		}
 	}
 }
